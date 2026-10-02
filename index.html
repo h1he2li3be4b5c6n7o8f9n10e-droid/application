@@ -625,6 +625,94 @@
       }
     }
 
+    #view-dex,
+    #view-dex > div,
+    #dex-grid {
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .dex-card {
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
+    }
+
+    .dex-card-content {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+
+    .dex-card-formula,
+    .dex-card-name,
+    .dex-card-desc {
+      min-width: 0;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .dex-card-desc {
+      line-height: 1.6;
+    }
+
+    @media (max-width: 767px) {
+      #view-dex > div {
+        padding: .75rem !important;
+      }
+
+      #dex-tabs {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        width: 100%;
+      }
+
+      #dex-tabs button {
+        width: 100%;
+        min-width: 0;
+        padding-right: .5rem;
+        padding-left: .5rem;
+        white-space: normal;
+      }
+
+      #dex-grid {
+        width: 100%;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: .75rem !important;
+      }
+
+      .dex-card {
+        gap: .65rem !important;
+        padding: .75rem !important;
+      }
+    }
+
+    @media (max-width: 900px) and (orientation: landscape) {
+      #view-dex {
+        flex: 1 1 auto;
+        height: 100%;
+        min-height: 0;
+        overflow-y: auto;
+        padding-bottom: .5rem;
+      }
+
+      #dex-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: .75rem !important;
+      }
+
+      .dex-card {
+        gap: .55rem !important;
+        padding: .65rem !important;
+      }
+    }
+
+    @media (max-width: 480px) and (orientation: landscape) {
+      #dex-grid {
+        grid-template-columns: minmax(0, 1fr) !important;
+      }
+    }
+
     .glow-effect {
       box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
     }
@@ -901,7 +989,7 @@
         <h2 class="text-lg font-bold text-white mb-2 flex items-center gap-2">
           <i class="fa-solid fa-book-bookmark text-cyan-400"></i> 化合物図鑑
         </h2>
-        <div class="flex flex-wrap gap-2 mb-4" role="tablist" aria-label="図鑑の種類">
+        <div id="dex-tabs" class="flex flex-wrap gap-2 mb-4" role="tablist" aria-label="図鑑の種類">
           <button id="dex-tab-manual" type="button" role="tab" aria-selected="true" onclick="switchDexTab('manual')" class="px-4 py-2 rounded-xl text-sm font-bold bg-cyan-500 text-slate-950">
             化合物図鑑
           </button>
@@ -4375,22 +4463,22 @@ const COMPOUNDS = [
 
         if (isDiscovered) {
           card.className =
-            'p-4 rounded-xl bg-slate-950 border border-emerald-500/30 flex gap-4 items-start relative overflow-hidden';
+            'dex-card p-4 rounded-xl bg-slate-950 border border-emerald-500/30 flex gap-4 items-start relative overflow-hidden';
           card.innerHTML = `
-            <div class="w-14 h-14 rounded-xl flex items-center justify-center font-black text-xl shadow-inner shrink-0"
+            <div class="dex-card-formula w-14 h-14 rounded-xl flex items-center justify-center font-black text-xl shadow-inner shrink-0"
                  style="background-color: ${displayColor}20; color: ${displayColor}; border: 1px solid ${displayColor}40;">
               ${compound.formula}
             </div>
-            <div>
+            <div class="dex-card-content">
               <div class="flex items-center gap-2">
-                <h3 class="font-extrabold text-white text-md">${compound.name}</h3>
+                <h3 class="dex-card-name font-extrabold text-white text-md">${compound.name}</h3>
                 <span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full font-bold">
                   発見済み
                 </span>
               </div>
-              ${compound.generated ? '' : `<p class="text-xs text-slate-400 mt-1">${compound.desc}</p>`}
+              ${compound.generated ? '' : `<p class="dex-card-desc text-xs text-slate-400 mt-1">${compound.desc}</p>`}
               ${!compound.generated && compound.mineral ? `
-                <p class="text-xs text-cyan-300 mt-2">
+                <p class="dex-card-desc text-xs text-cyan-300 mt-2">
                   鉱物情報: ${compound.mineral.name} — ${compound.mineral.desc}
                 </p>
               ` : ''}
@@ -4398,14 +4486,14 @@ const COMPOUNDS = [
           `;
         } else {
           card.className =
-            'p-4 rounded-xl bg-slate-950/40 border border-slate-800 flex gap-4 items-center opacity-60';
+            'dex-card p-4 rounded-xl bg-slate-950/40 border border-slate-800 flex gap-4 items-center opacity-60';
           card.innerHTML = `
             <div class="w-14 h-14 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center font-black text-xl text-slate-700 shrink-0">
               ?
             </div>
             <div>
-              <h3 class="font-bold text-slate-500 text-sm">未発見の化合物</h3>
-              <p class="text-xs text-slate-600 mt-1">
+              <h3 class="dex-card-name font-bold text-slate-500 text-sm">未発見の化合物</h3>
+              <p class="dex-card-desc text-xs text-slate-600 mt-1">
                 実験室で適切なイオンを結合させて解放しましょう。
               </p>
             </div>
