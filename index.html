@@ -1044,13 +1044,15 @@
       'H+':   { id: 'H+',   name: '水素イオン',       type: 'cation', charge: 1, color: 'from-sky-400 to-cyan-600', textColor: 'text-sky-50', borderColor: 'border-sky-300' },
       'Ni2+': { id: 'Ni2+', symbol: 'Ni²⁺', name: 'ニッケル(II)イオン', type: 'cation', charge: 2, color: 'from-green-600 to-emerald-700', textColor: 'text-green-50', borderColor: 'border-green-300' },
       'U6+':  { id: 'U6+',  symbol: 'U⁶⁺', name: 'ウラン(VI)イオン', type: 'cation', charge: 6, color: 'from-yellow-400 to-amber-600', textColor: 'text-yellow-50', borderColor: 'border-yellow-300' },
-      'UO2+2':{ id: 'UO2+2', symbol: 'UO₂²⁺', name: 'ウラニルイオン', type: 'cation', charge: 2, formula: 'UO2', polyatomic: true, color: 'from-yellow-400 to-amber-600', textColor: 'text-yellow-50', borderColor: 'border-yellow-300' },
+      'UO22+':{ id: 'UO22+', symbol: 'UO₂²⁺', name: 'ウラニルイオン', type: 'cation', charge: 2, formula: 'UO2', polyatomic: true, color: 'from-yellow-400 to-amber-600', textColor: 'text-yellow-50', borderColor: 'border-yellow-300' },
       'As3+': { id:'As3+', symbol: 'As³⁺', name: 'ヒ素(III)イオン', type: 'cation', charge: 3, color: 'from-purple-600 to-fuchsia-700', textColor: 'text-purple-50', borderColor: 'border-purple-300' },
       'Cr3+': { id:'Cr3+', symbol: 'Cr³⁺', name: 'クロム(III)イオン', type: 'cation', charge: 3, color: 'from-green-600 to-emerald-700', textColor: 'text-green-50', borderColor: 'border-green-300' },
       'Cr2+': { id:'Cr2+', symbol: 'Cr²⁺', name: 'クロム(II)イオン', type: 'cation', charge: 2, color: 'from-green-500 to-emerald-600', textColor: 'text-green-50', borderColor: 'border-green-300' },
       // 陰イオン
       'Cl-':  { id: 'Cl-',  name: '塩化物イオン',     type: 'anion',  charge: -1, color: 'from-emerald-500 to-teal-600', textColor: 'text-emerald-100', borderColor: 'border-emerald-400' },
       'F-':   { id: 'F-',   name: 'フッ化物イオン',   type: 'anion',  charge: -1, color: 'from-lime-500 to-green-600', textColor: 'text-lime-100', borderColor: 'border-lime-400' },
+      'I-':   { id: 'I-',   name: 'ヨウ化物イオン',   type: 'anion',  charge: -1, color: 'from-rose-500 to-pink-600', textColor: 'text-rose-100', borderColor: 'border-pink-400' },
+      'Br-':  { id: 'Br-',  name: '臭化物イオン',     type: 'anion',  charge: -1, color: 'from-rose-500 to-pink-600', textColor: 'text-rose-100', borderColor: 'border-pink-400' },
       'OH-':  { id: 'OH-',  name: '水酸化物イオン',   type: 'anion',  charge: -1, formula: 'OH', polyatomic: true, color: 'from-rose-500 to-pink-600', textColor: 'text-rose-100', borderColor: 'border-pink-400' },
       'O2-':  { id: 'O2-',  name: '酸化物イオン',     type: 'anion',  charge: -2, color: 'from-slate-500 to-slate-700', textColor: 'text-slate-100', borderColor: 'border-slate-400' },
       'S2-':  { id: 'S2-',  name: '硫化物イオン',     type: 'anion',  charge: -2, color: 'from-yellow-700 to-amber-900', textColor: 'text-amber-100', borderColor: 'border-amber-500' },
@@ -1078,6 +1080,14 @@
       Cu: { id: 'Cu', name: '銅', color: 'from-orange-500 to-rose-800', textColor: 'text-orange-50', borderColor: 'border-orange-300' },
       Ni: {id: 'Ni', name: 'ニッケル', color: 'from-green-500 to-emerald-800', textColor: 'text-green-50', borderColor: 'border-green-300' },
       Zn: { id: 'Zn', name: '亜鉛', color: 'from-slate-400 to-zinc-600', textColor: 'text-slate-50', borderColor: 'border-slate-300' },
+      Pb: { id: 'Pb', name: '鉛', color: 'from-slate-500 to-indigo-700', textColor: 'text-slate-50', borderColor: 'border-slate-300' },
+      Ca: { id: 'Ca', name: 'カルシウム', color: 'from-amber-400 to-yellow-700', textColor: 'text-amber-50', borderColor: 'border-amber-300' },
+      Cr:{ id: 'Cr', name: 'クロム', color: 'from-green-600 to-emerald-800', textColor: 'text-green-50', borderColor: 'border-green-300' },
+      Bk: { id: 'Bk', name: 'バークリウム', color: 'from-teal-400 to-cyan-700', textColor: 'text-cyan-50', borderColor: 'border-teal-300' },
+      Sr:{ id: 'Sr', name: 'ストロンチウム', color: 'from-rose-500 to-red-700', textColor: 'text-rose-50', borderColor: 'border-rose-300' },
+      U: { id: 'U', name: 'ウラン', color: 'from-yellow-400 to-amber-600', textColor: 'text-yellow-50', borderColor: 'border-yellow-300' },
+      As:{ id : 'As', name: 'ヒ素', color: 'from-purple-600 to-fuchsia-700', textColor: 'text-purple-50', borderColor: 'border-purple-300' },
+      Al: { id: 'Al', name: 'アルミニウム', color: 'from-zinc-400 to-slate-600', textColor: 'text-white', borderColor: 'border-zinc-300' },
       Efr: { id: 'Efr', name: 'エカフランシウム', color: 'from-yellow-400 to-red-500', textColor: 'text-red-950', borderColor: 'border-yellow-300' },
     };
 
@@ -1132,6 +1142,34 @@ const ALLOYS = [
     key: 'Ni-Mg', formula: 'NiMg', name: 'ニッケルマグネシウム', metals: ['Ni', 'Mg'], 
     desc: 'ニッケルとマグネシウムからなる金属間化合物です。ニッケル・マグネシウム系には複数の相が存在し、ここではNiMgを1:1組成の代表例として扱います。', 
   },
+    {
+    key: 'Cu-Zn', formula: 'CuZn', name: '黄銅', metals: ['Cu', 'Zn'],
+    desc: '銅と亜鉛を主成分とする代表的な合金です。黄銅は組成によって性質や色が変化し、機械部品や楽器など幅広い用途で利用されています。'
+  },
+  {
+    key: 'Ni-Cr', formula: 'NiCr', name: 'ニクロム', metals: ['Ni', 'Cr'],
+    desc: 'ニッケルとクロムを主成分とする合金です。電気抵抗が大きく、高温でも比較的安定なため、電熱線や発熱体などに利用されています。'
+  },
+  {
+    key: 'Fe-Cr', formula: 'FeCr', name: '鉄クロム合金', metals: ['Fe', 'Cr'],
+    desc: '鉄とクロムからなる合金です。クロムを含むことで耐食性が向上し、ステンレス鋼などの基礎となる重要な合金系の一つです。'
+  },
+  {
+    key: 'Al-Cu', formula: 'AlCu', name: 'アルミニウム銅合金', metals: ['Al', 'Cu'],
+    desc: 'アルミニウムと銅を主成分とする合金系です。軽量で比較的高い強度を持つ組成があり、航空機材料などにも利用されてきました。'
+  },
+  {
+    key: 'Al-Mg', formula: 'AlMg', name: 'アルミニウムマグネシウム合金', metals: ['Al', 'Mg'],
+    desc: 'アルミニウムとマグネシウムを主成分とする合金系です。軽量で耐食性に優れた組成があり、構造材料や各種部品などに利用されています。'
+  },
+  {
+    key: 'Al-Zn', formula: 'AlZn', name: 'アルミニウム亜鉛合金', metals: ['Al', 'Zn'],
+    desc: 'アルミニウムと亜鉛を主成分とする合金系です。高い強度を持つ組成があり、アルミニウム合金の代表的な合金系として知られています。'
+  },
+  {
+    key: 'Cu-Al', formula: 'CuAl', name: 'アルミニウム青銅', metals: ['Cu', 'Al'],
+    desc: '銅とアルミニウムを主成分とする合金です。高い強度と耐食性を持ち、機械部品や海水環境で使用される部材などに利用されています。'
+  }
 ];
 
 const COMPOUNDS = [
@@ -1170,12 +1208,16 @@ const COMPOUNDS = [
   { key: 'Ag2CrO4', formula: 'Ag₂CrO₄', name: 'クロム酸銀', cations: { 'Ag+': 2 }, anions: { 'CrO4-2': 1 }, color: '#b45309', desc: '赤褐色の固体です。水に溶けにくく、銀イオンとクロム酸イオンによる沈殿反応で生成します。' },
   { key: 'Ag2Cr2O7', formula: 'Ag₂Cr₂O₇', name: '二クロム酸銀', cations: { 'Ag+': 2 }, anions: { 'Cr2O7-2': 1 }, color: '#7c2d12', desc: '暗赤色系の固体です。銀イオンと二クロム酸イオンからなる難溶性の銀塩として扱われます。' },
   { key: 'Ag3AsO4', formula: 'Ag₃AsO₄', name: 'ヒ酸銀', cations: { 'Ag+': 3 }, anions: { 'AsO4-3': 1 }, color: '#f1f5f9', desc: '淡黄色系の固体です。水に溶けにくく、銀イオンとヒ酸イオンによる沈殿として生成する銀塩です。' },
+  { key: 'AgI', formula: 'AgI', name: 'ヨウ化銀', cations: { 'Ag+': 1 }, anions: { 'I-': 1 }, color: '#fef3c7', desc: '淡黄色の固体です。水に非常に溶けにくく、銀イオンとヨウ化物イオンの反応によって黄色の沈殿として生じます。' },
+  { key: 'AgBr', formula: 'AgBr', name: '臭化銀', cations: { 'Ag+': 1 }, anions: { 'Br-': 1 }, color: '#fef3c7', desc: '淡黄色の固体です。水に非常に溶けにくく、銀イオンと臭化物イオンの反応によって淡黄色の沈殿として生じます。' },
 
   // =========================
   // Cu⁺
   // =========================
 
   { key: 'CuCl', formula: 'CuCl', name: '塩化銅(I)', cations: { 'Cu+': 1 }, anions: { 'Cl-': 1 }, color: '#94a3b8', desc: '白色の結晶性固体として知られる銅(I)塩です。空気中では酸化されて銅(II)化合物へ変化することがあります。' },
+  { key: 'CuI', formula: 'CuI', name: 'ヨウ化銅(I)', cations: { 'Cu+': 1 }, anions: { 'I-': 1 }, color: '#f5f5f4', desc: '白色〜淡色系の固体です。銅(I)イオンとヨウ化物イオンからなるヨウ化物で、水に溶けにくい性質があります。' },
+  { key: 'CuBr', formula: 'CuBr', name: '臭化銅(I)', cations: { 'Cu+': 1 }, anions: { 'Br-': 1 }, color: '#f5f5f4', desc: '白色〜淡色系の固体です。銅(I)イオンと臭化物イオンからなる臭化物で、水に溶けにくい性質があります。' },
 
   { key: 'Cu2O1', formula: 'Cu₂O', name: '酸化銅(I)', cations: { 'Cu+': 2 }, anions: { 'O2-': 1 }, color: '#b91c1c', desc: '赤色〜赤褐色の固体です。銅(I)を含む代表的な酸化物です。', mineral: { name: '赤銅鉱（Cuprite）', desc: 'Cu₂Oと同じ化学組成を持つ銅の酸化鉱物です。' } },
 
@@ -1196,6 +1238,8 @@ const COMPOUNDS = [
   // =========================
 
   { key: 'Na1Cl1', formula: 'NaCl', name: '塩化ナトリウム', cations: { 'Na+': 1 }, anions: { 'Cl-': 1 }, color: '#f8fafc', desc: '食塩の主成分として知られる代表的なイオン化合物です。', mineral: { name: '岩塩（Halite）', desc: 'NaClと同じ化学組成を持つ代表的な蒸発岩鉱物です。' } },
+  { key: 'NaI', formula: 'NaI', name: 'ヨウ化ナトリウム', cations: { 'Na+': 1 }, anions: { 'I-': 1 }, color: '#f8fafc', desc: '白色の結晶性固体です。水によく溶けるヨウ化物で、ナトリウムイオンとヨウ化物イオンからなる代表的な塩です。' },
+  { key: 'NaBr', formula: 'NaBr', name: '臭化ナトリウム', cations: { 'Na+': 1 }, anions: { 'Br-': 1 }, color: '#f8fafc', desc: '白色の結晶性固体です。水によく溶ける臭化物で、ナトリウムイオンと臭化物イオンからなる代表的な塩です。' },
 
   { key: 'NaOH1', formula: 'NaOH', name: '水酸化ナトリウム', cations: { 'Na+': 1 }, anions: { 'OH-': 1 }, color: '#e2e8f0', desc: '強い塩基性を示す代表的な水酸化物です。水によく溶けます。' },
   { key: 'Na2CrO4', formula: 'Na₂CrO₄', name: 'クロム酸ナトリウム', cations: { 'Na+': 2 }, anions: { 'CrO4-2': 1 }, color: '#fde047', desc: '黄色の結晶性固体です。水に溶けやすく、水溶液中ではクロム酸イオンを生じるナトリウム塩です。' },
@@ -1207,6 +1251,8 @@ const COMPOUNDS = [
   // =========================
 
   { key: 'K1Cl1', formula: 'KCl', name: '塩化カリウム', cations: { 'K+': 1 }, anions: { 'Cl-': 1 }, color: '#f1f5f9', desc: 'カリウムイオンと塩化物イオンからなる代表的な塩化物です。', mineral: { name: 'シルビン（Sylvite）', desc: 'KClと同じ化学組成を持つカリウムのハロゲン化鉱物です。' } },
+  { key: 'KI', formula: 'KI', name: 'ヨウ化カリウム', cations: { 'K+': 1 }, anions: { 'I-': 1 }, color: '#f8fafc', desc: '白色の結晶性固体です。水に非常によく溶けるヨウ化物で、カリウムイオンとヨウ化物イオンからなる塩です。' },
+  { key: 'KBr', formula: 'KBr', name: '臭化カリウム', cations: { 'K+': 1 }, anions: { 'Br-': 1 }, color: '#f8fafc', desc: '白色の結晶性固体です。水に非常によく溶ける臭化物で、カリウムイオンと臭化物イオンからなる塩です。' },
 
   { key: 'KOH1', formula: 'KOH', name: '水酸化カリウム', cations: { 'K+': 1 }, anions: { 'OH-': 1 }, color: '#cbd5e1', desc: '強い塩基性を示すカリウムの水酸化物です。' },
   { key: 'K2CrO4', formula: 'K₂CrO₄', name: 'クロム酸カリウム', cations: { 'K+': 2 }, anions: { 'CrO4-2': 1 }, color: '#facc15', desc: '鮮黄色の結晶性固体です。水に溶けやすく、クロム酸イオンを含む代表的なクロム酸塩です。' },
@@ -1222,6 +1268,8 @@ const COMPOUNDS = [
   { key: 'FeO', formula: 'FeO', name: '酸化鉄(II)', cations: { 'Fe2+': 1 }, anions: { 'O2-': 1 }, color: '#27272a', desc: '黒色の固体です。鉄(II)を含む酸化物で、空気中ではさらに酸化されやすい性質があります。', mineral: { name: 'ウスタイト', desc: 'FeOと同じ組成を持つ鉄の酸化鉱物です。' } },
 
   { key: 'FeS', formula: 'FeS', name: '硫化鉄(II)', cations: { 'Fe2+': 1 }, anions: { 'S2-': 1 }, color: '#18181b', desc: '黒色の固体です。鉄(II)と硫化物イオンからなる水に溶けにくい硫化物です。酸と反応すると硫化水素を生じます。', mineral: { name: 'トロイライト', desc: 'FeSと同じ組成を持つ硫化鉱物です。' } },
+  { key: 'FeI2', formula: 'FeI₂', name: 'ヨウ化鉄(II)', cations: { 'Fe2+': 1 }, anions: { 'I-': 2 }, color: '#f8fafc', desc: '鉄(II)イオンとヨウ化物イオンからなるヨウ化物です。水溶液中では鉄(II)イオンを含む塩として存在します。' },
+  { key: 'FeBr2', formula: 'FeBr₂', name: '臭化鉄(II)', cations: { 'Fe2+': 1 }, anions: { 'Br-': 2 }, color: '#f8fafc', desc: '鉄(II)イオンと臭化物イオンからなる臭化物です。水溶液中では鉄(II)イオンを含む塩として存在します。' },
 
   // SO₄²⁻・NO₃⁻系の重要化合物
   { key: 'Na2SO4', formula: 'Na₂SO₄', name: '硫酸ナトリウム', cations: { 'Na+': 2 }, anions: { 'SO4-2': 1 }, color: '#f8fafc', desc: '白色の結晶性固体です。水に溶ける代表的な硫酸塩で、工業的にも利用されています。' },
@@ -1257,6 +1305,8 @@ const COMPOUNDS = [
   { key: 'FeCl2', formula: 'FeCl₂', name: '塩化鉄(II)', cations: { 'Fe2+': 1 }, anions: { 'Cl-': 2 }, color: '#86efac', desc: '淡緑色系の鉄(II)塩です。水に溶けやすく、空気中では鉄(II)が酸化されて鉄(III)化合物へ変化しやすい性質があります。' },
   // Zn²⁺ compounds
   { key: 'ZnCl2', formula: 'ZnCl₂', name: '塩化亜鉛', cations: { 'Zn2+': 1 }, anions: { 'Cl-': 2 }, color: '#e2e8f0', desc: '白色の結晶性固体です。水によく溶け、水溶液は酸性を示します。' },
+  { key: 'ZnI2', formula: 'ZnI₂', name: 'ヨウ化亜鉛', cations: { 'Zn2+': 1 }, anions: { 'I-': 2 }, color: '#f8fafc', desc: '白色〜無色の結晶性固体です。水に溶けやすいヨウ化物で、亜鉛イオンとヨウ化物イオンから構成されます。' },
+  { key: 'ZnBr2', formula: 'ZnBr₂', name: '臭化亜鉛', cations: { 'Zn2+': 1 }, anions: { 'Br-': 2 }, color: '#f8fafc', desc: '白色〜無色の結晶性固体です。水に溶けやすい臭化物で、亜鉛イオンと臭化物イオンから構成されます。' },
   { key: 'ZnSO4', formula: 'ZnSO₄', name: '硫酸亜鉛', cations: { 'Zn2+': 1 }, anions: { 'SO4-2': 1 }, color: '#f1f5f9', desc: '無色〜白色の結晶性固体です。水に溶けやすく、亜鉛を含む代表的な硫酸塩です。' },
   { key: 'ZnOH2', formula: 'Zn(OH)₂', name: '水酸化亜鉛', cations: { 'Zn2+': 1 }, anions: { 'OH-': 2 }, color: '#f8fafc', desc: '白色の沈殿として生じる水酸化物です。酸にも強塩基にも溶ける両性水酸化物です。' },
   { key: 'ZnO', formula: 'ZnO', name: '酸化亜鉛', cations: { 'Zn2+': 1 }, anions: { 'O2-': 1 }, color: '#f8fafc', desc: '白色の固体です。加熱すると黄色になりますが、冷却すると再び白色に戻ります。顔料やゴム製造など幅広く利用されます。', mineral: { name: '紅亜鉛鉱', desc: 'ZnOと同じ組成を持つ亜鉛の酸化鉱物です。' } },
@@ -1266,6 +1316,8 @@ const COMPOUNDS = [
 
   // Ca²⁺ compounds
   { key: 'CaCl2', formula: 'CaCl₂', name: '塩化カルシウム', cations: { 'Ca2+': 1 }, anions: { 'Cl-': 2 }, color: '#f8fafc', desc: '白色の結晶性固体です。水に非常によく溶け、その際に熱を発生します。乾燥剤や融雪剤などに利用されます。' },
+  { key: 'CaI2', formula: 'CaI₂', name: 'ヨウ化カルシウム', cations: { 'Ca2+': 1 }, anions: { 'I-': 2 }, color: '#f8fafc', desc: '白色の結晶性固体です。水に溶けやすく、カルシウムイオンとヨウ化物イオンからなる代表的なヨウ化物です。' },
+  { key: 'CaBr2', formula: 'CaBr₂', name: '臭化カルシウム', cations: { 'Ca2+': 1 }, anions: { 'Br-': 2 }, color: '#f8fafc', desc: '白色の結晶性固体です。水に溶けやすく、カルシウムイオンと臭化物イオンからなる代表的な臭化物です。' },
   { key: 'CaSO4', formula: 'CaSO₄', name: '硫酸カルシウム', cations: { 'Ca2+': 1 }, anions: { 'SO4-2': 1 }, color: '#f1f5f9', desc: '白色の固体で、水には溶けにくい性質があります。水和物として石膏や焼石膏に関係する重要なカルシウム化合物です。' },
   { key: 'CaOH2', formula: 'Ca(OH)₂', name: '水酸化カルシウム', cations: { 'Ca2+': 1 }, anions: { 'OH-': 2 }, color: '#f8fafc', desc: '白色の固体です。水に少し溶け、水溶液は強いアルカリ性を示します。石灰水や消石灰として利用されます。' },
   { key: 'CaO', formula: 'CaO', name: '酸化カルシウム', cations: { 'Ca2+': 1 }, anions: { 'O2-': 1 }, color: '#f8fafc', desc: '白色の固体です。水と反応して水酸化カルシウムを生じ、その反応では熱が発生します。生石灰とも呼ばれます。', mineral: { name: 'カルシア', desc: 'CaOと同じ組成を持つ酸化カルシウムです。' } },
@@ -1279,6 +1331,8 @@ const COMPOUNDS = [
 
   // Pb²⁺ compounds
   { key: 'PbCl2', formula: 'PbCl₂', name: '塩化鉛(II)', cations: { 'Pb2+': 1 }, anions: { 'Cl-': 2 }, color: '#f8fafc', desc: '白色の結晶性固体です。水には比較的溶けにくく、塩化物イオンを含む溶液から白色沈殿として生じます。' },
+  { key: 'PbI2', formula: 'PbI₂', name: 'ヨウ化鉛(II)', cations: { 'Pb2+': 1 }, anions: { 'I-': 2 }, color: '#fde68a', desc: '鮮やかな黄色の固体です。水に溶けにくく、鉛(II)イオンとヨウ化物イオンの反応で黄色の沈殿を生じます。' },
+  { key: 'PbBr2', formula: 'PbBr₂', name: '臭化鉛(II)', cations: { 'Pb2+': 1 }, anions: { 'Br-': 2 }, color: '#fef3c7', desc: '白色〜淡黄色の固体です。水に比較的溶けにくく、鉛(II)イオンと臭化物イオンからなる臭化物です。' },
   { key: 'PbSO4', formula: 'PbSO₄', name: '硫酸鉛(II)', cations: { 'Pb2+': 1 }, anions: { 'SO4-2': 1 }, color: '#f8fafc', desc: '白色の固体です。水に非常に溶けにくく、硫酸イオンによる鉛(II)の代表的な沈殿です。' },
   { key: 'PbOH2', formula: 'Pb(OH)₂', name: '水酸化鉛(II)', cations: { 'Pb2+': 1 }, anions: { 'OH-': 2 }, color: '#f1f5f9', desc: '白色の沈殿として生じる水酸化物です。酸にも強塩基にも反応する両性水酸化物です。' },
   { key: 'PbO', formula: 'PbO', name: '酸化鉛(II)', cations: { 'Pb2+': 1 }, anions: { 'O2-': 1 }, color: '#fbbf24', desc: '黄色または赤色系の固体として存在します。鉛(II)を含む代表的な酸化物です。', mineral: { name: 'リサージ・マッシコット', desc: 'PbOと同じ組成を持つ鉛の酸化鉱物です。' } },
@@ -1294,6 +1348,8 @@ const COMPOUNDS = [
   { key: 'Cu3PO42', formula: 'Cu₃(PO₄)₂', name: 'リン酸銅(II)', cations: { 'Cu2+': 3 }, anions: { 'PO4-3': 2 }, color: '#60a5fa', desc: '青色〜青緑色系の固体です。水に溶けにくい銅(II)のリン酸塩です。' },
   { key: 'Fe3PO42', formula: 'Fe₃(PO₄)₂', name: 'リン酸鉄(II)', cations: { 'Fe2+': 3 }, anions: { 'PO4-3': 2 }, color: '#a3a3a3', desc: '淡い色調の固体として知られる鉄(II)のリン酸塩です。水に溶けにくく、リン酸イオンと鉄(II)イオンから沈殿を生じます。' }, // Mg²⁺
   { key: 'MgCl2', formula: 'MgCl₂', name: '塩化マグネシウム', cations: { 'Mg2+': 1 }, anions: { 'Cl-': 2 }, color: '#f1f5f9', desc: '無色〜白色の結晶性固体です。水によく溶けるマグネシウム塩です。' },
+  { key: 'MgI2', formula: 'MgI₂', name: 'ヨウ化マグネシウム', cations: { 'Mg2+': 1 }, anions: { 'I-': 2 }, color: '#f8fafc', desc: '白色系の結晶性固体です。水に溶けやすく、マグネシウムイオンとヨウ化物イオンからなる塩です。' },
+  { key: 'MgBr2', formula: 'MgBr₂', name: '臭化マグネシウム', cations: { 'Mg2+': 1 }, anions: { 'Br-': 2 }, color: '#f8fafc', desc: '白色系の結晶性固体です。水に溶けやすく、マグネシウムイオンと臭化物イオンからなる塩です。' },
   { key: 'MgSO4', formula: 'MgSO₄', name: '硫酸マグネシウム', cations: { 'Mg2+': 1 }, anions: { 'SO4-2': 1 }, color: '#f8fafc', desc: '無色〜白色の結晶性固体です。水に溶けやすく、七水和物はエプソム塩として知られています。' },
   { key: 'MgOH2', formula: 'Mg(OH)₂', name: '水酸化マグネシウム', cations: { 'Mg2+': 1 }, anions: { 'OH-': 2 }, color: '#f8fafc', desc: '白色の固体です。水に溶けにくく、懸濁液は制酸剤などに利用されます。' },
   { key: 'MgO', formula: 'MgO', name: '酸化マグネシウム', cations: { 'Mg2+': 1 }, anions: { 'O2-': 1 }, color: '#f8fafc', desc: '白色の固体です。耐火材料などに利用され、水と反応すると水酸化マグネシウムを生じます。' },
@@ -1321,9 +1377,12 @@ const COMPOUNDS = [
   { key: 'FeNO33', formula: 'Fe(NO₃)₃', name: '硝酸鉄(III)', cations: { 'Fe3+': 1 }, anions: { 'NO3-1': 3 }, color: '#fbbf24', desc: '淡紫色〜淡黄色系の鉄(III)塩です。水に溶けやすく、水溶液は加水分解によって酸性を示します。' },
   { key: 'Fe2CO33', formula: 'Fe₂(CO₃)₃', name: '炭酸鉄(III)', cations: { 'Fe3+': 2 }, anions: { 'CO3-2': 3 }, color: '#92400e', desc: '単純な炭酸鉄(III)としては不安定な組成です。水中では加水分解などを起こしやすく、安定な単純塩としては扱いにくい化合物です。' },
   { key: 'FeBO3', formula: 'FeBO₃', name: 'ホウ酸鉄(III)', cations: { 'Fe3+': 1 }, anions: { 'BO3-3': 1 }, color: '#f8fafc', desc: '鉄(III)イオンとホウ酸イオンからなるホウ酸塩です。結晶性物質として知られ、磁気的性質が研究されています。' },
+  { key: 'FeI3', formula: 'FeI₃', name: 'ヨウ化鉄(III)', cations: { 'Fe3+': 1 }, anions: { 'I-': 3 }, color: '#fef3c7', desc: '形式上は鉄(III)とヨウ化物からなる組成ですが、鉄(III)はヨウ化物イオンを酸化しやすく単純なFeI₃は安定ではありません。' },
 
   // Ba²⁺
   { key: 'BaCl2', formula: 'BaCl₂', name: '塩化バリウム', cations: { 'Ba2+': 1 }, anions: { 'Cl-': 2 }, color: '#f8fafc', desc: '白色の結晶性固体です。水に溶けやすいバリウム塩で、硫酸イオンの検出にも利用されます。' },
+  { key: 'BaI2', formula: 'BaI₂', name: 'ヨウ化バリウム', cations: { 'Ba2+': 1 }, anions: { 'I-': 2 }, color: '#f8fafc', desc: '白色系の結晶性固体です。水に溶けやすく、バリウムイオンとヨウ化物イオンからなる塩です。' },
+  { key: 'BaBr2', formula: 'BaBr₂', name: '臭化バリウム', cations: { 'Ba2+': 1 }, anions: { 'Br-': 2 }, color: '#f8fafc', desc: '白色系の結晶性固体です。水に溶けやすく、バリウムイオンと臭化物イオンからなる臭化物です。' },
   { key: 'BaSO4', formula: 'BaSO₄', name: '硫酸バリウム', cations: { 'Ba2+': 1 }, anions: { 'SO4-2': 1 }, color: '#f8fafc', desc: '白色の固体で、水に非常に溶けにくい性質があります。硫酸イオンとの反応で白色沈殿を生じる代表的な化合物です。', mineral: { name: '重晶石', desc: 'BaSO₄と同じ組成を持つ代表的なバリウム鉱物です。' } },
   { key: 'BaOH2', formula: 'Ba(OH)₂', name: '水酸化バリウム', cations: { 'Ba2+': 1 }, anions: { 'OH-': 2 }, color: '#f8fafc', desc: '白色の固体です。水に比較的よく溶け、強いアルカリ性を示します。' },
   { key: 'BaO', formula: 'BaO', name: '酸化バリウム', cations: { 'Ba2+': 1 }, anions: { 'O2-': 1 }, color: '#f1f5f9', desc: '白色の固体です。水と反応して水酸化バリウムを生じます。' },
@@ -1367,6 +1426,8 @@ const COMPOUNDS = [
 
   // Sr²⁺ compounds
   { key: 'SrCl2', formula: 'SrCl₂', name: '塩化ストロンチウム', cations: { 'Sr2+': 1 }, anions: { 'Cl-': 2 }, color: '#f8fafc', desc: '無色〜白色の結晶性固体です。水に溶けやすいストロンチウム塩で、ストロンチウムイオンと塩化物イオンからなる代表的なハロゲン化物です。' },
+  { key: 'SrI2', formula: 'SrI₂', name: 'ヨウ化ストロンチウム', cations: { 'Sr2+': 1 }, anions: { 'I-': 2 }, color: '#f8fafc', desc: '白色の結晶性固体です。水に溶けやすく、ストロンチウムイオンとヨウ化物イオンからなる塩です。' },
+  { key: 'SrBr2', formula: 'SrBr₂', name: '臭化ストロンチウム', cations: { 'Sr2+': 1 }, anions: { 'Br-': 2 }, color: '#f8fafc', desc: '白色の結晶性固体です。水に溶けやすく、ストロンチウムイオンと臭化物イオンからなる塩です。' },
   { key: 'SrO', formula: 'SrO', name: '酸化ストロンチウム', cations: { 'Sr2+': 1 }, anions: { 'O2-': 1 }, color: '#f1f5f9', desc: '白色の固体です。ストロンチウムの塩基性酸化物で、水と反応すると水酸化ストロンチウムを生じます。' },
   { key: 'SrS', formula: 'SrS', name: '硫化ストロンチウム', cations: { 'Sr2+': 1 }, anions: { 'S2-': 1 }, color: '#fef3c7', desc: '白色〜淡黄色の固体です。ストロンチウムイオンと硫化物イオンからなる硫化物で、水と反応すると硫化物イオンの加水分解などにより塩基性を示します。' },
   { key: 'SrOH2', formula: 'Sr(OH)₂', name: '水酸化ストロンチウム', cations: { 'Sr2+': 1 }, anions: { 'OH-': 2 }, color: '#f8fafc', desc: '白色の固体です。水に比較的よく溶け、強いアルカリ性を示すストロンチウムの水酸化物です。' },
@@ -1385,6 +1446,8 @@ const COMPOUNDS = [
   { key: 'BkCl4', formula: 'BkCl₄', name: '塩化バークリウム(IV)', cations: { 'Bk4+': 1 }, anions: { 'Cl-': 4 }, color: '#f8fafc', desc: 'バークリウム(IV)と塩化物イオンからなるハロゲン化物です。' },
   { key: 'BkNO33', formula: 'Bk(NO₃)₃', name: '硝酸バークリウム(III)', cations: { 'Bk3+': 1 }, anions: { 'NO3-1': 3 }, color: '#42FDC9', desc: '淡緑色の固体です。水に溶けやすく、基本的には四水和物の形をとります。極めて希少で、この物質の溶液22mgに対し約1.5億円もの価格がついた事例があります。' },
   { key: 'NiCl2', formula: 'NiCl₂', name: '塩化ニッケル(II)', cations: { 'Ni2+': 1 }, anions: { 'Cl-': 2 }, color: '#22c55e', desc: '黄緑色の結晶性固体です。水に溶けやすく、ニッケルめっきやニッケル化合物の原料として利用されます。' },
+  { key: 'NiI2', formula: 'NiI₂', name: 'ヨウ化ニッケル(II)', cations: { 'Ni2+': 1 }, anions: { 'I-': 2 }, color: '#65a30d', desc: 'ニッケル(II)イオンとヨウ化物イオンからなるヨウ化物です。ニッケル(II)を含む塩として扱われます。' },
+  { key: 'NiBr2', formula: 'NiBr₂', name: '臭化ニッケル(II)', cations: { 'Ni2+': 1 }, anions: { 'Br-': 2 }, color: '#16a34a', desc: 'ニッケル(II)イオンと臭化物イオンからなる臭化物です。ニッケル(II)を含む代表的な塩の一つです。' },
   { key: 'NiF2', formula: 'NiF₂', name: 'フッ化ニッケル(II)', cations: { 'Ni2+': 1 }, anions: { 'F-': 2 }, color: '#84cc16', desc: '淡黄色から緑色の固体です。ニッケル(II)とフッ化物イオンからなる化合物で、無機フッ化物として知られています。' },
   { key: 'NiOH2', formula: 'Ni(OH)₂', name: '水酸化ニッケル(II)', cations: { 'Ni2+': 1 }, anions: { 'OH-': 2 }, color: '#22c55e', desc: '緑色の固体です。水に溶けにくく、ニッケル水素電池などの正極材料に利用される重要なニッケル化合物です。' },
   { key: 'NiO', formula: 'NiO', name: '酸化ニッケル(II)', cations: { 'Ni2+': 1 }, anions: { 'O2-': 1 }, color: '#166534', desc: '緑色から黒色の固体です。耐熱材料やセラミックス、触媒などに利用される代表的なニッケル酸化物です。' },
@@ -1422,7 +1485,7 @@ const COMPOUNDS = [
     const AUTO_ION_ORDER = [
       'H+', 'Na+', 'K+', 'Cs+', 'Cu+', 'Ag+', 'Cu2+', 'Fe2+', 'Zn2+', 'Ca2+', 'Pb2+', 'Sr2+',
       'Mg2+', 'Al3+', 'Fe3+', 'Bk3+', 'Bk4+', 'Ba2+', 'NH4+','U6+','As3+','Cr3+','Cr2+', 'Ni2+',
-      'F-', 'Cl-', 'OH-', 'O2-', 'S2-', 'H-', 'SO4-2', 'NO3-1', 'PO4-3', 'AsO4-3', 'CrO4-2', 'Cr2O7-2', 'CO3-2', 'HCO3-1','BO3-3','UO2-2'
+      'F-', 'Cl-', 'OH-', 'O2-', 'S2-', 'H-', 'SO4-2', 'NO3-1', 'PO4-3', 'AsO4-3', 'CrO4-2', 'Cr2O7-2', 'CO3-2', 'HCO3-1','BO3-3','UO22+','I-','Br-'
     ];
     const SUBSCRIPT_DIGITS = { 0: '₀', 1: '₁', 2: '₂', 3: '₃', 4: '₄', 5: '₅', 6: '₆', 7: '₇', 8: '₈', 9: '₉' };
 
@@ -1475,6 +1538,8 @@ const COMPOUNDS = [
         'CO3-2': '炭酸',
         'HCO3-1': '炭酸水素',
         'BO3-3': 'ホウ酸',
+        'I-': 'ヨウ化',
+        'Br-': '臭化'
       };
       const cationName = cationNames.join('・');
       const name = anionIds.length === 1
