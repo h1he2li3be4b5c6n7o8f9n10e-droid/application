@@ -1059,6 +1059,9 @@
           <button id="dex-tab-special" type="button" role="tab" aria-selected="false" onclick="switchDexTab('special')" class="px-4 py-2 rounded-xl text-sm font-bold bg-slate-800 text-slate-300 hover:bg-slate-700">
             特殊化合物図鑑
           </button>
+          <button id="dex-tab-mineral" type="button" role="tab" aria-selected="false" onclick="switchDexTab('mineral')" class="px-4 py-2 rounded-xl text-sm font-bold bg-slate-800 text-slate-300 hover:bg-slate-700">
+            鉱物組成図鑑
+          </button>
         </div>
         <p id="dex-description" class="text-xs text-slate-400 mb-6">
           手書き登録された化合物と固有の説明を表示します。
@@ -1425,7 +1428,7 @@ const COMPOUNDS = [
   // Fe2+ (atomic number 26)
   { key: 'FeOH2', formula: 'Fe(OH)₂', name: '水酸化鉄(II)', cations: { 'Fe2+': 1 }, anions: { 'OH-': 2 }, color: '#a3a3a3', desc: '鉄(II)イオンから生じる水酸化物です。空気中では酸化されやすく、色や組成が変化することがあります。' },
   { key: 'FeO', formula: 'FeO', name: '酸化鉄(II)', cations: { 'Fe2+': 1 }, anions: { 'O2-': 1 }, color: '#27272a', desc: '黒色の固体です。鉄(II)を含む酸化物で、空気中ではさらに酸化されやすい性質があります。', mineral: { name: 'ウスタイト', desc: 'FeOと同じ組成を持つ鉄の酸化鉱物です。' } },
-  { key: 'FeS', formula: 'FeS', name: '硫化鉄(II)', cations: { 'Fe2+': 1 }, anions: { 'S2-': 1 }, color: '#18181b', desc: '黒色の固体です。鉄(II)と硫化物イオンからなる水に溶けにくい硫化物です。酸と反応すると硫化水素を生じます。', mineral: { name: 'トロイライト', desc: 'FeSと同じ組成を持つ硫化鉱物です。' } },
+  { key: 'FeS', formula: 'FeS', name: '硫化鉄(II)', cations: { 'Fe2+': 1 }, anions: { 'S2-': 1 }, color: '#18181b', desc: '黒色の固体です。鉄(II)と硫化物イオンからなる水に溶けにくい硫化物です。酸と反応すると硫化水素を生じます。', mineral: { name: 'トロイライト', desc: 'FeSと同じ組成を持つ硫化鉱物です。隕石に含まれている場合があります。' } },
   { key: 'FeI2', formula: 'FeI₂', name: 'ヨウ化鉄(II)', cations: { 'Fe2+': 1 }, anions: { 'I-': 2 }, color: '#f8fafc', desc: '鉄(II)イオンとヨウ化物イオンからなるヨウ化物です。水溶液中では鉄(II)イオンを含む塩として存在します。' },
   { key: 'FeBr2', formula: 'FeBr₂', name: '臭化鉄(II)', cations: { 'Fe2+': 1 }, anions: { 'Br-': 2 }, color: '#f8fafc', desc: '鉄(II)イオンと臭化物イオンからなる臭化物です。水溶液中では鉄(II)イオンを含む塩として存在します。' },
   { key: 'Fe-SiO4', formula: 'Fe2SiO4', name: 'ケイ酸鉄(II)', cations: { 'Fe2+': 2 }, anions: { 'SiO4-4': 1 }, color: '#f8fafc', desc: '鉄(II)とケイ酸イオンからなる化合物です。Fe2SiO4は天然鉱物のファヤライトとして知られています。' },
@@ -1439,7 +1442,7 @@ const COMPOUNDS = [
   { key: 'FeCl3', formula: 'FeCl₃', name: '塩化鉄(III)', cations: { 'Fe3+': 1 }, anions: { 'Cl-': 3 }, color: '#a16207', desc: '黄褐色〜褐色の固体です。水に溶け、加水分解によって酸性を示します。' },
   { key: 'Fe2SO43', formula: 'Fe₂(SO₄)₃', name: '硫酸鉄(III)', cations: { 'Fe3+': 2 }, anions: { 'SO4-2': 3 }, color: '#f59e0b', desc: '黄褐色系の鉄(III)塩です。水溶液では加水分解し、酸性を示します。' },
   { key: 'FeOH3', formula: 'Fe(OH)₃', name: '水酸化鉄(III)', cations: { 'Fe3+': 1 }, anions: { 'OH-': 3 }, color: '#92400e', desc: '赤褐色の沈殿として生じる鉄(III)の水酸化物です。水にほとんど溶けません。' },
-  { key: 'Fe2O3', formula: 'Fe₂O₃', name: '酸化鉄(III)', cations: { 'Fe3+': 2 }, anions: { 'O2-': 3 }, color: '#7f1d1d', desc: '赤褐色〜暗赤色の固体です。鉄の代表的な酸化物で、赤鉄鉱などとして天然に産出します。', mineral: { name: '赤鉄鉱', desc: 'Fe₂O₃と同じ組成を持つ代表的な鉄鉱物です。' } },
+  { key: 'Fe2O3', formula: 'Fe₂O₃', name: '酸化鉄(III)', cations: { 'Fe3+': 2 }, anions: { 'O2-': 3 }, color: '#7f1d1d', desc: '赤褐色〜暗赤色の固体です。鉄の代表的な酸化物で、赤鉄鉱などとして天然に産出します。', mineral: { name: '赤鉄鉱', desc: 'Fe₂O₃と同じ組成を持つ代表的な鉄鉱物です。鉄鋼の原材料になります。' } },
   { key: 'Fe2S3', formula: 'Fe₂S₃', name: '硫化鉄(III)', cations: { 'Fe3+': 2 }, anions: { 'S2-': 3 }, color: '#3f3f46', desc: '鉄(III)と硫化物イオンからなる組成です。単純な硫化鉄(III)としては不安定で、実際の水溶液反応では別の鉄硫化物が生じる場合があります。' },
   { key: 'FeNO33', formula: 'Fe(NO₃)₃', name: '硝酸鉄(III)', cations: { 'Fe3+': 1 }, anions: { 'NO3-1': 3 }, color: '#fbbf24', desc: '淡紫色〜淡黄色系の鉄(III)塩です。水に溶けやすく、水溶液は加水分解によって酸性を示します。' },
   { key: 'Fe2CO33', formula: 'Fe₂(CO₃)₃', name: '炭酸鉄(III)', cations: { 'Fe3+': 2 }, anions: { 'CO3-2': 3 }, color: '#92400e', desc: '単純な炭酸鉄(III)としては不安定な組成です。水中では加水分解などを起こしやすく、安定な単純塩としては扱いにくい化合物です。' },
@@ -1501,7 +1504,7 @@ const COMPOUNDS = [
   { key: 'CuF2', formula: 'CuF₂', name: 'フッ化銅(II)', cations: { 'Cu2+': 1 }, anions: { 'F-': 2 }, color: '#60a5fa', desc: '銅(II)イオンとフッ化物イオンからなる無機化合物です。Cu²⁺の電荷を2個のF⁻で打ち消した組成になっています。' },
   { key: 'CuCl2', formula: 'CuCl₂', name: '塩化銅(II)', cations: { 'Cu2+': 1 }, anions: { 'Cl-': 2 }, color: '#2dd4bf', desc: '青緑色系の銅(II)塩です。水に溶け、水溶液は銅(II)イオンによって青〜青緑色を示します。' },
   { key: 'Cu3PO42', formula: 'Cu₃(PO₄)₂', name: 'リン酸銅(II)', cations: { 'Cu2+': 3 }, anions: { 'PO4-3': 2 }, color: '#60a5fa', desc: '青色〜青緑色系の固体です。水に溶けにくい銅(II)のリン酸塩です。' },
-
+  
   // Zn2+ (atomic number 30)
   { key: 'ZnCl2', formula: 'ZnCl₂', name: '塩化亜鉛', cations: { 'Zn2+': 1 }, anions: { 'Cl-': 2 }, color: '#e2e8f0', desc: '白色の結晶性固体です。水によく溶け、水溶液は酸性を示します。' },
   { key: 'ZnI2', formula: 'ZnI₂', name: 'ヨウ化亜鉛', cations: { 'Zn2+': 1 }, anions: { 'I-': 2 }, color: '#f8fafc', desc: '白色〜無色の結晶性固体です。水に溶けやすいヨウ化物で、亜鉛イオンとヨウ化物イオンから構成されます。' },
@@ -1543,10 +1546,10 @@ const COMPOUNDS = [
   { key: 'Ag3AsO4', formula: 'Ag₃AsO₄', name: 'ヒ酸銀', cations: { 'Ag+': 3 }, anions: { 'AsO4-3': 1 }, color: '#f1f5f9', desc: '淡黄色系の固体です。水に溶けにくく、銀イオンとヒ酸イオンによる沈殿として生成する銀塩です。' },
   { key: 'AgI', formula: 'AgI', name: 'ヨウ化銀', cations: { 'Ag+': 1 }, anions: { 'I-': 1 }, color: '#fef3c7', desc: '淡黄色の固体です。水に非常に溶けにくく、銀イオンとヨウ化物イオンの反応によって黄色の沈殿として生じます。' },
   { key: 'AgBr', formula: 'AgBr', name: '臭化銀', cations: { 'Ag+': 1 }, anions: { 'Br-': 1 }, color: '#fef3c7', desc: '淡黄色の固体です。水に非常に溶けにくく、銀イオンと臭化物イオンの反応によって淡黄色の沈殿として生じます。' },
-  { key: 'Ag-IO3', formula: 'AgIO3', name: 'ヨウ素酸銀', cations: { 'Ag+': 1 }, anions: { 'IO3-1': 1 }, color: '#f8fafc', desc: '銀イオンとヨウ素酸イオンからなる化合物です。ヨウ素酸銀は難溶性の銀塩として知られています。' },
-  { key: 'Ag-CN', formula: 'AgCN', name: 'シアン化銀', cations: { 'Ag+': 1 }, anions: { 'CN-1': 1 }, color: '#f8fafc', desc: '銀イオンとシアン化物イオンからなる化合物です。AgCNは難溶性の銀塩として知られています。' },
-  { key: 'Ag-CNO', formula: 'AgCNO', name: '雷酸銀', cations: { 'Ag+': 1 }, anions: { 'CNO-1': 1 }, color: '#f8fafc', desc: '銀イオンと雷酸イオンからなる化合物です。雷酸銀は雷酸塩の代表例として知られています。' },
-  { key: 'Ag-CNO-2', formula: 'AgCNO', name: '雷酸銀', cations: { 'Ag+': 1 }, anions: { 'CNO-1': 1 }, color: '#f8fafc', desc: '雷酸イオンと銀(I)イオンからなる雷酸塩です。雷酸塩を代表する化合物の一つです。' },
+  { key: 'AgIO3', formula: 'AgIO3', name: 'ヨウ素酸銀', cations: { 'Ag+': 1 }, anions: { 'IO3-1': 1 }, color: '#f8fafc', desc: '銀イオンとヨウ素酸イオンからなる化合物です。ヨウ素酸銀は難溶性の銀塩として知られています。' },
+  { key: 'AgCN', formula: 'AgCN', name: 'シアン化銀', cations: { 'Ag+': 1 }, anions: { 'CN-1': 1 }, color: '#f8fafc', desc: '銀イオンとシアン化物イオンからなる化合物です。AgCNは難溶性の銀塩として知られています。' },
+  { key: 'AgCNO', formula: 'AgCNO', name: '雷酸銀', cations: { 'Ag+': 1 }, anions: { 'CNO-1': 1 }, color: '#f8fafc', desc: '銀イオンと雷酸イオンからなる化合物です。雷酸銀は雷酸塩の代表例として知られています。' },
+  { key: 'AgCNO2', formula: 'AgCNO', name: '雷酸銀', cations: { 'Ag+': 1 }, anions: { 'CNO-1': 1 }, color: '#f8fafc', desc: '雷酸イオンと銀(I)イオンからなる雷酸塩です。雷酸塩を代表する化合物の一つです。' },
   { key: 'Ag2SO4', formula: 'Ag₂SO₄', name: '硫酸銀(I)', cations: { 'Ag+': 2 }, anions: { 'SO4-2': 1 }, color: '#e2e8f0', desc: '白色系の固体です。銀(I)イオンと硫酸イオンからなる硫酸塩で、水には比較的溶けにくい性質があります。' },
   { key: 'AgNO3', formula: 'AgNO₃', name: '硝酸銀(I)', cations: { 'Ag+': 1 }, anions: { 'NO3-1': 1 }, color: '#f8fafc', desc: '無色〜白色の結晶性固体です。水に溶けやすく、塩化物イオンと反応してAgClの白色沈殿を生じるため、塩化物イオンの検出などに利用されます。' },
   { key: 'AgF', formula: 'AgF', name: 'フッ化銀(I)', cations: { 'Ag+': 1 }, anions: { 'F-': 1 }, color: '#e2e8f0', desc: '白色系の固体です。ほかのハロゲン化銀と比べて水に溶けやすいという特徴があります。' },
@@ -1567,7 +1570,7 @@ const COMPOUNDS = [
   { key: 'BaCl2', formula: 'BaCl₂', name: '塩化バリウム', cations: { 'Ba2+': 1 }, anions: { 'Cl-': 2 }, color: '#f8fafc', desc: '白色の結晶性固体です。水に溶けやすいバリウム塩で、硫酸イオンの検出にも利用されます。' },
   { key: 'BaI2', formula: 'BaI₂', name: 'ヨウ化バリウム', cations: { 'Ba2+': 1 }, anions: { 'I-': 2 }, color: '#f8fafc', desc: '白色系の結晶性固体です。水に溶けやすく、バリウムイオンとヨウ化物イオンからなる塩です。' },
   { key: 'BaBr2', formula: 'BaBr₂', name: '臭化バリウム', cations: { 'Ba2+': 1 }, anions: { 'Br-': 2 }, color: '#f8fafc', desc: '白色系の結晶性固体です。水に溶けやすく、バリウムイオンと臭化物イオンからなる臭化物です。' },
-  { key: 'Ba-IO3', formula: 'Ba(IO3)2', name: 'ヨウ素酸バリウム', cations: { 'Ba2+': 1 }, anions: { 'IO3-1': 2 }, color: '#f8fafc', desc: 'バリウムとヨウ素酸イオンからなる化合物です。ヨウ素酸バリウムは難溶性のヨウ素酸塩として知られています。' },
+  { key: 'BaIO3', formula: 'Ba(IO3)2', name: 'ヨウ素酸バリウム', cations: { 'Ba2+': 1 }, anions: { 'IO3-1': 2 }, color: '#f8fafc', desc: 'バリウムとヨウ素酸イオンからなる化合物です。ヨウ素酸バリウムは難溶性のヨウ素酸塩として知られています。' },
   { key: 'BaSO4', formula: 'BaSO₄', name: '硫酸バリウム', cations: { 'Ba2+': 1 }, anions: { 'SO4-2': 1 }, color: '#f8fafc', desc: '白色の固体で、水に非常に溶けにくい性質があります。硫酸イオンとの反応で白色沈殿を生じる代表的な化合物です。', mineral: { name: '重晶石', desc: 'BaSO₄と同じ組成を持つ代表的なバリウム鉱物です。' } },
   { key: 'BaOH2', formula: 'Ba(OH)₂', name: '水酸化バリウム', cations: { 'Ba2+': 1 }, anions: { 'OH-': 2 }, color: '#f8fafc', desc: '白色の固体です。水に比較的よく溶け、強いアルカリ性を示します。' },
   { key: 'BaO', formula: 'BaO', name: '酸化バリウム', cations: { 'Ba2+': 1 }, anions: { 'O2-': 1 }, color: '#f1f5f9', desc: '白色の固体です。水と反応して水酸化バリウムを生じます。' },
@@ -1639,12 +1642,23 @@ const COMPOUNDS = [
   { key: 'BkF4', formula: 'BkF₄', name: 'フッ化バークリウム(IV)', cations: { 'Bk4+': 1 }, anions: { 'F-': 4 }, color: '#f8fafc', desc: 'バークリウム(IV)とフッ化物イオンからなるハロゲン化物です。' },
   { key: 'BkCl4', formula: 'BkCl₄', name: '塩化バークリウム(IV)', cations: { 'Bk4+': 1 }, anions: { 'Cl-': 4 }, color: '#f8fafc', desc: 'バークリウム(IV)と塩化物イオンからなるハロゲン化物です。' },
 
+  //複カチオン
+    { key:'AlK(SO4)2', formula:'AlK(SO₄)₂', name:'硫酸アルミニウムカリウム', cations:{'Al3+':1,'K+':1}, anions:{'SO4-2':2}, color:'#f8fafc', desc:'硫酸アルミニウムカリウム十二水和物として知られる結晶性固体です。通称明礬。水に溶けやすく、古くから染料の媒染剤や収斂剤として利用されてきました。'},
+    { key:'KAl(SO4)2', formula:'KAl(SO₄)₂', name:'硫酸アルミニウムカリウム', cations:{'K+':1,'Al3+':1}, anions:{'SO4-2':2}, color:'#f8fafc', desc:'硫酸カリウムアルミニウム十二水和物として知られる結晶性固体です。通称明礬。水に溶けやすく、古くから染料の媒染剤や収斂剤として利用されてきました。'},
 ];
 //↑新化合物追加領域
 
 
-//↓自動生成辞書登録部分
+//↓鉱物系辞書追加領域
     const MANUAL_COMPOUNDS = [...COMPOUNDS];
+    const MINERAL_COMPOUNDS = [
+    { key: 'Cu2-OH2-CO3', formula: 'Cu2(OH)2CO3', name: '水酸化炭酸銅(II)', cations: { 'Cu2+': 2 }, anions: { 'OH-': 2, 'CO3-2': 1 }, color: '#16a34a', desc: '緑色の固体です。銅(II)イオン、水酸化物イオン、炭酸イオンからなる塩基性炭酸塩です。', mineral: { name: '孔雀石', desc: '鮮やかな緑色を示す銅の炭酸塩鉱物です。' } },
+
+    ];
+
+
+
+//↓自動生成辞書登録部分
     const AUTO_ION_ORDER = [
       'H+', 'Na+', 'K+', 'Cs+', 'Cu+', 'Ag+', 'Cu2+', 'Fe2+', 'Zn2+', 'Ca2+', 'Pb2+', 'Sr2+',
       'Mg2+', 'Al3+', 'Fe3+', 'Co2+', 'Co3+', 'Bk3+', 'Bk4+', 'Ba2+', 'La3+', 'Yb2+', 'Yb3+',
@@ -1848,14 +1862,20 @@ const COMPOUNDS = [
       { anion: 'F-', solubility: 'soluble' },
     ];
     const PRECIPITATION_RULES = [];
-    const ACTIVITY_SERIES = ['K', 'Ca', 'Na', 'Mg', 'Al', 'Zn', 'Fe', 'Ni', 'Sn', 'Pb', 'H', 'Cu', 'Hg', 'Ag', 'Pt', 'Au'];
+    const ACTIVITY_SERIES = [
+      'Cs', 'K', 'Na', 'Ca', 'Sr', 'La', 'Mg', 'Al', 'Bk', 'U', 'Zn', 'Cr',
+      'Fe', 'Co', 'Ni', 'Pb', 'Cu', 'Ag', 'Au',
+    ];
     const METAL_IONS = {
-      K: { ionId: 'K+', charge: 1 }, Ca: { ionId: 'Ca2+', charge: 2 },
-      Na: { ionId: 'Na+', charge: 1 }, Mg: { ionId: 'Mg2+', charge: 2 },
-      Al: { ionId: 'Al3+', charge: 3 }, Zn: { ionId: 'Zn2+', charge: 2 },
-      Fe: { ionId: 'Fe2+', charge: 2 }, Ni: { ionId: 'Ni2+', charge: 2 },
-      Pb: { ionId: 'Pb2+', charge: 2 }, Cu: { ionId: 'Cu2+', charge: 2 },
-      Ag: { ionId: 'Ag+', charge: 1 },
+      Cs: { ionId: 'Cs+', charge: 1 }, K: { ionId: 'K+', charge: 1 },
+      Na: { ionId: 'Na+', charge: 1 }, Ca: { ionId: 'Ca2+', charge: 2 },
+      Sr: { ionId: 'Sr2+', charge: 2 }, La: { ionId: 'La3+', charge: 3 },
+      Mg: { ionId: 'Mg2+', charge: 2 }, Al: { ionId: 'Al3+', charge: 3 },
+      Bk: { ionId: 'Bk3+', charge: 3 }, U: { ionId: 'U4+', charge: 4 },
+      Zn: { ionId: 'Zn2+', charge: 2 }, Cr: { ionId: 'Cr2+', charge: 2 },
+      Fe: { ionId: 'Fe2+', charge: 2 }, Co: { ionId: 'Co2+', charge: 2 },
+      Ni: { ionId: 'Ni2+', charge: 2 }, Pb: { ionId: 'Pb2+', charge: 2 },
+      Cu: { ionId: 'Cu2+', charge: 2 }, Ag: { ionId: 'Ag+', charge: 1 },
     };
     const ACID_BASE_RULES = [
       { ionId: 'H+', role: 'acid' },
@@ -3764,14 +3784,14 @@ const COMPOUNDS = [
 
     function runDisplacementReactions() {
       let reacted = false;
-      ACTIVITY_SERIES.filter((metal) => metal !== 'H').forEach((metal) => {
+      ACTIVITY_SERIES.forEach((metal) => {
         const metalIon = METAL_IONS[metal];
         if (!metalIon || !IONS[metalIon.ionId] || !ELEMENTS[metal]) return;
         let availableMetal = beakerState.metalPieces[metal] || 0;
         if (availableMetal <= 0) return;
 
         const metalRank = ACTIVITY_SERIES.indexOf(metal);
-        ACTIVITY_SERIES.slice(metalRank + 1).filter((targetMetal) => targetMetal !== 'H').forEach((targetMetal) => {
+        ACTIVITY_SERIES.slice(metalRank + 1).forEach((targetMetal) => {
           if (availableMetal <= 0) return;
           const targetIon = METAL_IONS[targetMetal];
           if (!targetIon || !IONS[targetIon.ionId]) return;
@@ -3815,7 +3835,8 @@ const COMPOUNDS = [
     }
 
     function runMetalAcidReactions() {
-      const hydrogenRank = ACTIVITY_SERIES.indexOf('H');
+      const hydrogenRank = ACTIVITY_SERIES.indexOf('Cu');
+      if (hydrogenRank < 0) return false;
       let reacted = false;
       ACTIVITY_SERIES.slice(0, hydrogenRank).forEach((metal) => {
         const metalIon = METAL_IONS[metal];
@@ -4711,14 +4732,63 @@ const COMPOUNDS = [
       currentDexTab = tab;
       const manualButton = document.getElementById('dex-tab-manual');
       const specialButton = document.getElementById('dex-tab-special');
+      const mineralButton = document.getElementById('dex-tab-mineral');
       const activeClass = 'px-4 py-2 rounded-xl text-sm font-bold bg-cyan-500 text-slate-950';
       const inactiveClass = 'px-4 py-2 rounded-xl text-sm font-bold bg-slate-800 text-slate-300 hover:bg-slate-700';
 
       manualButton.className = tab === 'manual' ? activeClass : inactiveClass;
       specialButton.className = tab === 'special' ? activeClass : inactiveClass;
+      mineralButton.className = tab === 'mineral' ? activeClass : inactiveClass;
       manualButton.setAttribute('aria-selected', String(tab === 'manual'));
       specialButton.setAttribute('aria-selected', String(tab === 'special'));
+      mineralButton.setAttribute('aria-selected', String(tab === 'mineral'));
       renderDex();
+    }
+
+    function buildDexCard(compound) {
+      const isDiscovered = compound.generated || discoveredCompounds.has(compound.key);
+      const displayColor = compound.color || '#334155';
+      const card = document.createElement('div');
+
+      if (isDiscovered) {
+        card.className =
+          'dex-card p-4 rounded-xl bg-slate-950 border border-emerald-500/30 flex gap-4 items-start relative overflow-hidden';
+        card.innerHTML = `
+          <div class="dex-card-formula w-14 h-14 rounded-xl flex items-center justify-center font-black text-xl shadow-inner shrink-0"
+               style="background-color: ${displayColor}20; color: ${displayColor}; border: 1px solid ${displayColor}40;">
+            ${compound.formula}
+          </div>
+          <div class="dex-card-content">
+            <div class="flex items-center gap-2">
+              <h3 class="dex-card-name font-extrabold text-white text-md">${compound.name}</h3>
+              <span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full font-bold">
+                発見済み
+              </span>
+            </div>
+            ${compound.generated ? '' : `<p class="dex-card-desc text-xs text-slate-400 mt-1">${compound.desc}</p>`}
+            ${!compound.generated && compound.mineral ? `
+              <p class="dex-card-desc text-xs text-cyan-300 mt-2">
+                鉱物情報: ${compound.mineral.name} — ${compound.mineral.desc}
+              </p>
+            ` : ''}
+          </div>
+        `;
+      } else {
+        card.className =
+          'dex-card p-4 rounded-xl bg-slate-950/40 border border-slate-800 flex gap-4 items-center opacity-60';
+        card.innerHTML = `
+          <div class="w-14 h-14 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center font-black text-xl text-slate-700 shrink-0">
+            ?
+          </div>
+          <div>
+            <h3 class="dex-card-name font-bold text-slate-500 text-sm">未発見の化合物</h3>
+            <p class="dex-card-desc text-xs text-slate-600 mt-1">
+              実験室で適切なイオンを結合させて解放しましょう。
+            </p>
+          </div>
+        `;
+      }
+      return card;
     }
 
     // 化合物図鑑の描画
@@ -4726,6 +4796,46 @@ const COMPOUNDS = [
       const grid = document.getElementById('dex-grid');
       const description = document.getElementById('dex-description');
       grid.innerHTML = '';
+
+      if (currentDexTab === 'mineral') {
+        const visibleMinerals = MINERAL_COMPOUNDS.filter((compound) => discoveredCompounds.has(compound.key));
+        const groupedMinerals = new Map();
+        visibleMinerals.forEach((compound) => {
+          const primaryCation = Object.keys(compound.cations || {})[0] || 'unknown';
+          const cationLabel = IONS[primaryCation]?.symbol || IONS[primaryCation]?.id || primaryCation || '不明';
+          if (!groupedMinerals.has(cationLabel)) {
+            groupedMinerals.set(cationLabel, []);
+          }
+          groupedMinerals.get(cationLabel).push(compound);
+        });
+
+        description.innerText = '発見済みの鉱物組成を陽イオンごとに見やすく整理した図鑑です。';
+
+        const sections = Array.from(groupedMinerals.entries());
+
+        sections.forEach(([cationLabel, compounds]) => {
+          const section = document.createElement('section');
+          section.className = 'rounded-2xl border border-slate-800 bg-slate-950/60 p-4 space-y-3';
+          const heading = document.createElement('h3');
+          heading.className = 'text-sm font-bold text-cyan-200';
+          heading.textContent = `${cationLabel}系`;
+          section.appendChild(heading);
+
+          const cards = document.createElement('div');
+          cards.className = 'grid grid-cols-1 md:grid-cols-2 gap-3';
+          compounds.forEach((compound) => cards.appendChild(buildDexCard(compound)));
+          section.appendChild(cards);
+          grid.appendChild(section);
+        });
+
+        if (!visibleMinerals.length) {
+          const empty = document.createElement('div');
+          empty.className = 'rounded-2xl border border-slate-800 bg-slate-950/40 p-6 text-sm text-slate-400';
+          empty.textContent = 'まだ発見した鉱物がありません。';
+          grid.appendChild(empty);
+        }
+        return;
+      }
 
       let compoundsToRender;
       if (currentDexTab === 'manual') {
@@ -4739,50 +4849,7 @@ const COMPOUNDS = [
       }
 
       compoundsToRender.forEach((compound) => {
-        const isDiscovered = compound.generated || discoveredCompounds.has(compound.key);
-        const displayColor = compound.color || '#334155';
-        const card = document.createElement('div');
-
-        if (isDiscovered) {
-          card.className =
-            'dex-card p-4 rounded-xl bg-slate-950 border border-emerald-500/30 flex gap-4 items-start relative overflow-hidden';
-          card.innerHTML = `
-            <div class="dex-card-formula w-14 h-14 rounded-xl flex items-center justify-center font-black text-xl shadow-inner shrink-0"
-                 style="background-color: ${displayColor}20; color: ${displayColor}; border: 1px solid ${displayColor}40;">
-              ${compound.formula}
-            </div>
-            <div class="dex-card-content">
-              <div class="flex items-center gap-2">
-                <h3 class="dex-card-name font-extrabold text-white text-md">${compound.name}</h3>
-                <span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full font-bold">
-                  発見済み
-                </span>
-              </div>
-              ${compound.generated ? '' : `<p class="dex-card-desc text-xs text-slate-400 mt-1">${compound.desc}</p>`}
-              ${!compound.generated && compound.mineral ? `
-                <p class="dex-card-desc text-xs text-cyan-300 mt-2">
-                  鉱物情報: ${compound.mineral.name} — ${compound.mineral.desc}
-                </p>
-              ` : ''}
-            </div>
-          `;
-        } else {
-          card.className =
-            'dex-card p-4 rounded-xl bg-slate-950/40 border border-slate-800 flex gap-4 items-center opacity-60';
-          card.innerHTML = `
-            <div class="w-14 h-14 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center font-black text-xl text-slate-700 shrink-0">
-              ?
-            </div>
-            <div>
-              <h3 class="dex-card-name font-bold text-slate-500 text-sm">未発見の化合物</h3>
-              <p class="dex-card-desc text-xs text-slate-600 mt-1">
-                実験室で適切なイオンを結合させて解放しましょう。
-              </p>
-            </div>
-          `;
-        }
-
-        grid.appendChild(card);
+        grid.appendChild(buildDexCard(compound));
       });
     }
 
