@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main
+      - main # mainブランチにpushされたら実行（masterの場合は master に変更）
   workflow_dispatch:
 
 permissions:
@@ -27,28 +27,28 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # --- 1. Node.js のセットアップを追加 ---
+      # package-lock.json がなくてもエラーにならない設定
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
 
-      # --- 2. 依存パッケージのインストールとビルドを追加 ---
+      # package.json を元に依存関係をインストール
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
+      # package.json 内の "build": "vite build" を実行して dist/ を生成
       - name: Build project
         run: npm run build
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      # --- 3. アップロードするフォルダをビルド出力先に変更 ---
+      # ビルドされた dist フォルダをアップロード
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: './dist' # Create React App の場合は './build'
+          path: './dist'
 
       - name: Deploy to GitHub Pages
         id: deployment
