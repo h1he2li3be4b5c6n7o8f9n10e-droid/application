@@ -1067,6 +1067,7 @@
           手書き登録された化合物と固有の説明を表示します。
         </p>
 
+        <div id="dex-category-nav" class="mb-6"></div>
         <div id="dex-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
           <!-- 動的追加 -->
         </div>
@@ -1090,14 +1091,22 @@
     //新ブロック追加領域
     const IONS = {
       // 陽イオン
-      'H+':   { id: 'H+',   name: '水素イオン',       type: 'cation', charge: 1, color: 'from-sky-400 to-cyan-600', textColor: 'text-sky-50', borderColor: 'border-sky-300' },
+      'H+':   { id: 'H+',   name: '水素イオン',type: 'cation', charge: 1, color: 'from-sky-400 to-cyan-600', textColor: 'text-sky-50', borderColor: 'border-sky-300' },
+      'Li+':  { id: 'Li+',  name: 'リチウムイオン', type: 'cation', charge: 1, color: 'from-red-500 to-rose-700', textColor: 'text-red-50', borderColor: 'border-red-300' },
+      'Be2+': { id: 'Be2+', symbol: 'Be²⁺', name: 'ベリリウムイオン', type: 'cation', charge: 2, color: 'from-emerald-500 to-green-700', textColor: 'text-emerald-50', borderColor: 'border-emerald-300' },
       'Na+':  { id: 'Na+',  name: 'ナトリウムイオン', type: 'cation', charge: 1, color: 'from-amber-500 to-orange-500', textColor: 'text-amber-50', borderColor: 'border-amber-300' },
       'Mg2+': { id: 'Mg2+', symbol: 'Mg²⁺', name: 'マグネシウムイオン', type: 'cation', charge: 2, color: 'from-cyan-500 to-sky-700', textColor: 'text-cyan-50', borderColor: 'border-cyan-300' },
       'Al3+': { id: 'Al3+', symbol: 'Al³⁺', name: 'アルミニウムイオン', type: 'cation', charge: 3, color: 'from-zinc-400 to-slate-600', textColor: 'text-white', borderColor: 'border-zinc-300' },
+      'Si4+': { id: 'Si4+', symbol: 'Si⁴⁺', name: 'ケイ素(IV)イオン', type: 'cation', charge: 4, color: 'from-slate-400 to-zinc-600', textColor: 'text-slate-50', borderColor: 'border-slate-300' },
+      'Ti3+': { id: 'Ti3+', symbol: 'Ti³⁺', name: 'チタン(III)イオン', type: 'cation', charge: 3, color: 'from-sky-600 to-blue-800', textColor: 'text-sky-50', borderColor: 'border-sky-300' },
+      'Ti4+': { id: 'Ti4+', symbol: 'Ti⁴⁺', name: 'チタン(IV)イオン', type: 'cation', charge: 4, color: 'from-sky-500 to-indigo-800', textColor: 'text-sky-50', borderColor: 'border-sky-300' },
+      'V2+': { id: 'V2+', symbol: 'V²⁺', name: 'バナジウム(II)イオン', type: 'cation', charge: 2, color: 'from-teal-500 to-cyan-800', textColor: 'text-teal-50', borderColor: 'border-teal-300' },
+      'V3+': { id: 'V3+', symbol: 'V³⁺', name: 'バナジウム(III)イオン', type: 'cation', charge: 3, color: 'from-teal-600 to-blue-800', textColor: 'text-teal-50', borderColor: 'border-teal-300' },
       'K+':   { id: 'K+',   name: 'カリウムイオン',   type: 'cation', charge: 1, color: 'from-violet-500 to-purple-600', textColor: 'text-violet-50', borderColor: 'border-violet-300' },
       'Ca2+': { id: 'Ca2+', symbol: 'Ca²⁺', name: 'カルシウムイオン', type: 'cation', charge: 2, color: 'from-stone-300 to-amber-100', textColor: 'text-stone-900', borderColor: 'border-stone-200' },
       'Cr3+': { id:'Cr3+', symbol: 'Cr³⁺', name: 'クロム(III)イオン', type: 'cation', charge: 3, color: 'from-green-600 to-emerald-700', textColor: 'text-green-50', borderColor: 'border-green-300' },
       'Cr2+': { id:'Cr2+', symbol: 'Cr²⁺', name: 'クロム(II)イオン', type: 'cation', charge: 2, color: 'from-green-500 to-emerald-600', textColor: 'text-green-50', borderColor: 'border-green-300' },
+      'Mn2+': { id: 'Mn2+', symbol: 'Mn²⁺', name: 'マンガン(II)イオン', type: 'cation', charge: 2, color: 'from-fuchsia-500 to-purple-700', textColor: 'text-fuchsia-50', borderColor: 'border-fuchsia-300' },
       'Fe2+': { id: 'Fe2+', name: '鉄(II)イオン',      type: 'cation', charge: 2, color: 'from-orange-700 to-amber-800', textColor: 'text-orange-100', borderColor: 'border-orange-400' },
       'Fe3+': { id: 'Fe3+', symbol: 'Fe³⁺', name: '鉄(III)イオン', type: 'cation', charge: 3, color: 'from-amber-600 to-red-800', textColor: 'text-amber-50', borderColor: 'border-amber-400' },
       'Co2+': { id: 'Co2+', symbol: 'Co²⁺', name: 'コバルト(II)イオン', type: 'cation', charge: 2, color: 'from-pink-600 to-fuchsia-700', textColor: 'text-pink-50', borderColor: 'border-pink-300' },
@@ -1108,19 +1117,26 @@
       'Zn2+': { id: 'Zn2+', symbol: 'Zn²⁺', name: '亜鉛イオン', type: 'cation', charge: 2, color: 'from-slate-400 to-zinc-600', textColor: 'text-slate-50', borderColor: 'border-slate-300' },
       'As3+': { id:'As3+', symbol: 'As³⁺', name: 'ヒ素(III)イオン', type: 'cation', charge: 3, color: 'from-purple-600 to-fuchsia-700', textColor: 'text-purple-50', borderColor: 'border-purple-300' },
       'Sr2+': { id: 'Sr2+', symbol: 'Sr²⁺', formula: 'Sr', name: 'ストロンチウムイオン', type: 'cation', charge: 2, color: 'from-rose-500 to-red-700', textColor: 'text-rose-50', borderColor: 'border-rose-300' },
+      'Tc4+': { id: 'Tc4+', symbol: 'Tc⁴⁺', name: 'テクネチウム(IV)イオン', type: 'cation', charge: 4, color: 'from-rose-600 to-pink-800', textColor: 'text-rose-50', borderColor: 'border-rose-300' },
       'Ag+':  { id: 'Ag+',  name: '銀イオン',        type: 'cation', charge: 1, color: 'from-slate-400 to-slate-200', textColor: 'text-slate-900', borderColor: 'border-slate-300' },
       'Cs+':  { id: 'Cs+', symbol: 'Cs⁺', formula: 'Cs', name: 'セシウムイオン', type: 'cation', charge: 1, color: 'from-indigo-500 to-violet-700', textColor: 'text-violet-50', borderColor: 'border-violet-300' },
       'Ba2+': { id: 'Ba2+', symbol: 'Ba²⁺', name: 'バリウムイオン', type: 'cation', charge: 2, color: 'from-emerald-500 to-green-800', textColor: 'text-emerald-50', borderColor: 'border-emerald-300' },
       'La3+': { id: 'La3+', symbol: 'La³⁺', name: 'ランタンイオン', type: 'cation', charge: 3, color: 'from-amber-400 to-yellow-600', textColor: 'text-amber-50', borderColor: 'border-amber-300' },
+      'Nd3+': { id: 'Nd3+', symbol: 'Nd³⁺', name: 'ネオジム(III)イオン', type: 'cation', charge: 3, color: 'from-rose-400 to-pink-600', textColor: 'text-rose-50', borderColor: 'border-rose-300' },
       'Yb3+': { id: 'Yb3+', symbol: 'Yb³⁺', name: 'イッテルビウム(III)イオン', type: 'cation', charge: 3, color: 'from-rose-500 to-pink-700', textColor: 'text-rose-50', borderColor: 'border-rose-300' },
       'Yb2+': { id: 'Yb2+', symbol: 'Yb²⁺', name: 'イッテルビウム(II)イオン', type: 'cation', charge: 2, color: 'from-rose-400 to-pink-600', textColor: 'text-rose-50', borderColor: 'border-rose-300' },
+      'Sn2+': { id: 'Sn2+', symbol: 'Sn²⁺', name: 'スズ(II)イオン', type: 'cation', charge: 2, color: 'from-slate-400 to-slate-600', textColor: 'text-slate-50', borderColor: 'border-slate-300' },
+      'Sn4+': { id: 'Sn4+', symbol: 'Sn⁴⁺', name: 'スズ(IV)イオン', type: 'cation', charge: 4, color: 'from-slate-500 to-indigo-700', textColor: 'text-slate-50', borderColor: 'border-slate-300' },
+      'Au4+': { id: 'Au4+', symbol: 'Au⁴⁺', name: '金(IV)イオン', type: 'cation', charge: 4, color: 'from-yellow-500 to-amber-700', textColor: 'text-yellow-50', borderColor: 'border-yellow-300' },
       'Pb2+': { id: 'Pb2+', symbol: 'Pb²⁺', name: '鉛(II)イオン', type: 'cation', charge: 2, color: 'from-slate-500 to-indigo-700', textColor: 'text-slate-50', borderColor: 'border-slate-300' },
       'U6+':  { id: 'U6+',  symbol: 'U⁶⁺', name: 'ウラン(VI)イオン', type: 'cation', charge: 6, color: 'from-yellow-400 to-amber-600', textColor: 'text-yellow-50', borderColor: 'border-yellow-300' },
       'U4+':  { id: 'U4+',  symbol: 'U⁴⁺', name: 'ウラン(IV)イオン', type: 'cation', charge: 4, color: 'from-yellow-500 to-amber-700', textColor: 'text-yellow-50', borderColor: 'border-yellow-300' },
+      'Pu3+': { id: 'Pu3+', symbol: 'Pu³⁺', name: 'プルトニウム(III)イオン', type: 'cation', charge: 3, color: 'from-red-600 to-rose-800', textColor: 'text-red-50', borderColor: 'border-red-300' },
+      'Pu4+': { id: 'Pu4+', symbol: 'Pu⁴⁺', name: 'プルトニウム(IV)イオン', type: 'cation', charge: 4, color: 'from-red-700 to-rose-900', textColor: 'text-red-50', borderColor: 'border-red-300' },
       'Bk3+': { id: 'Bk3+', element: 'Bk', formula: 'Bk', symbol: 'Bk³⁺', name: 'バークリウム(III)イオン', type: 'cation', charge: 3, color: '#20c9b0', gradientColor: '#0f8f83', textColor: 'text-slate-950', borderColor: 'border-teal-300' },
       'Bk4+': { id: 'Bk4+', element: 'Bk', formula: 'Bk', symbol: 'Bk⁴⁺', name: 'バークリウム(IV)イオン', type: 'cation', charge: 4, color: '#f06a3a', gradientColor: '#c43b25', textColor: 'text-white', borderColor: 'border-orange-300'},
       'NH4+': { id: 'NH4+', symbol: 'NH₄⁺', name: 'アンモニウムイオン', type: 'cation', charge: 1, formula: 'NH4', polyatomic: true, color: 'from-fuchsia-500 to-purple-700', textColor: 'text-fuchsia-50', borderColor: 'border-fuchsia-300' },
-      'UO22+':{ id: 'UO22+', symbol: 'UO₂²⁺', name: 'ウラニルイオン', type: 'cation', charge: 2, formula: 'UO2', polyatomic: true, color: 'from-yellow-400 to-amber-600', textColor: 'text-yellow-50', borderColor: 'border-yellow-300' },
+      'UO22+':{ id: 'UO22+', symbol: 'UO₂²⁺', name: 'ウラニルイオン', type: 'cation', charge: 2, formula: 'UO2', polyatomic: true, color: 'from-lime-400 to-green-600', textColor: 'text-lime-50', borderColor: 'border-lime-300' },
       // 陰イオン
       'H-':   { id: 'H-',   name: '水素化物イオン',   type: 'anion',  charge: -1, color: 'from-slate-300 to-slate-500', textColor: 'text-slate-950', borderColor: 'border-slate-200' },
       'O2-':  { id: 'O2-',  name: '酸化物イオン',     type: 'anion',  charge: -2, color: 'from-slate-500 to-slate-700', textColor: 'text-slate-100', borderColor: 'border-slate-400' },
@@ -1128,8 +1144,8 @@
       'F-':   { id: 'F-',   name: 'フッ化物イオン',   type: 'anion',  charge: -1, color: 'from-lime-500 to-green-600', textColor: 'text-lime-100', borderColor: 'border-lime-400' },
       'S2-':  { id: 'S2-',  name: '硫化物イオン',     type: 'anion',  charge: -2, color: 'from-yellow-700 to-amber-900', textColor: 'text-amber-100', borderColor: 'border-amber-500' },
       'Cl-':  { id: 'Cl-',  name: '塩化物イオン',     type: 'anion',  charge: -1, color: 'from-emerald-500 to-teal-600', textColor: 'text-emerald-100', borderColor: 'border-emerald-400' },
-      'Br-':  { id: 'Br-',  name: '臭化物イオン',     type: 'anion',  charge: -1, color: 'from-rose-500 to-pink-600', textColor: 'text-rose-100', borderColor: 'border-pink-400' },
-      'I-':   { id: 'I-',   name: 'ヨウ化物イオン',   type: 'anion',  charge: -1, color: 'from-rose-500 to-pink-600', textColor: 'text-rose-100', borderColor: 'border-pink-400' },
+      'Br-':  { id: 'Br-',  name: '臭化物イオン',     type: 'anion',  charge: -1, color: 'from-amber-700 to-yellow-950', textColor: 'text-amber-50', borderColor: 'border-amber-500' },
+      'I-':   { id: 'I-',   name: 'ヨウ化物イオン',   type: 'anion',  charge: -1, color: 'from-purple-600 to-violet-800', textColor: 'text-purple-50', borderColor: 'border-purple-300' },
       'OH-':  { id: 'OH-',  name: '水酸化物イオン',   type: 'anion',  charge: -1, formula: 'OH', polyatomic: true, color: 'from-rose-500 to-pink-600', textColor: 'text-rose-100', borderColor: 'border-pink-400' },
       'SO4-2': { id: 'SO4-2', symbol: 'SO₄²⁻', name: '硫酸イオン', type: 'anion', charge: -2, formula: 'SO4', polyatomic: true, color: 'from-cyan-600 to-blue-700', textColor: 'text-cyan-50', borderColor: 'border-cyan-300' },
       'NO3-1': { id: 'NO3-1', symbol: 'NO₃⁻', name: '硝酸イオン', type: 'anion', charge: -1, formula: 'NO3', polyatomic: true, color: 'from-indigo-500 to-violet-700', textColor: 'text-violet-50', borderColor: 'border-violet-300' },
@@ -1137,23 +1153,35 @@
       'CO3-2': { id: 'CO3-2', symbol: 'CO₃²⁻', name: '炭酸イオン', type: 'anion', charge: -2, formula: 'CO3', polyatomic: true, color: 'from-teal-500 to-cyan-800', textColor: 'text-teal-50', borderColor: 'border-teal-300' },
       'BO3-3': { id: 'BO3-3', symbol: 'BO₃³⁻', name: 'ホウ酸イオン', type: 'anion', charge: -3, formula: 'BO3', polyatomic: true, color: 'from-emerald-500 to-teal-700', textColor: 'text-emerald-50', borderColor: 'border-emerald-300' },
       'SiO4-4': { id: 'SiO4-4', symbol: 'SiO₄⁴⁻', name: 'ケイ酸イオン', type: 'anion', charge: -4, formula: 'SiO4', polyatomic: true, color: 'from-blue-500 to-indigo-700', textColor: 'text-blue-50', borderColor: 'border-blue-300' },
-      'IO3-1': { id: 'IO3-1', symbol: 'IO₃⁻', name: 'ヨウ素酸イオン', type: 'anion', charge: -1, formula: 'IO3', polyatomic: true, color: 'from-rose-500 to-pink-700', textColor: 'text-rose-50', borderColor: 'border-rose-300' },
+      'IO3-1': { id: 'IO3-1', symbol: 'IO₃⁻', name: 'ヨウ素酸イオン', type: 'anion', charge: -1, formula: 'IO3', polyatomic: true, color: 'from-purple-600 to-violet-800', textColor: 'text-purple-50', borderColor: 'border-purple-300' },
       'CN-1': { id: 'CN-1', symbol: 'CN⁻', name: 'シアン化イオン', type: 'anion', charge: -1, formula: 'CN', polyatomic: true, color: 'from-yellow-500 to-amber-700', textColor: 'text-yellow-50', borderColor: 'border-yellow-300' },
       'CNO-1':{ id: 'CNO-1', symbol: 'CNO⁻', name:'雷酸イオン', type: 'anion', charge: -1, formula: 'CNO', polyatomic: true, color: 'from-yellow-500 to-amber-700', textColor: 'text-yellow-50', borderColor: 'border-yellow-300' },
       'HCO3-1': { id: 'HCO3-1', symbol: 'HCO₃⁻', name: '炭酸水素イオン', type: 'anion', charge: -1, formula: 'HCO3', polyatomic: true, color: 'from-lime-500 to-emerald-700', textColor: 'text-lime-50', borderColor: 'border-lime-300' },
       'CrO4-2': { id: 'CrO4-2', symbol: 'CrO₄²⁻', name: 'クロム酸イオン', type: 'anion', charge: -2, formula: 'CrO4', polyatomic: true, color: 'from-yellow-600 to-amber-800', textColor: 'text-yellow-50', borderColor: 'border-yellow-300' },
       'Cr2O7-2': { id: 'Cr2O7-2', symbol: 'Cr₂O₇²⁻', name: '二クロム酸イオン', type: 'anion', charge: -2, formula: 'Cr2O7', polyatomic: true, color: 'from-yellow-600 to-amber-800', textColor: 'text-yellow-50', borderColor: 'border-yellow-300' },
       'AsO4-3': { id: 'AsO4-3', symbol: 'AsO₄³⁻', name: 'ヒ素酸イオン', type: 'anion', charge: -3, formula: 'AsO4', polyatomic: true, color: 'from-purple-600 to-fuchsia-700', textColor: 'text-purple-50', borderColor: 'border-purple-300' },
+      'ClO3-1': { id: 'ClO3-1', symbol: 'ClO₃⁻', name: '塩素酸イオン', type: 'anion', charge: -1, formula: 'ClO3', polyatomic: true, color: 'from-emerald-500 to-teal-700', textColor: 'text-emerald-50', borderColor: 'border-emerald-300' },
+      'BrO3-1': { id: 'BrO3-1', symbol: 'BrO₃⁻', name: '臭素酸イオン', type: 'anion', charge: -1, formula: 'BrO3', polyatomic: true, color: 'from-amber-700 to-yellow-950', textColor: 'text-amber-50', borderColor: 'border-amber-500' },
+      'AtO3-1': { id: 'AtO3-1', symbol: 'AtO₃⁻', name: 'アスタチン酸イオン', type: 'anion', charge: -1, formula: 'AtO3', polyatomic: true, color: 'from-rose-500 to-pink-700', textColor: 'text-rose-50', borderColor: 'border-rose-300' },
+      'MnO4-1': { id: 'MnO4-1', symbol: 'MnO₄⁻', name: '過マンガン酸イオン', type: 'anion', charge: -1, formula: 'MnO4', polyatomic: true, color: 'from-purple-600 to-fuchsia-800', textColor: 'text-fuchsia-50', borderColor: 'border-fuchsia-300' },
+      'AuCl4-1': { id: 'AuCl4-1', symbol: 'AuCl₄⁻', name: 'テトラクロロ金酸イオン', type: 'anion', charge: -1, formula: 'AuCl4', polyatomic: true, color: 'from-yellow-500 to-amber-700', textColor: 'text-yellow-50', borderColor: 'border-yellow-300' },
+      'TcO4-1': { id: 'TcO4-1', symbol: 'TcO₄⁻', name: '過テクネチウム酸イオン', type: 'anion', charge: -1, formula: 'TcO4', polyatomic: true, color: 'from-rose-600 to-pink-800', textColor: 'text-rose-50', borderColor: 'border-rose-300' },
+      'CoO2-1': { id: 'CoO2-1', symbol: 'CoO₂⁻', name: 'コバルト酸(III)イオン', type: 'anion', charge: -1, formula: 'CoO2', polyatomic: true, color: 'from-pink-600 to-violet-800', textColor: 'text-pink-50', borderColor: 'border-pink-300' }
     };
 
     const ELEMENTS = {
+      Li: { id: 'Li', name: 'リチウム', color: 'from-red-500 to-rose-700', textColor: 'text-red-50', borderColor: 'border-red-300' },
+      Be: { id: 'Be', name: 'ベリリウム', color: 'from-cyan-400 to-sky-600', textColor: 'text-cyan-50', borderColor: 'border-cyan-300' },
       B: { id: 'B', name: 'ホウ素', color: 'from-emerald-500 to-teal-800', textColor: 'text-emerald-50', borderColor: 'border-emerald-300' },
       Na: { id: 'Na', name: 'ナトリウム', color: 'from-amber-300 to-orange-600', textColor: 'text-amber-950', borderColor: 'border-amber-100' },
       Mg: { id: 'Mg', name: 'マグネシウム', color: 'from-cyan-300 to-slate-400', textColor: 'text-slate-950', borderColor: 'border-cyan-100' },
       Al: { id: 'Al', name: 'アルミニウム', color: 'from-zinc-400 to-slate-600', textColor: 'text-white', borderColor: 'border-zinc-300' },
+      Ti: { id: 'Ti', name: 'チタン', color: 'from-sky-500 to-blue-800', textColor: 'text-sky-50', borderColor: 'border-sky-300' },
+      V: { id: 'V', name: 'バナジウム', color: 'from-teal-500 to-blue-800', textColor: 'text-teal-50', borderColor: 'border-teal-300' },
       K: { id: 'K', name: 'カリウム', color: 'from-violet-400 to-purple-700', textColor: 'text-white', borderColor: 'border-violet-200' },
       Ca: { id: 'Ca', name: 'カルシウム', color: 'from-amber-400 to-yellow-700', textColor: 'text-amber-50', borderColor: 'border-amber-300' },
       Cr:{ id: 'Cr', name: 'クロム', color: 'from-green-600 to-emerald-800', textColor: 'text-green-50', borderColor: 'border-green-300' },
+      Mn: { id: 'Mn', name: 'マンガン', color: 'from-fuchsia-500 to-purple-700', textColor: 'text-fuchsia-50', borderColor: 'border-fuchsia-300' },
       Fe: { id: 'Fe', name: '鉄', color: 'from-slate-500 to-zinc-800', textColor: 'text-slate-50', borderColor: 'border-slate-300' },
       Co: { id: 'Co', name: 'コバルト', color: 'from-pink-600 to-fuchsia-700', textColor: 'text-pink-50', borderColor: 'border-pink-300' },
       Ni: {id: 'Ni', name: 'ニッケル', color: 'from-green-500 to-emerald-800', textColor: 'text-green-50', borderColor: 'border-green-300' },
@@ -1163,12 +1191,17 @@
       Sr:{ id: 'Sr', name: 'ストロンチウム', color: 'from-rose-500 to-red-700', textColor: 'text-rose-50', borderColor: 'border-rose-300' },
       Ag: { id: 'Ag', name: '銀', color: 'from-slate-300 to-slate-500', textColor: 'text-slate-950', borderColor: 'border-slate-200' },
       Cs: { id: 'Cs', name: 'セシウム', color: 'from-rose-400 to-fuchsia-700', textColor: 'text-white', borderColor: 'border-rose-200' },
+      Ba: { id: 'Ba', name: 'バリウム', color: 'from-emerald-500 to-green-800', textColor: 'text-emerald-50', borderColor: 'border-emerald-300' },
       La: { id: 'La', name: 'ランタン', color: 'from-amber-400 to-yellow-600', textColor: 'text-amber-50', borderColor: 'border-amber-300' },
+      Nd: { id: 'Nd', name: 'ネオジム', color: 'from-rose-400 to-pink-600', textColor: 'text-rose-50', borderColor: 'border-rose-300' },
       Yb: { id: 'Yb', name: 'イッテルビウム', color: 'from-rose-400 to-pink-700', textColor: 'text-rose-50', borderColor: 'border-rose-300' },
+      Sn: { id: 'Sn', name: 'スズ', color: 'from-slate-400 to-slate-600', textColor: 'text-slate-50', borderColor: 'border-slate-300' },
+      Tc: { id: 'Tc', name: 'テクネチウム', color: 'from-rose-600 to-pink-800', textColor: 'text-rose-50', borderColor: 'border-rose-300' },
       Au: { id: 'Au', name: '金', color: 'from-yellow-300 to-amber-600', textColor: 'text-amber-950', borderColor: 'border-yellow-200' },
       Pb: { id: 'Pb', name: '鉛', color: 'from-slate-500 to-indigo-700', textColor: 'text-slate-50', borderColor: 'border-slate-300' },
       Bk: { id: 'Bk', name: 'バークリウム', color: 'from-teal-400 to-cyan-700', textColor: 'text-cyan-50', borderColor: 'border-teal-300' },
       U: { id: 'U', name: 'ウラン', color: 'from-yellow-400 to-amber-600', textColor: 'text-yellow-50', borderColor: 'border-yellow-300' },
+      Pu: { id: 'Pu', name: 'プルトニウム', color: 'from-red-600 to-rose-800', textColor: 'text-red-50', borderColor: 'border-red-300' },
       Efr: { id: 'Efr', name: 'エカフランシウム', color: 'from-yellow-400 to-red-500', textColor: 'text-red-950', borderColor: 'border-yellow-300' },
     };
 
@@ -1285,6 +1318,56 @@ const ALLOYS = [
     key: 'Yb-Co', formula: 'YbCo', name: 'イッテルビウムコバルト合金',
     metals: ['Yb', 'Co'],
     desc: 'イッテルビウムとコバルトからなる金属間化合物系です。希土類元素とコバルトの組み合わせによる磁気的・電子的性質が研究されています。'
+  },
+  {
+    key: 'Al-Mn', formula: 'Mn-Al', name: 'マンガン・アルミニウム合金（τ相）',
+    metals: ['Al', 'Mn'],
+    desc: 'Mn-Al系の準安定なτ相です。Mn-Al系は希土類元素を含まない永久磁石材料の候補として研究されています。'
+  },
+  {
+    key: 'Fe-Mn', formula: 'Fe-Mn', name: 'フェロマンガン',
+    metals: ['Fe', 'Mn'],
+    desc: '鉄とマンガンを主成分とする組成幅のある合金で、製鋼時のマンガン添加材として広く利用されます。'
+  },
+  {
+    key: 'Cu-Mn-Ni', formula: 'Cu-Mn-Ni', name: 'マンガニン',
+    metals: ['Cu', 'Mn', 'Ni'],
+    desc: '銅を主成分にマンガンとニッケルを加えた電気抵抗合金です。組成は製品によって異なり、精密抵抗器などに利用されます。'
+  },
+  {
+    key: 'Fe-Cr-Ni', formula: 'Fe-Cr-Ni', name: 'ステンレス鋼',
+    metals: ['Fe', 'Cr', 'Ni'],
+    desc: '鉄を主成分にクロムを含み、種類によってニッケルなども加えた耐食性の高い合金です。元素比は鋼種によって異なります。'
+  },
+  {
+    key: 'Cu-Ni-Zn', formula: 'Cu-Ni-Zn', name: '洋白（ニッケルシルバー）',
+    metals: ['Cu', 'Ni', 'Zn'],
+    desc: '銅・ニッケル・亜鉛からなる合金で、銀は含みません。代表的な洋白には銅約65%、ニッケル約18%、亜鉛約17%の組成があり、洋食器や楽器などに利用されます。'
+  },
+  {
+    key: 'Cu-Sn-Zn', formula: 'Cu-Sn-Zn', name: '砲金（ガンメタル）',
+    metals: ['Cu', 'Sn', 'Zn'],
+    desc: '銅を主成分にスズと亜鉛を加えた青銅系合金です。組成幅があり、耐食性や鋳造性を生かしてバルブなどに利用されます。'
+  },
+  {
+    key: 'Ti-Al', formula: 'TiAl', name: 'チタンアルミナイド（γ-TiAl）',
+    metals: ['Ti', 'Al'],
+    desc: 'チタンとアルミニウムからなる金属間化合物です。γ-TiAl系は軽量で高温強度を持ち、航空機エンジンなどの耐熱材料として利用されています。'
+  },
+  {
+    key: 'Ti-Ni', formula: 'TiNi', name: 'ニチノール',
+    metals: ['Ti', 'Ni'],
+    desc: 'チタンとニッケルからなる形状記憶合金です。形状記憶効果や超弾性を示し、医療器具や機械部品などに利用されています。'
+  },
+  {
+    key: 'Fe-V', formula: 'FeV', name: 'フェロバナジウム',
+    metals: ['Fe', 'V'],
+    desc: '鉄とバナジウムを主成分とする合金です。製鋼時のバナジウム添加材として用いられ、鋼の強度や耐摩耗性の向上に役立ちます。'
+  },
+  {
+    key: 'Ti-Al-V', formula: 'Ti-6Al-4V', name: 'Ti-6Al-4V合金',
+    metals: ['Ti', 'Al', 'V'],
+    desc: 'チタンを主成分にアルミニウムとバナジウムを加えた代表的なチタン合金です。Ti-6Al-4Vは高い比強度と耐食性を持ち、航空宇宙・医療分野などで広く利用されています。'
   }
 ];
 
@@ -1313,6 +1396,16 @@ const COMPOUNDS = [
   { key: 'H2', formula: 'H₂', name: '水素', cations: { 'H+': 1 }, anions: { 'H-': 1 }, color: '#e0f2fe', desc: '水素原子2個からなる分子です。非常に軽く、可燃性を持つ気体です。', specialType: 'hydrogen_molecule' },
   
   // 陽イオンの原子番号順
+
+  // Li+ (atomic number 3)
+  { key: 'LiOH', formula: 'LiOH', name: '水酸化リチウム', cations: { 'Li+': 1 }, anions: { 'OH-': 1 }, color: '#fda4af', desc: '白色の吸湿性固体で、空気中の二酸化炭素を吸収して炭酸リチウムを生じます。水酸化ナトリウムより水への溶解度が低く、二酸化炭素吸収材やリチウム塩の原料に利用されます。' },
+
+  // Be2+ (atomic number 4)
+  { key: 'BeO', formula: 'BeO', name: '酸化ベリリウム', cations: { 'Be2+': 1 }, anions: { 'O2-': 1 }, color: '#f8fafc', desc: '高い熱伝導性と電気絶縁性を持つ白色のセラミックス材料です。ベリリウム化合物には毒性があるため、粉じんの吸入を避けるなど厳重な管理が必要です。' },
+  { key: 'BeF2', formula: 'BeF₂', name: 'フッ化ベリリウム', cations: { 'Be2+': 1 }, anions: { 'F-': 2 }, color: '#f8fafc', desc: 'ベリリウムとフッ素からなる化合物です。固体では共有結合性のネットワーク構造をとり、溶融塩やガラス形成の研究で扱われます。ベリリウム化合物のため厳重な管理が必要です。' },
+  { key: 'BeCl2', formula: 'BeCl₂', name: '塩化ベリリウム', cations: { 'Be2+': 1 }, anions: { 'Cl-': 2 }, color: '#f8fafc', desc: '吸湿性を持つベリリウムの塩化物です。固体では鎖状構造をとり、水に溶けると加水分解して酸性を示します。ベリリウム化合物のため厳重な管理が必要です。' },
+  { key: 'BeOH2', formula: 'Be(OH)₂', name: '水酸化ベリリウム', cations: { 'Be2+': 1 }, anions: { 'OH-': 2 }, color: '#f8fafc', desc: '難溶性の白色固体です。酸にも強塩基にも溶ける両性水酸化物で、ベリリウム塩の製造や分離に関係します。ベリリウム化合物のため厳重な管理が必要です。' },
+  { key: 'BeSO4', formula: 'BeSO₄', name: '硫酸ベリリウム', cations: { 'Be2+': 1 }, anions: { 'SO4-2': 1 }, color: '#f8fafc', desc: '水に溶けやすいベリリウムの硫酸塩で、通常は水和物として扱われます。ベリリウム化合物には毒性があるため、厳重な管理が必要です。' },
 
   // NH4+ (atomic number 7)
   { key: 'NH4Cl', formula: 'NH₄Cl', name: '塩化アンモニウム', cations: { 'NH4+': 1 }, anions: { 'Cl-': 1 }, color: '#f8fafc', desc: '無色〜白色の結晶性固体です。水に溶けやすく、水溶液は弱い酸性を示します。' },
@@ -1414,6 +1507,25 @@ const COMPOUNDS = [
   { key: 'Ca3AsO42', formula: 'Ca₃(AsO₄)₂', name: 'ヒ酸カルシウム', cations: { 'Ca2+': 3 }, anions: { 'AsO4-3': 2 }, color: '#f8fafc', desc: '白色系の固体です。カルシウムイオンとヒ酸イオンからなる難溶性のヒ酸塩として扱われます。' },
   { key: 'CaCO3', formula: 'CaCO₃', name: '炭酸カルシウム', cations: { 'Ca2+': 1 }, anions: { 'CO3-2': 1 }, color: '#f8fafc', desc: '白色の固体で、水に溶けにくい代表的な炭酸塩です。石灰石や大理石などの主成分です。', mineral: { name: '方解石・霰石', desc: 'CaCO₃と同じ組成を持つ代表的な炭酸塩鉱物です。' } },
   { key: 'CaHCO32', formula: 'Ca(HCO₃)₂', name: '炭酸水素カルシウム', cations: { 'Ca2+': 1 }, anions: { 'HCO3-1': 2 }, color: '#f8fafc', desc: '水中に溶存する形で存在する炭酸水素塩です。固体としては不安定で、水溶液中で重要な役割を持ちます。' },
+
+  // Ti3+ and Ti4+ (atomic number 22)
+  { key: 'Ti2O3', formula: 'Ti₂O₃', name: '酸化チタン(III)', cations: { 'Ti3+': 2 }, anions: { 'O2-': 3 }, color: '#4b5563', desc: '暗紫色系の固体として知られるチタン(III)酸化物です。酸素欠損を持つ酸化チタン材料やチタンの酸化還元化学に関係します。' },
+  { key: 'TiCl3', formula: 'TiCl₃', name: '塩化チタン(III)', cations: { 'Ti3+': 1 }, anions: { 'Cl-': 3 }, color: '#7c3aed', desc: '紫色系のチタン(III)塩です。オレフィン重合触媒の成分など、化学合成や材料化学で利用されます。' },
+  { key: 'TiF3', formula: 'TiF₃', name: 'フッ化チタン(III)', cations: { 'Ti3+': 1 }, anions: { 'F-': 3 }, color: '#f8fafc', desc: 'チタン(III)とフッ化物からなる無機化合物です。チタンの低い酸化状態を含むフッ化物として知られています。' },
+  { key: 'Ti2SO43', formula: 'Ti₂(SO₄)₃', name: '硫酸チタン(III)', cations: { 'Ti3+': 2 }, anions: { 'SO4-2': 3 }, color: '#f8fafc', desc: 'チタン(III)イオンと硫酸イオンからなる塩です。水溶液中では酸化されやすいチタン(III)を含みます。' },
+  { key: 'TiO2', formula: 'TiO₂', name: '二酸化チタン', cations: { 'Ti4+': 1 }, anions: { 'O2-': 2 }, color: '#f8fafc', desc: '白色の固体で、顔料や日焼け止め、光触媒材料など幅広く利用されます。天然ではルチルやアナターゼなどの鉱物として産出します。', mineral: { name: 'ルチル・アナターゼ', desc: 'TiO₂を主成分とする二酸化チタン鉱物です。' } },
+  { key: 'TiCl4', formula: 'TiCl₄', name: '塩化チタン(IV)', cations: { 'Ti4+': 1 }, anions: { 'Cl-': 4 }, color: '#f8fafc', desc: '無色の揮発性液体で、湿った空気中で加水分解して白煙を生じます。金属チタンや二酸化チタンの製造工程に用いられます。' },
+  { key: 'TiF4', formula: 'TiF₄', name: 'フッ化チタン(IV)', cations: { 'Ti4+': 1 }, anions: { 'F-': 4 }, color: '#f8fafc', desc: 'チタン(IV)とフッ化物からなる無機化合物です。チタンのフッ素化学や材料化学で扱われます。' },
+  { key: 'Ti(SO4)2', formula: 'Ti(SO₄)₂', name: '硫酸チタン(IV)', cations: { 'Ti4+': 1 }, anions: { 'SO4-2': 2 }, color: '#f8fafc', desc: 'チタン(IV)を含む硫酸塩です。水溶液中で加水分解しやすく、チタン化合物の調製などに関係します。' },
+
+  // V2+ and V3+ (atomic number 23)
+  { key: 'VO', formula: 'VO', name: '酸化バナジウム(II)', cations: { 'V2+': 1 }, anions: { 'O2-': 1 }, color: '#334155', desc: 'バナジウム(II)を含む低級酸化物です。空気中で酸化されやすく、バナジウムの酸化状態の変化を示す化合物です。' },
+  { key: 'VCl2', formula: 'VCl₂', name: '塩化バナジウム(II)', cations: { 'V2+': 1 }, anions: { 'Cl-': 2 }, color: '#7c3aed', desc: '紫色系のバナジウム(II)塩です。水溶液中で酸化されやすい低酸化状態のバナジウム化合物として扱われます。' },
+  { key: 'VSO4', formula: 'VSO₄', name: '硫酸バナジウム(II)', cations: { 'V2+': 1 }, anions: { 'SO4-2': 1 }, color: '#a78bfa', desc: 'バナジウム(II)イオンを含む硫酸塩です。空気酸化を受けやすく、バナジウムの酸化還元化学に関係します。' },
+  { key: 'V2O3', formula: 'V₂O₃', name: '酸化バナジウム(III)', cations: { 'V3+': 2 }, anions: { 'O2-': 3 }, color: '#334155', desc: '黒色系の固体で、バナジウム(III)を含む代表的な酸化物です。温度によって電気的性質が変化する材料としても研究されています。' },
+  { key: 'VCl3', formula: 'VCl₃', name: '塩化バナジウム(III)', cations: { 'V3+': 1 }, anions: { 'Cl-': 3 }, color: '#7c3aed', desc: '紫色系の固体で、水と反応してバナジウム(III)を含む溶液を生じます。バナジウム化合物の合成原料として扱われます。' },
+  { key: 'V2(SO4)3', formula: 'V₂(SO₄)₃', name: '硫酸バナジウム(III)', cations: { 'V3+': 2 }, anions: { 'SO4-2': 3 }, color: '#a78bfa', desc: 'バナジウム(III)イオンと硫酸イオンからなる塩です。水溶液中でバナジウムの酸化還元反応を調べる際に扱われます。' },
+  { key: 'VPO4', formula: 'VPO₄', name: 'リン酸バナジウム(III)', cations: { 'V3+': 1 }, anions: { 'PO4-3': 1 }, color: '#64748b', desc: 'バナジウム(III)とリン酸イオンからなる固体です。電極や無機材料の研究対象となるリン酸塩です。' },
 
   // Cr2+ (atomic number 24)
   { key: 'CrOH2', formula: 'Cr(OH)₂', name: '水酸化クロム(II)', cations: { 'Cr2+': 1 }, anions: { 'OH-': 2 }, color: '#f1f5f9', desc: 'クロム(II)イオンと水酸化物イオンからなる水酸化物で、水に溶けにくい固体として扱います。' },
@@ -1518,6 +1630,28 @@ const COMPOUNDS = [
   { key: 'ZnNO32', formula: 'Zn(NO₃)₂', name: '硝酸亜鉛', cations: { 'Zn2+': 1 }, anions: { 'NO3-1': 2 }, color: '#f8fafc', desc: '無色〜白色の結晶性固体です。水に溶けやすい亜鉛の硝酸塩です。' },
   { key: 'Zn3PO42', formula: 'Zn₃(PO₄)₂', name: 'リン酸亜鉛', cations: { 'Zn2+': 3 }, anions: { 'PO4-3': 2 }, color: '#f1f5f9', desc: '白色の固体です。水に溶けにくく、金属表面の防錆処理などに利用されます。' },
 
+  // Mn2+ (atomic number 25)
+  { key: 'MnO', formula: 'MnO', name: '酸化マンガン(II)', cations: { 'Mn2+': 1 }, anions: { 'O2-': 1 }, color: '#86a88a', desc: '緑色を帯びた固体として知られるマンガン(II)酸化物です。空気中で酸化されやすく、電池材料やセラミックスなどのマンガン化合物の原料として利用されます。' },
+  { key: 'MnCl2', formula: 'MnCl₂', name: '塩化マンガン(II)', cations: { 'Mn2+': 1 }, anions: { 'Cl-': 2 }, color: '#f1f5f9', desc: '淡い桃色の結晶性固体で、水に溶けやすいマンガン(II)塩です。マンガン電解や触媒、ほかのマンガン化合物の調製に利用されます。' },
+  { key: 'MnSO4', formula: 'MnSO₄', name: '硫酸マンガン(II)', cations: { 'Mn2+': 1 }, anions: { 'SO4-2': 1 }, color: '#f8fafc', desc: '淡い桃色の結晶性固体で、水和物としても得られます。肥料や飼料への微量元素添加、電池材料用マンガン化合物の原料に使われます。' },
+  { key: 'MnOH2', formula: 'Mn(OH)₂', name: '水酸化マンガン(II)', cations: { 'Mn2+': 1 }, anions: { 'OH-': 2 }, color: '#f1f5f9', desc: '新たにできた沈殿は白色〜淡桃色ですが、空気中の酸素で酸化され、褐色系へ変化します。この色の変化はマンガンの酸化反応を観察する例になります。' },
+  { key: 'MnCO3', formula: 'MnCO₃', name: '炭酸マンガン(II)', cations: { 'Mn2+': 1 }, anions: { 'CO3-2': 1 }, color: '#f9a8d4', desc: '淡桃色を帯びる炭酸塩です。天然では菱マンガン鉱（ロードクロサイト）として産出し、マンガン鉱石や顔料材料として知られています。', mineral: { name: '菱マンガン鉱（Rhodochrosite）', desc: 'MnCO₃を主成分とする、桃色から赤色の炭酸塩鉱物です。' } },
+  { key: 'MnS', formula: 'MnS', name: '硫化マンガン(II)', cations: { 'Mn2+': 1 }, anions: { 'S2-': 1 }, color: '#fda4af', desc: 'マンガン(II)を含む硫化物で、結晶構造や生成条件によって色や形態が異なります。鋼中の非金属介在物としても現れ、材料の加工性に影響します。' },
+  { key: 'KMnO4', formula: 'KMnO₄', name: '過マンガン酸カリウム', cations: { 'K+': 1 }, anions: { 'MnO4-1': 1 }, color: '#7e22ce', desc: '濃紫色の結晶で、水溶液も紫色を示す強い酸化剤です。分析化学の酸化還元滴定や水処理などに利用されます。' },
+  { key: 'NaMnO4', formula: 'NaMnO₄', name: '過マンガン酸ナトリウム', cations: { 'Na+': 1 }, anions: { 'MnO4-1': 1 }, color: '#9333ea', desc: '水に溶けやすい紫色の過マンガン酸塩です。過マンガン酸イオンの酸化作用を利用する分析や処理工程で用いられます。' },
+
+  // Bromate salts
+  { key: 'HBrO3', formula: 'HBrO₃', name: '臭素酸', cations: { 'H+': 1 }, anions: { 'BrO3-1': 1 }, color: '#fef3c7', desc: '臭素酸イオンを含む強い酸化性のオキソ酸です。水溶液中で臭素酸塩を形成します。' },
+  { key: 'NaBrO3', formula: 'NaBrO₃', name: '臭素酸ナトリウム', cations: { 'Na+': 1 }, anions: { 'BrO3-1': 1 }, color: '#f8fafc', desc: '水に溶ける臭素酸塩で、酸化剤として利用される化合物です。酸化性を持つため、可燃物などから離して適切に管理します。' },
+  { key: 'KBrO3', formula: 'KBrO₃', name: '臭素酸カリウム', cations: { 'K+': 1 }, anions: { 'BrO3-1': 1 }, color: '#f8fafc', desc: '代表的な臭素酸塩で、酸化剤として知られています。食品用途は各国で規制されており、酸化性を持つため適切な管理が必要です。' },
+  { key: 'Ba(BrO3)2', formula: 'Ba(BrO₃)₂', name: '臭素酸バリウム', cations: { 'Ba2+': 1 }, anions: { 'BrO3-1': 2 }, color: '#f8fafc', desc: 'バリウムイオンと臭素酸イオンからなる塩です。酸化性を持つ臭素酸塩として適切な管理が必要です。' },
+  { key: 'AgBrO3', formula: 'AgBrO₃', name: '臭素酸銀', cations: { 'Ag+': 1 }, anions: { 'BrO3-1': 1 }, color: '#f8fafc', desc: '銀イオンと臭素酸イオンからなる臭素酸塩です。難溶性の銀塩として扱われます。' },
+
+  // Cobaltate(III) salts
+  { key: 'LiCoO2', formula: 'LiCoO₂', name: 'コバルト酸リチウム', cations: { 'Li+': 1 }, anions: { 'CoO2-1': 1 }, color: '#334155', desc: '層状構造を持つリチウム遷移金属酸化物で、リチウムイオン電池の正極材料として広く利用されています。CoO₂層にコバルト(III)を含みます。' },
+  { key: 'NaCoO2', formula: 'NaCoO₂', name: 'コバルト酸ナトリウム', cations: { 'Na+': 1 }, anions: { 'CoO2-1': 1 }, color: '#475569', desc: '層状構造を持つナトリウム・コバルト酸化物です。ナトリウム量などに応じた構造・電子物性が研究されています。' },
+  { key: 'KCoO2', formula: 'KCoO₂', name: 'コバルト酸カリウム', cations: { 'K+': 1 }, anions: { 'CoO2-1': 1 }, color: '#475569', desc: 'カリウムイオンとコバルト酸(III)層からなる酸化物の組成です。層状コバルト酸化物の一つとして材料研究で扱われます。' },
+
   // As3+ (atomic number 33)
   { key: 'AsOH3', formula: 'As(OH)₃', name: '水酸化ヒ素(III)', cations: { 'As3+': 1 }, anions: { 'OH-': 3 }, color: '#f1f5f9', desc: '白色〜淡黄色の固体として扱われるヒ素(III)の水酸化物で、水に溶けにくい性質を持ちます。' },
   { key: 'AsCl3', formula: 'AsCl₃', name: '塩化ヒ素(III)', cations: { 'As3+': 1 }, anions: { 'Cl-': 3 }, color: '#f8fafc', desc: '無色〜淡黄色のヒ素(III)化合物で、水と反応して加水分解し、酸性の溶液を生じる性質があります。' },
@@ -1590,6 +1724,16 @@ const COMPOUNDS = [
   { key: 'La2SO43', formula: 'La₂(SO₄)₃', name: '硫酸ランタン(III)', cations: { 'La3+': 2 }, anions: { 'SO4-2': 3 }, color: '#f8fafc', desc: 'ランタンイオンと硫酸イオンからなる硫酸塩です。希土類元素の化学において扱われる代表的なランタン化合物の一つです。' },
   { key: 'La2CO33', formula: 'La₂(CO₃)₃', name: '炭酸ランタン(III)', cations: { 'La3+': 2 }, anions: { 'CO3-2': 3 }, color: '#f8fafc', desc: '白色系のランタン炭酸塩です。ランタン化合物の分離や調製に関連して扱われ、希土類元素の化学で知られています。' },
 
+  // Nd3+ (atomic number 60)
+  { key: 'Nd2O3', formula: 'Nd₂O₃', name: '酸化ネオジム(III)', cations: { 'Nd3+': 2 }, anions: { 'O2-': 3 }, color: '#c4b5fd', desc: '淡紫色〜青紫色を帯びることのある希土類酸化物です。ガラスの着色や光学材料、ネオジム磁石の原料などに利用されます。' },
+  { key: 'NdF3', formula: 'NdF₃', name: 'フッ化ネオジム(III)', cations: { 'Nd3+': 1 }, anions: { 'F-': 3 }, color: '#f1f5f9', desc: '水に溶けにくいネオジムのフッ化物です。希土類元素の分離や金属ネオジムの製造に関わるフッ化物として扱われます。' },
+  { key: 'NdCl3', formula: 'NdCl₃', name: '塩化ネオジム(III)', cations: { 'Nd3+': 1 }, anions: { 'Cl-': 3 }, color: '#f8fafc', desc: '吸湿性を持つネオジム(III)塩で、水和物は水に溶けます。金属ネオジムやほかのネオジム化合物を調製する出発物質として利用されます。' },
+  { key: 'NdOH3', formula: 'Nd(OH)₃', name: '水酸化ネオジム(III)', cations: { 'Nd3+': 1 }, anions: { 'OH-': 3 }, color: '#f8fafc', desc: 'ネオジム(III)塩の水溶液に塩基を加えると沈殿する水酸化物です。加熱によって酸化ネオジムへ変化し、ネオジム化合物の調製にも用いられます。' },
+  { key: 'Nd2SO43', formula: 'Nd₂(SO₄)₃', name: '硫酸ネオジム(III)', cations: { 'Nd3+': 2 }, anions: { 'SO4-2': 3 }, color: '#f8fafc', desc: 'ネオジム(III)の硫酸塩で、水和物として結晶化します。希土類硫酸塩の溶解度や結晶化を調べる際に扱われる化合物です。' },
+  { key: 'NdNO33', formula: 'Nd(NO₃)₃', name: '硝酸ネオジム(III)', cations: { 'Nd3+': 1 }, anions: { 'NO3-1': 3 }, color: '#f8fafc', desc: '水に溶けやすく、通常は水和物として扱われるネオジム塩です。溶液から酸化物やほかのネオジム化合物を調製する原料になります。' },
+  { key: 'NdPO4', formula: 'NdPO₄', name: 'リン酸ネオジム(III)', cations: { 'Nd3+': 1 }, anions: { 'PO4-3': 1 }, color: '#f1f5f9', desc: '水に溶けにくい希土類リン酸塩です。天然では単斜モナズ石の希土類成分としてネオジムを含み、希土類元素の固定や分離に関係します。' },
+  { key: 'Nd2CO33', formula: 'Nd₂(CO₃)₃', name: '炭酸ネオジム(III)', cations: { 'Nd3+': 2 }, anions: { 'CO3-2': 3 }, color: '#f8fafc', desc: 'ネオジム(III)を含む炭酸塩で、沈殿・水和物として得られます。加熱すると二酸化炭素を放出して酸化ネオジムへ変化します。' },
+
   // Yb2+ (atomic number 70)
   { key: 'YbCl2', formula: 'YbCl₂', name: '塩化イッテルビウム(II)', cations: { 'Yb2+': 1 }, anions: { 'Cl-': 2 }, color: '#86efac', desc: '緑色の結晶として知られるイッテルビウム(II)塩です。Yb(II)の化合物は還元性を示し、水溶液中では不安定な性質があります。' },
   { key: 'YbF2', formula: 'YbF₂', name: 'フッ化イッテルビウム(II)', cations: { 'Yb2+': 1 }, anions: { 'F-': 2 }, color: '#f8fafc', desc: 'イッテルビウム(II)とフッ化物イオンからなる二価イッテルビウム化合物です。Yb(II)化合物特有の低い酸化状態を示します。' },
@@ -1618,6 +1762,16 @@ const COMPOUNDS = [
   { key: 'Pb3PO42', formula: 'Pb₃(PO₄)₂', name: 'リン酸鉛(II)', cations: { 'Pb2+': 3 }, anions: { 'PO4-3': 2 }, color: '#f1f5f9', desc: '白色の固体です。水に溶けにくいリン酸塩で、鉛(II)イオンとリン酸イオンから生じる沈殿として扱えます。' },
   { key: 'Pb3BO32', formula: 'Pb₃(BO₃)₂', name: 'ホウ酸鉛(II)', cations: { 'Pb2+': 3 }, anions: { 'BO3-3': 2 }, color: '#f8fafc', desc: '鉛(II)イオンとホウ酸イオンからなるホウ酸塩です。鉛を含むホウ酸塩の一つとして知られています。' },
 
+  // Sn2+ and Sn4+ (atomic number 50)
+  { key: 'SnCl2', formula: 'SnCl₂', name: '塩化スズ(II)', cations: { 'Sn2+': 1 }, anions: { 'Cl-': 2 }, color: '#f8fafc', desc: '白色の結晶性固体で、水に溶けやすいスズ(II)塩です。還元剤として利用され、水溶液は加水分解しやすいため塩酸酸性で扱われます。' },
+  { key: 'SnO', formula: 'SnO', name: '酸化スズ(II)', cations: { 'Sn2+': 1 }, anions: { 'O2-': 1 }, color: '#334155', desc: '青黒色〜黒色の固体です。加熱や空気中で酸化されて酸化スズ(IV)へ変化しやすく、スズの酸化状態の変化を示す化合物です。' },
+  { key: 'SnSO4', formula: 'SnSO₄', name: '硫酸スズ(II)', cations: { 'Sn2+': 1 }, anions: { 'SO4-2': 1 }, color: '#f8fafc', desc: 'スズ(II)を含む硫酸塩で、電気めっき浴などに利用されます。水溶液中ではスズ(II)が空気酸化を受けやすいため、状態の管理が必要です。' },
+  { key: 'SnS', formula: 'SnS', name: '硫化スズ(II)', cations: { 'Sn2+': 1 }, anions: { 'S2-': 1 }, color: '#292524', desc: '褐色〜黒色系の層状固体です。天然鉱物ヘルツェンベルグ鉱として産出し、光吸収特性から薄膜太陽電池材料として研究されています。', mineral: { name: 'ヘルツェンベルグ鉱（Herzenbergite）', desc: 'SnSを主成分とするスズの硫化鉱物です。' } },
+  { key: 'SnO2', formula: 'SnO₂', name: '酸化スズ(IV)', cations: { 'Sn4+': 1 }, anions: { 'O2-': 2 }, color: '#e2e8f0', desc: '白色の固体で、電気伝導性を持つ透明導電膜やガスセンサーに利用されます。天然では錫石として産出する、スズの主要な鉱石です。', mineral: { name: '錫石（Cassiterite）', desc: 'SnO₂を主成分とするスズの代表的な鉱石鉱物です。' } },
+  { key: 'SnCl4', formula: 'SnCl₄', name: '塩化スズ(IV)', cations: { 'Sn4+': 1 }, anions: { 'Cl-': 4 }, color: '#f8fafc', desc: '無色の分子性液体で、空気中の水分と反応して白煙を生じます。塩化スズ(IV)五水和物は触媒や有機合成の試薬として利用されます。' },
+  { key: 'SnS2', formula: 'SnS₂', name: '硫化スズ(IV)', cations: { 'Sn4+': 1 }, anions: { 'S2-': 2 }, color: '#eab308', desc: '金色を帯びた層状結晶で、「モザイク金」と呼ばれる顔料として知られます。層状構造を持つ半導体材料としても研究されています。' },
+  { key: 'SnF4', formula: 'SnF₄', name: 'フッ化スズ(IV)', cations: { 'Sn4+': 1 }, anions: { 'F-': 4 }, color: '#f1f5f9', desc: 'スズ(IV)を含む無機フッ化物です。水分と反応しやすく、フッ化物ガラスや無機フッ素化学の研究で扱われます。' },
+
   // U4+ (atomic number 92)
   { key: 'UCl4', formula: 'UCl₄', name: '塩化ウラン(IV)', cations: { 'U4+': 1 }, anions: { 'Cl-': 4 }, color: '#f8fafc', desc: '無色〜淡黄色の結晶性固体です。水に溶けやすく、ウラン(IV)を含む塩化物として知られています。' },
   { key: 'UO2', formula: 'UO₂', name: '酸化ウラン(IV)', cations: { 'U4+': 1 }, anions: { 'O2-': 2 }, color: '#65a30d', desc: '黒色〜暗褐色の固体です。ウランの代表的な酸化物の一つで、核燃料として利用される重要なウラン化合物です。' },
@@ -1631,16 +1785,34 @@ const COMPOUNDS = [
   { key: 'UF6', formula: 'UF₆', name: 'フッ化ウラン(VI)', cations: { 'U6+': 1 }, anions: { 'F-': 6 }, color: '#f8fafc', desc: '無色の結晶性固体です。水に溶けやすく、ウランの六フッ化物として知られています。イエローケーキ/核燃料の材料です。' },
   { key: 'UO3', formula: 'UO₃', name: '酸化ウラン(VI)', cations: { 'U6+': 1 }, anions: { 'O2-': 3 }, color: '#facc15', desc: '黄色〜橙色の固体です。ウラン(VI)を含む代表的な酸化物です。' },
 
+  // UO2²⁺ (uranyl ion)
+  { key: 'UO2F2', formula: 'UO₂F₂', name: 'フッ化ウラニル', cations: { 'UO22+': 1 }, anions: { 'F-': 2 }, color: '#fef08a', desc: '黄色系のウラニル(VI)フッ化物です。水に溶ける性質があり、ウランのフッ化物化学や核燃料サイクルに関する研究で扱われます。' },
+  { key: 'UO2NO32', formula: 'UO₂(NO₃)₂', name: '硝酸ウラニル', cations: { 'UO22+': 1 }, anions: { 'NO3-1': 2 }, color: '#fde047', desc: '黄色の結晶性固体で、通常は水和物として扱われる水溶性のウラニル塩です。ウラン溶液から酸化物などを調製する工程で重要な化合物です。' },
+  { key: 'UO2SO4', formula: 'UO₂SO₄', name: '硫酸ウラニル', cations: { 'UO22+': 1 }, anions: { 'SO4-2': 1 }, color: '#facc15', desc: 'ウラニルイオンと硫酸イオンからなる黄色系の塩です。水溶液中では硫酸イオンとの錯形成も起こり、ウラン(VI)の溶液化学で扱われます。' },
+  { key: 'UO2CO3', formula: 'UO₂CO₃', name: '炭酸ウラニル', cations: { 'UO22+': 1 }, anions: { 'CO3-2': 1 }, color: '#facc15', desc: 'ウラニル(VI)の炭酸塩です。天然ではラザフォード石として産出し、炭酸イオンは地下水中でウランの溶存・移動に影響します。' },
+
+  // Au4+ (formal oxidation state IV)
+  { key: 'AuO2', formula: 'AuO₂', name: '酸化金(IV)', cations: { 'Au4+': 1 }, anions: { 'O2-': 2 }, color: '#facc15', desc: '金(IV)と酸化物イオンからなる形式組成です。金の高酸化状態は不安定で、単純なAuO₂を一般的な安定塩として扱うことはできません。この項目はイオンブロックの電荷中性モデルを示します。' },
+  { key: 'AuF4', formula: 'AuF₄', name: 'フッ化金(IV)', cations: { 'Au4+': 1 }, anions: { 'F-': 4 }, color: '#fef3c7', desc: '金(IV)とフッ化物イオンからなる形式組成です。金の高酸化状態を保つ単純な塩は一般的ではなく、ここではイオンブロックの電荷中性モデルとして登録しています。' },
+
+  // Pu3+ and Pu4+
+  { key: 'Pu2O3', formula: 'Pu₂O₃', name: '酸化プルトニウム(III)', cations: { 'Pu3+': 2 }, anions: { 'O2-': 3 }, color: '#7c2d12', desc: '三価のプルトニウムを含む酸化物です。空気中で酸化されやすく、プルトニウムの酸化状態や酸化物の熱力学を調べる研究で扱われます。' },
+  { key: 'PuF3', formula: 'PuF₃', name: 'フッ化プルトニウム(III)', cations: { 'Pu3+': 1 }, anions: { 'F-': 3 }, color: '#f1f5f9', desc: 'プルトニウム(III)のフッ化物です。水に溶けにくく、プルトニウムの分離・精製やアクチノイドフッ化物の研究に関連する化合物です。' },
+  { key: 'PuCl3', formula: 'PuCl₃', name: '塩化プルトニウム(III)', cations: { 'Pu3+': 1 }, anions: { 'Cl-': 3 }, color: '#f8fafc', desc: 'プルトニウム(III)を含む塩化物で、水和物や無水物として扱われます。プルトニウム化合物の調製や酸化還元化学の研究に用いられます。' },
+  { key: 'PuO2', formula: 'PuO₂', name: '酸化プルトニウム(IV)', cations: { 'Pu4+': 1 }, anions: { 'O2-': 2 }, color: '#7f1d1d', desc: '二酸化プルトニウムは安定性の高い代表的なプルトニウム酸化物です。核燃料物質として利用される一方、放射性・毒性があるため厳重な管理を要します。' },
+  { key: 'PuF4', formula: 'PuF₄', name: 'フッ化プルトニウム(IV)', cations: { 'Pu4+': 1 }, anions: { 'F-': 4 }, color: '#f8fafc', desc: 'プルトニウム(IV)のフッ化物です。水に溶けにくく、プルトニウムを酸化物や金属へ転換する工程など、核燃料化学に関わる研究で扱われます。' },
+  { key: 'PuCl4', formula: 'PuCl₄', name: '塩化プルトニウム(IV)', cations: { 'Pu4+': 1 }, anions: { 'Cl-': 4 }, color: '#f8fafc', desc: '四価のプルトニウムを含む塩化物です。水分に敏感で、加水分解や酸化還元を受けるため、無水条件でのアクチノイド化学の研究対象となります。' },
+
+  // TcO4- (pertechnetate)
+  { key: 'H-TcO4', formula: 'HTcO₄', name: '過テクネチウム酸', cations: { 'H+': 1 }, anions: { 'TcO4-1': 1 }, color: '#f8fafc', desc: 'テクネチウム(VII)のオキソ酸です。水溶液中では過テクネチウム酸イオンを生じます。テクネチウムは放射性元素であり、取り扱いには専門的な設備と管理が必要です。' },
+  { key: 'Na-TcO4', formula: 'NaTcO₄', name: '過テクネチウム酸ナトリウム', cations: { 'Na+': 1 }, anions: { 'TcO4-1': 1 }, color: '#f8fafc', desc: '過テクネチウム酸イオンを含む水溶性のテクネチウム(VII)塩です。テクネチウムは放射性元素であり、取り扱いには専門的な設備と管理が必要です。' },
+  { key: 'K-TcO4', formula: 'KTcO₄', name: '過テクネチウム酸カリウム', cations: { 'K+': 1 }, anions: { 'TcO4-1': 1 }, color: '#f8fafc', desc: '過テクネチウム酸イオンを含むテクネチウム(VII)塩です。テクネチウムは放射性元素であり、取り扱いには専門的な設備と管理が必要です。' },
+  { key: 'NH4-TcO4', formula: 'NH₄TcO₄', name: '過テクネチウム酸アンモニウム', cations: { 'NH4+': 1 }, anions: { 'TcO4-1': 1 }, color: '#f8fafc', desc: 'テクネチウム(VII)の代表的なアンモニウム塩です。加熱による分解で酸化テクネチウム(VII)を生じます。テクネチウムは放射性元素であり、取り扱いには専門的な設備と管理が必要です。' },
+
   // Bk3+ (atomic number 97)
-  { key: 'Bk2O3', formula: 'Bk₂O₃', name: '酸化バークリウム(III)', cations: { 'Bk3+': 2 }, anions: { 'O2-': 3 }, color: '#f1f5f9', desc: 'バークリウム(III)と酸化物イオンからなる酸化物です。' },
-  { key: 'BkF3', formula: 'BkF₃', name: 'フッ化バークリウム(III)', cations: { 'Bk3+': 1 }, anions: { 'F-': 3 }, color: '#f8fafc', desc: 'バークリウム(III)とフッ化物イオンからなるハロゲン化物です。' },
-  { key: 'BkCl3', formula: 'BkCl₃', name: '塩化バークリウム(III)', cations: { 'Bk3+': 1 }, anions: { 'Cl-': 3 }, color: '#f8fafc', desc: 'バークリウム(III)と塩化物イオンからなるハロゲン化物です。' },
   { key: 'BkNO33', formula: 'Bk(NO₃)₃', name: '硝酸バークリウム(III)', cations: { 'Bk3+': 1 }, anions: { 'NO3-1': 3 }, color: '#42FDC9', desc: '淡緑色の固体です。水に溶けやすく、基本的には四水和物の形をとります。極めて希少で、この物質の溶液22mgに対し約1.5億円もの価格がついた事例があります。' },
 
   // Bk4+ (atomic number 97)
-  { key: 'BkO2', formula: 'BkO₂', name: '酸化バークリウム(IV)', cations: { 'Bk4+': 1 }, anions: { 'O2-': 2 }, color: '#e2e8f0', desc: 'バークリウム(IV)と酸化物イオンからなる酸化物です。' },
-  { key: 'BkF4', formula: 'BkF₄', name: 'フッ化バークリウム(IV)', cations: { 'Bk4+': 1 }, anions: { 'F-': 4 }, color: '#f8fafc', desc: 'バークリウム(IV)とフッ化物イオンからなるハロゲン化物です。' },
-  { key: 'BkCl4', formula: 'BkCl₄', name: '塩化バークリウム(IV)', cations: { 'Bk4+': 1 }, anions: { 'Cl-': 4 }, color: '#f8fafc', desc: 'バークリウム(IV)と塩化物イオンからなるハロゲン化物です。' },
 
   //複カチオン
     { key:'AlK(SO4)2', formula:'AlK(SO₄)₂', name:'硫酸アルミニウムカリウム', cations:{'Al3+':1,'K+':1}, anions:{'SO4-2':2}, color:'#f8fafc', desc:'硫酸アルミニウムカリウム十二水和物として知られる結晶性固体です。通称明礬。水に溶けやすく、古くから染料の媒染剤や収斂剤として利用されてきました。'},
@@ -1652,7 +1824,7 @@ const COMPOUNDS = [
 //↓鉱物系辞書追加領域
     const MANUAL_COMPOUNDS = [...COMPOUNDS];
     const MINERAL_COMPOUNDS = [
-    { key: 'Cu2-OH2-CO3', formula: 'Cu2(OH)2CO3', name: '水酸化炭酸銅(II)', cations: { 'Cu2+': 2 }, anions: { 'OH-': 2, 'CO3-2': 1 }, color: '#16a34a', desc: '緑色の固体です。銅(II)イオン、水酸化物イオン、炭酸イオンからなる塩基性炭酸塩です。', mineral: { name: '孔雀石', desc: '鮮やかな緑色を示す銅の炭酸塩鉱物です。' } },
+      { key: 'Cu2-OH2-CO3', formula: 'Cu2(OH)2CO3', name: '水酸化炭酸銅(II)', cations: { 'Cu2+': 2 }, anions: { 'OH-': 2, 'CO3-2': 1 }, color: '#16a34a', desc: '緑色の固体です。銅(II)イオン、水酸化物イオン、炭酸イオンからなる塩基性炭酸塩です。', mineral: { name: '孔雀石', desc: '鮮やかな緑色を示す銅の炭酸塩鉱物です。' } },
 
     ];
 
@@ -1660,11 +1832,12 @@ const COMPOUNDS = [
 
 //↓自動生成辞書登録部分
     const AUTO_ION_ORDER = [
-      'H+', 'Na+', 'K+', 'Cs+', 'Cu+', 'Ag+', 'Cu2+', 'Fe2+', 'Zn2+', 'Ca2+', 'Pb2+', 'Sr2+',
-      'Mg2+', 'Al3+', 'Fe3+', 'Co2+', 'Co3+', 'Bk3+', 'Bk4+', 'Ba2+', 'La3+', 'Yb2+', 'Yb3+',
-      'NH4+', 'U4+', 'U6+', 'As3+', 'Cr3+', 'Cr2+', 'Ni2+',
+      'H+', 'Li+', 'Be2+', 'Na+', 'K+', 'Cs+', 'Cu+', 'Ag+', 'Au4+', 'Cu2+', 'Fe2+', 'Zn2+', 'Ca2+', 'Pb2+', 'Sr2+',
+      'Mg2+', 'Al3+', 'Si4+', 'Ti3+', 'Ti4+', 'V2+', 'V3+', 'Fe3+', 'Co2+', 'Co3+', 'Mn2+', 'Bk3+', 'Bk4+', 'Ba2+', 'La3+', 'Nd3+', 'Yb2+', 'Yb3+',
+      'Sn2+', 'Sn4+',
+      'NH4+', 'U4+', 'U6+', 'Pu3+', 'Pu4+', 'UO22+', 'As3+', 'Cr3+', 'Cr2+', 'Ni2+', 'Tc4+',
       'F-', 'Cl-', 'OH-', 'O2-', 'S2-', 'H-', 'SO4-2', 'NO3-1', 'PO4-3', 'AsO4-3', 'CrO4-2', 
-      'Cr2O7-2', 'CO3-2', 'HCO3-1', 'BO3-3', 'SiO4-4', 'IO3-1', 'CN-1', 'CNO-1', 'UO22+', 'I-', 'Br-'
+      'Cr2O7-2', 'CO3-2', 'HCO3-1', 'BO3-3', 'SiO4-4', 'IO3-1', 'BrO3-1', 'MnO4-1', 'TcO4-1', 'CoO2-1', 'CN-1', 'CNO-1', 'UO22+', 'I-', 'Br-'
     ];
     const SUBSCRIPT_DIGITS = { 0: '₀', 1: '₁', 2: '₂', 3: '₃', 4: '₄', 5: '₅', 6: '₆', 7: '₇', 8: '₈', 9: '₉' };
 
@@ -1717,6 +1890,10 @@ const COMPOUNDS = [
         'CO3-2': '炭酸',
         'HCO3-1': '炭酸水素',
         'BO3-3': 'ホウ酸',
+        'MnO4-1': '過マンガン酸',
+        'TcO4-1': '過テクネチウム酸',
+        'BrO3-1': '臭素酸',
+        'CoO2-1': 'コバルト酸',
         'I-': 'ヨウ化',
         'Br-': '臭化'
       };
@@ -1851,7 +2028,7 @@ const COMPOUNDS = [
       { anion: 'NO3-1', solubility: 'soluble' },
       { anion: 'Cl-', cations: ['Na+', 'K+', 'H+', 'Cu+', 'Cu2+', 'Fe2+', 'Zn2+', 'Ca2+'], solubility: 'soluble' },
       { anion: 'SO4-2', solubility: 'soluble' },
-      { anion: 'OH-', cations: ['Na+', 'K+', 'Cs+', 'H+'], solubility: 'soluble' },
+      { anion: 'OH-', cations: ['Li+', 'Na+', 'K+', 'Cs+', 'H+'], solubility: 'soluble' },
       { cation: 'Ca2+', anion: 'OH-', solubility: 'slightlySoluble' },
       { anion: 'OH-', solubility: 'insoluble' },
       { anion: 'PO4-3', cations: ['Na+', 'K+', 'H+'], solubility: 'soluble' },
@@ -1862,12 +2039,13 @@ const COMPOUNDS = [
       { anion: 'F-', solubility: 'soluble' },
     ];
     const PRECIPITATION_RULES = [];
+    //イオン化傾向列-ionline
     const ACTIVITY_SERIES = [
-      'Cs', 'K', 'Na', 'Ca', 'Sr', 'La', 'Mg', 'Al', 'Bk', 'U', 'Zn', 'Cr',
-      'Fe', 'Co', 'Ni', 'Pb', 'Cu', 'Ag', 'Au',
+      'Li', 'Cs', 'K', 'Ba', 'Na', 'Ca', 'Sr', 'La', 'Mg', 'Be', 'Al', 'Bk', 'U',
+      'Ti', 'V', 'Mn', 'Zn', 'Cr', 'Fe', 'Co', 'Ni', 'Sn', 'Pb', 'H2', 'Cu', 'Ag', 'Au',
     ];
     const METAL_IONS = {
-      Cs: { ionId: 'Cs+', charge: 1 }, K: { ionId: 'K+', charge: 1 },
+      Li: { ionId: 'Li+', charge: 1 }, Cs: { ionId: 'Cs+', charge: 1 }, K: { ionId: 'K+', charge: 1 },
       Na: { ionId: 'Na+', charge: 1 }, Ca: { ionId: 'Ca2+', charge: 2 },
       Sr: { ionId: 'Sr2+', charge: 2 }, La: { ionId: 'La3+', charge: 3 },
       Mg: { ionId: 'Mg2+', charge: 2 }, Al: { ionId: 'Al3+', charge: 3 },
@@ -1876,6 +2054,9 @@ const COMPOUNDS = [
       Fe: { ionId: 'Fe2+', charge: 2 }, Co: { ionId: 'Co2+', charge: 2 },
       Ni: { ionId: 'Ni2+', charge: 2 }, Pb: { ionId: 'Pb2+', charge: 2 },
       Cu: { ionId: 'Cu2+', charge: 2 }, Ag: { ionId: 'Ag+', charge: 1 },
+      Ba: { ionId: 'Ba2+', charge: 2 }, Be: { ionId: 'Be2+', charge: 2 },
+      Ti: { ionId: 'Ti4+', charge: 4 }, V: { ionId: 'V3+', charge: 3 },
+      Mn: { ionId: 'Mn2+', charge: 2 }, Sn: { ionId: 'Sn2+', charge: 2 },
     };
     const ACID_BASE_RULES = [
       { ionId: 'H+', role: 'acid' },
@@ -1926,6 +2107,7 @@ const COMPOUNDS = [
     };
 
     const ALKALI_METAL_WATER_REACTIONS = {
+      Li: { ionId: 'Li+', hydroxideKey: 'LiOH', color: '#dc143c', label: '深赤色', duration: 1500 },
       Na: { ionId: 'Na+', hydroxideKey: 'NaOH1', color: '#FFD21F', label: '黄色', duration: 1800 },
       K: { ionId: 'K+', hydroxideKey: 'KOH1', color: '#C084FC', label: '紫色', duration: 1900 },
       Cs: { ionId: 'Cs+', hydroxideKey: 'CsOH', color: '#818CF8', label: '青紫色', duration: 2200, intense: true },
@@ -1983,6 +2165,7 @@ const COMPOUNDS = [
     });
 
     const FLAME_TESTS = {
+      'Li+': { enabled: true, color: '#dc143c', label: '深赤色', duration: 1200, priority: 270 },
       'Na+': { enabled: true, color: '#FFD21F', label: '黄色', duration: 1200, priority: 200 },
       'K+': { enabled: true, color: '#C084FC', label: '紫色', duration: 1200, priority: 100 },
       'Cu+': { enabled: true, color: '#22D3EE', label: '青緑色', duration: 1200, priority: 300 },
@@ -2053,6 +2236,7 @@ const COMPOUNDS = [
     let currentIonTab = 'cation';
     let paletteSearchQuery = '';
     let currentDexTab = 'manual';
+    let currentDexCategory = null;
     let workspaceIons = [];
     let workspaceElements = [];
     let workspaceMolecules = [];
@@ -2656,6 +2840,13 @@ const COMPOUNDS = [
       document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape' && lighterModeSelected) setLighterMode(false);
       });
+      document.addEventListener('keydown', (event) => {
+        if (event.key.toLowerCase() !== 'c' || event.repeat ||
+            event.ctrlKey || event.altKey || event.metaKey) return;
+        if (event.target instanceof Element &&
+            event.target.closest('input, textarea, select, [contenteditable="true"]')) return;
+        revealAllDexCompounds();
+      });
     }
 
     function switchIonTab(type) {
@@ -2731,7 +2922,7 @@ const COMPOUNDS = [
       card.className = 'ion-list-card p-3 rounded-xl bg-slate-950 border border-slate-800 hover:border-amber-400 transition flex items-center justify-between';
       card.innerHTML = `
         <div class="flex min-w-0 items-center gap-3">
-          <div class="w-10 h-10 shrink-0 rounded-lg bg-gradient-to-br ${element.color} flex items-center justify-center ${element.textColor} font-black">${element.id}</div>
+          <div class="w-9 h-9 shrink-0 rounded-lg bg-gradient-to-br ${element.color} flex items-center justify-center ${element.textColor} font-black">${element.id}</div>
           <div class="min-w-0 text-sm text-white">${element.name}<div class="text-xs text-slate-500">${showType ? '単体' : '単体元素'}</div></div>
         </div>
         <i class="fa-solid fa-hand-pointer palette-drag-handle" title="ここをドラッグして配置" aria-label="ドラッグして配置"></i>
@@ -2748,7 +2939,7 @@ const COMPOUNDS = [
       card.className = 'ion-list-card p-3 rounded-xl bg-slate-950 border border-slate-800 hover:border-cyan-500 transition flex items-center justify-between';
       card.innerHTML = `
         <div class="flex min-w-0 items-center gap-3">
-          <div class="ion-list-color w-10 h-10 shrink-0 rounded-lg ${colorClasses} flex items-center justify-center ${ion.textColor}">
+          <div class="ion-list-color w-9 h-9 shrink-0 rounded-lg ${colorClasses} flex items-center justify-center ${ion.textColor}">
             ${formatIonFormula(ion.id)}
           </div>
           <div class="min-w-0 text-sm text-white">
@@ -2984,20 +3175,26 @@ const COMPOUNDS = [
       return group;
     }
 
-    function findAlloy(metalA, metalB) {
-      const getMetalId = (metal) => typeof metal === 'string'
-        ? metal
-        : metal?.type === 'alloy' ? null : metal?.id;
-      const ids = [getMetalId(metalA), getMetalId(metalB)].sort();
-      if (ids.some((id) => !id)) return null;
+    function getAlloyElementIds(element) {
+      if (typeof element === 'string') return [element];
+      if (!element) return [];
+      return element.type === 'alloy'
+        ? (element.metals || []).flatMap((metal) => getAlloyElementIds(metal))
+        : element.id ? [element.id] : [];
+    }
+
+    function findAlloy(...components) {
+      const ids = [...new Set(components.flatMap((component) => getAlloyElementIds(component)))].sort();
+      if (ids.length < 2 || ids.length > 3) return null;
       return ALLOYS.find((alloy) => {
         const metals = Array.isArray(alloy.metals) ? alloy.metals : alloy.elements;
-        return Array.isArray(metals) && metals.length === 2 &&
+        return Array.isArray(metals) && metals.length === ids.length &&
           [...metals].sort().every((metalId, index) => metalId === ids[index]);
       }) || null;
     }
 
-    function createAlloyObject(alloy, firstElement, secondElement) {
+    function createAlloyObject(alloy, elements) {
+      const metals = elements.flatMap((element) => getAlloyElementIds(element));
       return {
         instanceId: `alloy-${Date.now()}-${Math.random()}`,
         type: 'alloy',
@@ -3005,43 +3202,59 @@ const COMPOUNDS = [
         id: alloy.key,
         formula: alloy.formula,
         name: alloy.name,
-        metals: [...(alloy.metals || alloy.elements)],
+        metals: [...new Set(metals)],
         desc: alloy.desc || '',
         color: alloy.color?.startsWith('from-') ? alloy.color : 'from-amber-500 to-yellow-700',
         surfaceColor: alloy.color?.startsWith('#') ? alloy.color : '',
         textColor: alloy.textColor || 'text-amber-50',
         borderColor: alloy.borderColor || 'border-amber-300',
-        x: (firstElement.x + secondElement.x) / 2,
-        y: (firstElement.y + secondElement.y) / 2,
+        x: elements.reduce((sum, element) => sum + element.x, 0) / elements.length,
+        y: elements.reduce((sum, element) => sum + element.y, 0) / elements.length,
       };
     }
 
     function tryConnectAlloy(instanceId) {
       const dragged = workspaceElements.find((element) => element.instanceId === instanceId);
-      if (!dragged || dragged.type === 'alloy') return;
-      let closest = null;
-
-      workspaceElements.forEach((other) => {
-        if (other.instanceId === dragged.instanceId || other.type === 'alloy') return;
-        const alloy = findAlloy(dragged, other);
-        if (!alloy) return;
+      if (!dragged) return;
+      const nearby = workspaceElements.filter((element) => {
+        if (element.instanceId === dragged.instanceId) return false;
         const distance = Math.hypot(
-          dragged.x + ELEMENT_BLOCK_WIDTH / 2 - other.x - ELEMENT_BLOCK_WIDTH / 2,
-          dragged.y + ELEMENT_BLOCK_HEIGHT / 2 - other.y - ELEMENT_BLOCK_HEIGHT / 2,
+          dragged.x + ELEMENT_BLOCK_WIDTH / 2 - element.x - ELEMENT_BLOCK_WIDTH / 2,
+          dragged.y + ELEMENT_BLOCK_HEIGHT / 2 - element.y - ELEMENT_BLOCK_HEIGHT / 2,
         );
-        if (distance <= ALLOY_CONTACT_DISTANCE && (!closest || distance < closest.distance)) {
-          closest = { other, alloy, distance };
-        }
+        return distance <= ALLOY_CONTACT_DISTANCE;
       });
+      let closest = null;
+      const consider = (elements) => {
+        const alloy = findAlloy(dragged, ...elements);
+        if (!alloy) return;
+        const distance = elements.reduce((sum, element) => sum + Math.hypot(
+          dragged.x - element.x,
+          dragged.y - element.y,
+        ), 0);
+        if (
+          !closest ||
+          alloy.metals.length > closest.alloy.metals.length ||
+          (alloy.metals.length === closest.alloy.metals.length && distance < closest.distance)
+        ) {
+          closest = { elements, alloy, distance };
+        }
+      };
 
+      nearby.forEach((element, index) => {
+        consider([element]);
+        nearby.slice(index + 1).forEach((other) => consider([element, other]));
+      });
       if (!closest) return;
-      const alloyObject = createAlloyObject(closest.alloy, dragged, closest.other);
+
+      const components = [dragged, ...closest.elements];
+      const componentIds = new Set(components.map((element) => element.instanceId));
+      const alloyObject = createAlloyObject(closest.alloy, components);
       workspaceElements = workspaceElements.filter((element) =>
-        element.instanceId !== dragged.instanceId && element.instanceId !== closest.other.instanceId,
+        !componentIds.has(element.instanceId),
       );
       alloyConnections = alloyConnections.filter((connection) =>
-        connection.from !== dragged.instanceId && connection.to !== dragged.instanceId &&
-        connection.from !== closest.other.instanceId && connection.to !== closest.other.instanceId,
+        !componentIds.has(connection.from) && !componentIds.has(connection.to),
       );
       workspaceElements.push(alloyObject);
     }
@@ -4471,7 +4684,7 @@ const COMPOUNDS = [
         if (element.surfaceColor) block.style.backgroundColor = element.surfaceColor;
         block.dataset.instanceId = String(element.instanceId);
         block.innerHTML = `
-          <span class="font-black text-xl ${element.textColor} pointer-events-none">${isAlloy ? (element.formula || element.name) : element.id}</span>
+          <span class="font-black ${isAlloy && element.metals.length > 2 ? 'text-[10px]' : 'text-xl'} ${element.textColor} pointer-events-none">${isAlloy ? (element.formula || element.name) : element.id}</span>
           ${isAlloy ? `<span class="text-[8px] font-bold text-amber-100/90 pointer-events-none">${element.name || ''}</span>` : ''}
           ${link ? `<span class="text-[8px] font-bold text-amber-100/90 pointer-events-none" title="${alloy?.name || '合金'}">${alloy?.name || '合金'}</span>` : ''}
           <button class="absolute -top-2 -right-2 w-6 h-6 bg-slate-900 text-rose-400 rounded-full delete-element" title="単体を削除" aria-label="単体を削除">
@@ -4728,8 +4941,122 @@ const COMPOUNDS = [
       badge.innerText = `${discoveredCompounds.size}/${MANUAL_COMPOUNDS.length}`;
     }
 
+    function revealAllDexCompounds() {
+      MANUAL_COMPOUNDS.forEach((compound) => discoveredCompounds.add(compound.key));
+      MINERAL_COMPOUNDS.forEach((compound) => discoveredCompounds.add(compound.key));
+      updateDexBadge();
+      if (activeTab === 'dex') renderDex();
+    }
+
+    const DEX_CATEGORIES = [
+      { id: 'basic-acid', label: '基本酸' },
+      { id: 'hydride', label: '水素化物' },
+      { id: 'oxide-sulfide', label: '酸化・硫化物' },
+      { id: 'halide', label: 'ハロゲン化物' },
+      { id: 'sulfate-nitrate-carbonate', label: '硫酸・硝酸・炭酸' },
+      { id: 'halogen-oxoacid', label: 'ハロゲン酸' },
+      { id: 'chromate-arsenate-manganate', label: 'クロム酸・ヒ素酸・マンガン酸' },
+      { id: 'phosphate', label: 'リン酸' },
+      { id: 'fulminate-cyanide', label: '雷酸・シアン化' },
+      { id: 'other', label: 'その他' },
+    ];
+
+    const DEX_BASIC_ACID_KEYS = new Set([
+      'H2O1', 'HF', 'HCl', 'H2S', 'CrO4H2', 'Cr2O7H2', 'AsH3O4', 'BO3H3',
+      'H4-SiO4', 'H-IO3', 'H-CN', 'H-CNO', 'H3PO4', 'H2CO3', 'H2SO4',
+      'HNO3', 'H1OH1', 'H2',
+    ]);
+
+    function getDexCompoundCategory(compound) {
+      const cations = Object.keys(compound.cations || {});
+      const anions = Object.keys(compound.anions || {});
+      const anionSet = new Set(anions);
+      const hydrogenCationOnly = cations.length === 1 && cations[0] === 'H+';
+
+      if (DEX_BASIC_ACID_KEYS.has(compound.key)) return 'basic-acid';
+      if (anionSet.has('H-')) return 'hydride';
+      if (hydrogenCationOnly && ['F-', 'Cl-', 'Br-', 'I-'].some((ionId) => anionSet.has(ionId))) {
+        return 'halogen-oxoacid';
+      }
+      if (['SO4-2', 'NO3-1', 'CO3-2', 'HCO3-1'].some((ionId) => anionSet.has(ionId))) {
+        return 'sulfate-nitrate-carbonate';
+      }
+      if (['IO3-1', 'ClO3-1', 'BrO3-1', 'AtO3-1'].some((ionId) => anionSet.has(ionId))) {
+        return 'halogen-oxoacid';
+      }
+      if (['CrO4-2', 'Cr2O7-2', 'AsO4-3', 'MnO4-1'].some((ionId) => anionSet.has(ionId))) {
+        return 'chromate-arsenate-manganate';
+      }
+      if (anionSet.has('PO4-3')) return 'phosphate';
+      if (['CNO-1', 'CN-1'].some((ionId) => anionSet.has(ionId))) {
+        return 'fulminate-cyanide';
+      }
+      if (hydrogenCationOnly && !['H2O1', 'H1OH1'].includes(compound.key) &&
+          compound.specialType !== 'hydrogen_molecule') {
+        return 'basic-acid';
+      }
+      if (['H2O1', 'H1OH1'].includes(compound.key)) return 'other';
+      if (['O2-', 'OH-', 'S2-'].some((ionId) => anionSet.has(ionId))) {
+        return 'oxide-sulfide';
+      }
+      if (['F-', 'Cl-', 'Br-', 'I-'].some((ionId) => anionSet.has(ionId))) {
+        return 'halide';
+      }
+      return 'other';
+    }
+
+    function renderDexCategoryNavigation(categoryCompounds) {
+      const navigation = document.getElementById('dex-category-nav');
+      navigation.innerHTML = '';
+      navigation.classList.remove('hidden');
+
+      if (currentDexCategory) {
+        const category = DEX_CATEGORIES.find((item) => item.id === currentDexCategory);
+        const toolbar = document.createElement('div');
+        toolbar.className = 'flex flex-wrap items-center gap-3';
+        const backButton = document.createElement('button');
+        backButton.type = 'button';
+        backButton.className = 'px-3 py-2 rounded-lg bg-slate-800 text-slate-200 hover:bg-slate-700 text-sm font-bold';
+        backButton.textContent = '分類一覧へ戻る';
+        backButton.onclick = () => {
+          currentDexCategory = null;
+          renderDex();
+        };
+        const heading = document.createElement('h3');
+        heading.className = 'text-sm font-bold text-cyan-200';
+        heading.textContent = `${category?.label || '分類'}（${categoryCompounds.length}件）`;
+        toolbar.append(backButton, heading);
+        navigation.appendChild(toolbar);
+        return;
+      }
+
+      const categoryList = document.createElement('div');
+      categoryList.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3';
+      DEX_CATEGORIES.forEach((category) => {
+        const count = MANUAL_COMPOUNDS.filter(
+          (compound) => getDexCompoundCategory(compound) === category.id,
+        ).length;
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'flex items-center justify-between gap-3 rounded-xl border border-slate-700 bg-slate-950/70 px-4 py-3 text-left text-sm font-bold text-slate-200 transition hover:border-cyan-500 hover:bg-slate-800';
+        const label = document.createElement('span');
+        label.textContent = category.label;
+        const itemCount = document.createElement('span');
+        itemCount.className = 'shrink-0 rounded-full bg-slate-800 px-2 py-1 text-xs text-slate-400';
+        itemCount.textContent = `${count}件`;
+        button.append(label, itemCount);
+        button.onclick = () => {
+          currentDexCategory = category.id;
+          renderDex();
+        };
+        categoryList.appendChild(button);
+      });
+      navigation.appendChild(categoryList);
+    }
+
     function switchDexTab(tab) {
       currentDexTab = tab;
+      currentDexCategory = null;
       const manualButton = document.getElementById('dex-tab-manual');
       const specialButton = document.getElementById('dex-tab-special');
       const mineralButton = document.getElementById('dex-tab-mineral');
@@ -4795,7 +5122,10 @@ const COMPOUNDS = [
     function renderDex() {
       const grid = document.getElementById('dex-grid');
       const description = document.getElementById('dex-description');
+      const categoryNavigation = document.getElementById('dex-category-nav');
       grid.innerHTML = '';
+      grid.classList.remove('hidden');
+      categoryNavigation.classList.toggle('hidden', currentDexTab !== 'manual');
 
       if (currentDexTab === 'mineral') {
         const visibleMinerals = MINERAL_COMPOUNDS.filter((compound) => discoveredCompounds.has(compound.key));
@@ -4839,9 +5169,20 @@ const COMPOUNDS = [
 
       let compoundsToRender;
       if (currentDexTab === 'manual') {
-        compoundsToRender = MANUAL_COMPOUNDS;
-        description.innerText = '手書き登録された化合物と固有の説明を表示します。';
+        if (!currentDexCategory) {
+          description.innerText = '分類を選択して、手書き登録された化合物と固有の説明を表示します。';
+          renderDexCategoryNavigation([]);
+          grid.classList.add('hidden');
+          return;
+        }
+        compoundsToRender = MANUAL_COMPOUNDS.filter(
+          (compound) => getDexCompoundCategory(compound) === currentDexCategory,
+        );
+        description.innerText = '選択した分類の化合物を表示します。発見状況は図鑑全体で共通です。';
+        renderDexCategoryNavigation(compoundsToRender);
+        grid.classList.remove('hidden');
       } else {
+        grid.classList.remove('hidden');
         compoundsToRender = discoveredSpecialCompounds
           .map((key) => makeDiscoveredSpecialCompound(key))
           .filter(Boolean);
