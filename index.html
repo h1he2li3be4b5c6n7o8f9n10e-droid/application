@@ -1112,6 +1112,8 @@
       'Co2+': { id: 'Co2+', symbol: 'Co²⁺', name: 'コバルト(II)イオン', type: 'cation', charge: 2, color: 'from-pink-600 to-fuchsia-700', textColor: 'text-pink-50', borderColor: 'border-pink-300' },
       'Co3+': { id: 'Co3+', symbol: 'Co³⁺', name: 'コバルト(III)イオン', type: 'cation', charge: 3, color: 'from-pink-700 to-fuchsia-800', textColor: 'text-pink-50', borderColor: 'border-pink-300' },
       'Ni2+': { id: 'Ni2+', symbol: 'Ni²⁺', name: 'ニッケル(II)イオン', type: 'cation', charge: 2, color: 'from-green-600 to-emerald-700', textColor: 'text-green-50', borderColor: 'border-green-300' },
+      'Hg2+': { id: 'Hg2+', symbol: 'Hg²⁺', name: '水銀(II)イオン', type: 'cation', charge: 2, color: 'from-slate-400 to-zinc-600', textColor: 'text-slate-50', borderColor: 'border-slate-300' },
+      'Hg22+': { id: 'Hg22+', symbol: 'Hg₂²⁺', name: '水銀(I)イオン', type: 'cation', charge: 2, formula: 'Hg2', polyatomic: true, color: 'from-amber-400 to-stone-600', textColor: 'text-amber-50', borderColor: 'border-amber-300' },
       'Cu+':  { id: 'Cu+',  name: '銅(I)イオン',      type: 'cation', charge: 1, color: 'from-blue-600 to-cyan-500',  textColor: 'text-cyan-100', borderColor: 'border-cyan-400' },
       'Cu2+': { id: 'Cu2+', name: '銅(II)イオン',     type: 'cation', charge: 2, color: 'from-blue-700 to-indigo-600',textColor: 'text-blue-100', borderColor: 'border-blue-400' },
       'Zn2+': { id: 'Zn2+', symbol: 'Zn²⁺', name: '亜鉛イオン', type: 'cation', charge: 2, color: 'from-slate-400 to-zinc-600', textColor: 'text-slate-50', borderColor: 'border-slate-300' },
@@ -1141,6 +1143,7 @@
       'H-':   { id: 'H-',   name: '水素化物イオン',   type: 'anion',  charge: -1, color: 'from-slate-300 to-slate-500', textColor: 'text-slate-950', borderColor: 'border-slate-200' },
       'O2-':  { id: 'O2-',  name: '酸化物イオン',     type: 'anion',  charge: -2, color: 'from-slate-500 to-slate-700', textColor: 'text-slate-100', borderColor: 'border-slate-400' },
       'S2-':  { id: 'S2-',  name: '硫化物イオン',     type: 'anion',  charge: -2, color: 'from-yellow-700 to-amber-900', textColor: 'text-amber-100', borderColor: 'border-amber-500' },
+      'Te2-': { id: 'Te2-', symbol: 'Te²⁻', name: 'テルル化物イオン', type: 'anion', charge: -2, color: 'from-orange-600 to-red-900', textColor: 'text-orange-50', borderColor: 'border-orange-300' },
       'F-':   { id: 'F-',   name: 'フッ化物イオン',   type: 'anion',  charge: -1, color: 'from-lime-500 to-green-600', textColor: 'text-lime-100', borderColor: 'border-lime-400' },
       'Cl-':  { id: 'Cl-',  name: '塩化物イオン',     type: 'anion',  charge: -1, color: 'from-emerald-500 to-teal-600', textColor: 'text-emerald-100', borderColor: 'border-emerald-400' },
       'Br-':  { id: 'Br-',  name: '臭化物イオン',     type: 'anion',  charge: -1, color: 'from-amber-700 to-yellow-950', textColor: 'text-amber-50', borderColor: 'border-amber-500' },
@@ -1148,6 +1151,7 @@
       'OH-':  { id: 'OH-',  name: '水酸化物イオン',   type: 'anion',  charge: -1, formula: 'OH', polyatomic: true, color: 'from-rose-500 to-pink-600', textColor: 'text-rose-100', borderColor: 'border-pink-400' },
       'N3-': { id: 'N3-', symbol: 'N³⁻', name: '窒化物イオン', type: 'anion', charge: -3, formula: 'N', color: 'from-slate-600 to-indigo-900', textColor: 'text-slate-50', borderColor: 'border-indigo-300' },
       'N3-1': { id: 'N3-1', symbol: 'N₃⁻', name: 'アジ化物イオン', type: 'anion', charge: -1, formula: 'N3', polyatomic: true, color: 'from-amber-500 to-orange-700', textColor: 'text-amber-50', borderColor: 'border-amber-300' },
+      'HgO2-2': { id: 'HgO2-2', symbol: 'HgO₂²⁻', name: '水銀酸イオン', type: 'anion', charge: -2, formula: 'HgO2', polyatomic: true, color: 'from-lime-500 to-emerald-800', textColor: 'text-lime-50', borderColor: 'border-lime-300' },
       'SO4-2': { id: 'SO4-2', symbol: 'SO₄²⁻', name: '硫酸イオン', type: 'anion', charge: -2, formula: 'SO4', polyatomic: true, color: 'from-cyan-600 to-blue-700', textColor: 'text-cyan-50', borderColor: 'border-cyan-300' },
       'NO3-1': { id: 'NO3-1', symbol: 'NO₃⁻', name: '硝酸イオン', type: 'anion', charge: -1, formula: 'NO3', polyatomic: true, color: 'from-indigo-500 to-violet-700', textColor: 'text-violet-50', borderColor: 'border-violet-300' },
       'PO4-3': { id: 'PO4-3', symbol: 'PO₄³⁻', name: 'リン酸イオン', type: 'anion', charge: -3, formula: 'PO4', polyatomic: true, color: 'from-fuchsia-600 to-purple-800', textColor: 'text-fuchsia-50', borderColor: 'border-fuchsia-300' },
@@ -1442,6 +1446,7 @@ const COMPOUNDS = [
   { key: 'Na-IO3', formula: 'NaIO3', name: 'ヨウ素酸ナトリウム', cations: { 'Na+': 1 }, anions: { 'IO3-1': 1 }, color: '#f8fafc', desc: 'ナトリウムとヨウ素酸イオンからなる化合物です。ヨウ素酸ナトリウムは安定なヨウ素酸塩として扱われます。' },
   { key: 'Na-CN', formula: 'NaCN', name: 'シアン化ナトリウム', cations: { 'Na+': 1 }, anions: { 'CN-1': 1 }, color: '#f8fafc', desc: 'ナトリウムとシアン化物イオンからなる化合物です。代表的なアルカリ金属シアン化物です。' },
   { key: 'Na-CNO', formula: 'NaCNO', name: '雷酸ナトリウム', cations: { 'Na+': 1 }, anions: { 'CNO-1': 1 }, color: '#f8fafc', desc: 'ナトリウムと雷酸イオンからなる化合物です。雷酸塩の一種です。' },
+  { key: 'NaN3', formula: 'NaN₃', name: 'アジ化ナトリウム', cations: { 'Na+': 1 }, anions: { 'N3-1': 1 }, color: '#f8fafc', desc: 'ナトリウムイオンとアジ化物イオンからなる水溶性のアジ化物塩です。衝撃や加熱で危険な分解を起こすため、ここでは物質情報を示す辞書項目として登録しています。' },
   { key: 'NaOH1', formula: 'NaOH', name: '水酸化ナトリウム', cations: { 'Na+': 1 }, anions: { 'OH-': 1 }, color: '#e2e8f0', desc: '強い塩基性を示す代表的な水酸化物です。水によく溶けます。' },
   { key: 'Na2CrO4', formula: 'Na₂CrO₄', name: 'クロム酸ナトリウム', cations: { 'Na+': 2 }, anions: { 'CrO4-2': 1 }, color: '#fde047', desc: '黄色の結晶性固体です。水に溶けやすく、水溶液中ではクロム酸イオンを生じるナトリウム塩です。' },
   { key: 'Na2Cr2O7', formula: 'Na₂Cr₂O₇', name: '二クロム酸ナトリウム', cations: { 'Na+': 2 }, anions: { 'Cr2O7-2': 1 }, color: '#f97316', desc: '橙色系の結晶性固体です。水に溶けやすく、水溶液中で二クロム酸イオンを生じるナトリウム塩です。' },
@@ -1490,6 +1495,7 @@ const COMPOUNDS = [
   // K+ (atomic number 19)
   { key: 'KH', formula: 'KH', name: '水素化カリウム', cations: { 'K+': 1 }, anions: { 'H-': 1 }, color: '#f8fafc', desc: '水素化物イオンを含む金属水素化物です。水と反応して水素を発生し、水酸化カリウムを生じます。' },
   { key: 'K1Cl1', formula: 'KCl', name: '塩化カリウム', cations: { 'K+': 1 }, anions: { 'Cl-': 1 }, color: '#f1f5f9', desc: 'カリウムイオンと塩化物イオンからなる代表的な塩化物です。', mineral: { name: 'シルビン（Sylvite）', desc: 'KClと同じ化学組成を持つカリウムのハロゲン化鉱物です。' } },
+  { key: 'KN3', formula: 'KN₃', name: 'アジ化カリウム（アジ化加里）', cations: { 'K+': 1 }, anions: { 'N3-1': 1 }, color: '#f8fafc', desc: 'カリウムイオンとアジ化物イオンからなるアジ化物塩です。衝撃や加熱で危険な分解を起こすため、ここでは物質情報を示す辞書項目として登録しています。' },
   { key: 'KI', formula: 'KI', name: 'ヨウ化カリウム', cations: { 'K+': 1 }, anions: { 'I-': 1 }, color: '#f8fafc', desc: '白色の結晶性固体です。水に非常によく溶けるヨウ化物で、カリウムイオンとヨウ化物イオンからなる塩です。' },
   { key: 'KBr', formula: 'KBr', name: '臭化カリウム', cations: { 'K+': 1 }, anions: { 'Br-': 1 }, color: '#f8fafc', desc: '白色の結晶性固体です。水に非常によく溶ける臭化物で、カリウムイオンと臭化物イオンからなる塩です。' },
   { key: 'K-IO3', formula: 'KIO3', name: 'ヨウ素酸カリウム', cations: { 'K+': 1 }, anions: { 'IO3-1': 1 }, color: '#f8fafc', desc: 'カリウムとヨウ素酸イオンからなる化合物です。ヨウ素酸カリウムは代表的なヨウ素酸塩の一つです。' },
@@ -1852,11 +1858,11 @@ const COMPOUNDS = [
 
 //↓自動生成辞書登録部分
     const AUTO_ION_ORDER = [
-      'H+', 'Li+', 'Be2+', 'Na+', 'K+', 'Cs+', 'Cu+', 'Ag+', 'Au4+', 'Cu2+', 'Fe2+', 'Zn2+', 'Ca2+', 'Pb2+', 'Sr2+',
+      'H+', 'Li+', 'Be2+', 'Na+', 'K+', 'Cs+', 'Cu+', 'Ag+', 'Au4+', 'Cu2+', 'Hg2+', 'Hg22+', 'Fe2+', 'Zn2+', 'Ca2+', 'Pb2+', 'Sr2+',
       'Mg2+', 'Al3+', 'Si4+', 'Ti3+', 'Ti4+', 'V2+', 'V3+', 'Fe3+', 'Co2+', 'Co3+', 'Mn2+', 'Bk3+', 'Bk4+', 'Ba2+', 'La3+', 'Nd3+', 'Yb2+', 'Yb3+',
       'Sn2+', 'Sn4+',
       'NH4+', 'U4+', 'U6+', 'Pu3+', 'Pu4+', 'UO22+', 'As3+', 'Cr3+', 'Cr2+', 'Ni2+', 'Tc4+',
-      'F-', 'Cl-', 'OH-', 'O2-', 'S2-', 'H-', 'N3-', 'N3-1', 'SO4-2', 'NO3-1', 'PO4-3', 'AsO4-3', 'CrO4-2', 
+      'F-', 'Cl-', 'OH-', 'O2-', 'S2-', 'Te2-', 'H-', 'N3-', 'N3-1', 'HgO2-2', 'SO4-2', 'NO3-1', 'PO4-3', 'AsO4-3', 'CrO4-2', 
       'Cr2O7-2', 'CO3-2', 'HCO3-1', 'BO3-3', 'SiO4-4', 'IO3-1', 'ClO3-1', 'BrO3-1', 'AtO3-1', 'MnO4-1', 'AuCl4-1', 'TcO4-1', 'CoO2-1', 'CN-1', 'CNO-1', 'UO22+', 'I-', 'Br-'
     ];
     const SUBSCRIPT_DIGITS = { 0: '₀', 1: '₁', 2: '₂', 3: '₃', 4: '₄', 5: '₅', 6: '₆', 7: '₇', 8: '₈', 9: '₉' };
@@ -1905,6 +1911,8 @@ const COMPOUNDS = [
         'H-': '水素化',
         'N3-': '窒化',
         'N3-1': 'アジ化',
+        'Te2-': 'テルル化',
+        'HgO2-2': '水銀酸',
         'SO4-2': '硫酸',
         'NO3-1': '硝酸',
         'PO4-3': 'リン酸',
@@ -2047,6 +2055,11 @@ const COMPOUNDS = [
     }
 
     const SOLUBILITY_RULES = [
+      { anion: 'Te2-', cations: ['Li+', 'Na+', 'K+', 'Cs+', 'H+'], solubility: 'soluble' },
+      { anion: 'Te2-', solubility: 'insoluble' },
+      { anion: 'HgO2-2', cations: ['Li+', 'Na+', 'K+', 'Cs+', 'NH4+'], solubility: 'soluble' },
+      { anion: 'HgO2-2', solubility: 'insoluble' },
+      { anion: 'N3-1', cations: ['Hg2+', 'Hg22+'], solubility: 'insoluble' },
       { anion: 'N3-', cation: 'H+', solubility: 'soluble' },
       { anion: 'N3-', solubility: 'insoluble' },
       { anion: 'N3-1', cations: ['Li+', 'Na+', 'K+', 'Cs+', 'NH4+', 'H+'], solubility: 'soluble' },
