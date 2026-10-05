@@ -1112,8 +1112,10 @@
       'Co2+': { id: 'Co2+', symbol: 'Co²⁺', name: 'コバルト(II)イオン', type: 'cation', charge: 2, color: 'from-pink-600 to-fuchsia-700', textColor: 'text-pink-50', borderColor: 'border-pink-300' },
       'Co3+': { id: 'Co3+', symbol: 'Co³⁺', name: 'コバルト(III)イオン', type: 'cation', charge: 3, color: 'from-pink-700 to-fuchsia-800', textColor: 'text-pink-50', borderColor: 'border-pink-300' },
       'Ni2+': { id: 'Ni2+', symbol: 'Ni²⁺', name: 'ニッケル(II)イオン', type: 'cation', charge: 2, color: 'from-green-600 to-emerald-700', textColor: 'text-green-50', borderColor: 'border-green-300' },
+      'Cd2+': { id: 'Cd2+', symbol: 'Cd²⁺', name: 'カドミウムイオン', type: 'cation', charge: 2, color: 'from-slate-400 to-blue-700', textColor: 'text-slate-50', borderColor: 'border-slate-300' },
+      'Ga3+': { id: 'Ga3+', symbol: 'Ga³⁺', name: 'ガリウム(III)イオン', type: 'cation', charge: 3, color: 'from-cyan-500 to-indigo-700', textColor: 'text-cyan-50', borderColor: 'border-cyan-300' },
       'Hg2+': { id: 'Hg2+', symbol: 'Hg²⁺', name: '水銀(II)イオン', type: 'cation', charge: 2, color: 'from-slate-400 to-zinc-600', textColor: 'text-slate-50', borderColor: 'border-slate-300' },
-      'Hg22+': { id: 'Hg22+', symbol: 'Hg₂²⁺', name: '水銀(I)イオン', type: 'cation', charge: 2, formula: 'Hg2', polyatomic: true, color: 'from-amber-400 to-stone-600', textColor: 'text-amber-50', borderColor: 'border-amber-300' },
+      'Hg22+': { id: 'Hg22+', symbol: 'Hg₂²⁺', name: '水銀(I)二量体', type: 'cation', charge: 2, formula: 'Hg2', polyatomic: true, color: 'from-amber-400 to-stone-600', textColor: 'text-amber-50', borderColor: 'border-amber-300' },
       'Cu+':  { id: 'Cu+',  name: '銅(I)イオン',      type: 'cation', charge: 1, color: 'from-blue-600 to-cyan-500',  textColor: 'text-cyan-100', borderColor: 'border-cyan-400' },
       'Cu2+': { id: 'Cu2+', name: '銅(II)イオン',     type: 'cation', charge: 2, color: 'from-blue-700 to-indigo-600',textColor: 'text-blue-100', borderColor: 'border-blue-400' },
       'Zn2+': { id: 'Zn2+', symbol: 'Zn²⁺', name: '亜鉛イオン', type: 'cation', charge: 2, color: 'from-slate-400 to-zinc-600', textColor: 'text-slate-50', borderColor: 'border-slate-300' },
@@ -1198,6 +1200,8 @@
       Cr:{ id: 'Cr', name: 'クロム', color: 'from-green-600 to-emerald-800', textColor: 'text-green-50', borderColor: 'border-green-300' },
       Mn: { id: 'Mn', name: 'マンガン', color: 'from-fuchsia-500 to-purple-700', textColor: 'text-fuchsia-50', borderColor: 'border-fuchsia-300' },
       Fe: { id: 'Fe', name: '鉄', color: 'from-slate-500 to-zinc-800', textColor: 'text-slate-50', borderColor: 'border-slate-300' },
+      Ga: { id: 'Ga', name: 'ガリウム', color: 'from-cyan-500 to-indigo-700', textColor: 'text-cyan-50', borderColor: 'border-cyan-300' },
+      Cd: { id: 'Cd', name: 'カドミウム', color: 'from-slate-400 to-blue-700', textColor: 'text-slate-50', borderColor: 'border-slate-300' },
       Co: { id: 'Co', name: 'コバルト', color: 'from-pink-600 to-fuchsia-700', textColor: 'text-pink-50', borderColor: 'border-pink-300' },
       Ni: {id: 'Ni', name: 'ニッケル', color: 'from-green-500 to-emerald-800', textColor: 'text-green-50', borderColor: 'border-green-300' },
       Cu: { id: 'Cu', name: '銅', color: 'from-orange-500 to-rose-800', textColor: 'text-orange-50', borderColor: 'border-orange-300' },
@@ -1383,6 +1387,51 @@ const ALLOYS = [
     key: 'Ti-Al-V', formula: 'Ti-6Al-4V', name: 'Ti-6Al-4V合金',
     metals: ['Ti', 'Al', 'V'],
     desc: 'チタンを主成分にアルミニウムとバナジウムを加えた代表的なチタン合金です。Ti-6Al-4Vは高い比強度と耐食性を持ち、航空宇宙・医療分野などで広く利用されています。'
+  },
+  {
+    key: 'Cd-Ga', formula: 'Cd-Ga', name: 'カドミウム・ガリウム合金',
+    metals: ['Cd', 'Ga'],
+    desc: 'カドミウムとガリウムからなる二元合金系です。組成によって性質や相が変化するため、ここでは特定の化学量論比を示さない合金系として扱います。'
+  },
+  {
+    key: 'Cd-Cu', formula: 'Cd-Cu', name: 'カドミウム銅合金',
+    metals: ['Cd', 'Cu'],
+    desc: '銅にカドミウムを加えた合金系です。導電性と強度を両立する電線材料などに利用されます。'
+  },
+  {
+    key: 'Cd-Pb', formula: 'Cd-Pb', name: 'カドミウム鉛合金',
+    metals: ['Cd', 'Pb'],
+    desc: 'カドミウムと鉛からなる低融点合金系です。組成によって融点や性質が変わるため、ここでは特定比ではなく合金系として扱います。'
+  },
+  {
+    key: 'Cd-Sn', formula: 'Cd-Sn', name: 'カドミウム・スズ合金',
+    metals: ['Cd', 'Sn'],
+    desc: 'カドミウムとスズからなる合金系です。低融点合金やはんだ材料の組成に用いられることがあり、ここでは合金系の代表として登録しています。'
+  },
+  {
+    key: 'Cd-Zn', formula: 'Cd-Zn', name: 'カドミウム亜鉛合金',
+    metals: ['Cd', 'Zn'],
+    desc: 'カドミウムと亜鉛からなる合金系です。組成幅のある二元系として扱い、式は特定の原子比を示しません。'
+  },
+  {
+    key: 'Ga-Al', formula: 'Ga-Al', name: 'ガリウム・アルミニウム合金',
+    metals: ['Ga', 'Al'],
+    desc: 'ガリウムとアルミニウムからなる二元系です。ガリウムはアルミニウムの表面や機械的性質に強く作用するため、ここでは材料系として登録しています。'
+  },
+  {
+    key: 'Ga-Cu', formula: 'Ga-Cu', name: 'ガリウム銅合金',
+    metals: ['Ga', 'Cu'],
+    desc: 'ガリウムと銅からなる合金・金属間化合物系です。組成や温度によって複数の相をとるため、特定の化学量論比を示さない系として扱います。'
+  },
+  {
+    key: 'Ga-Sn', formula: 'Ga-Sn', name: 'ガリウム・スズ合金',
+    metals: ['Ga', 'Sn'],
+    desc: 'ガリウムとスズからなる低融点合金系です。組成によって融点が変化するため、ここでは特定比ではなく合金系として扱います。'
+  },
+  {
+    key: 'Ga-Zn', formula: 'Ga-Zn', name: 'ガリウム亜鉛合金',
+    metals: ['Ga', 'Zn'],
+    desc: 'ガリウムと亜鉛からなる合金系です。相や性質は組成によって異なるため、式は特定の原子比を表しません。'
   }
 ];
 
@@ -1840,6 +1889,18 @@ const COMPOUNDS = [
 
   // Bk4+ (atomic number 97)
 
+  // Cd2+ and Ga3+
+  { key: 'CdO', formula: 'CdO', name: '酸化カドミウム', cations: { 'Cd2+': 1 }, anions: { 'O2-': 1 }, color: '#b45309', desc: '黄褐色から赤褐色を示すことのあるカドミウムの酸化物です。カドミウム化合物は有害なため、ここでは教材用の組成・性質紹介として扱います。' },
+  { key: 'CdS', formula: 'CdS', name: '硫化カドミウム', cations: { 'Cd2+': 1 }, anions: { 'S2-': 1 }, color: '#facc15', desc: '黄色の固体で、鉱物のグリーナッカイトとして産出します。顔料や半導体材料として知られますが、カドミウム化合物は有害です。', mineral: { name: 'グリーナッカイト', desc: 'CdSからなる黄色のカドミウム硫化鉱物です。' } },
+  { key: 'CdCl2', formula: 'CdCl₂', name: '塩化カドミウム', cations: { 'Cd2+': 1 }, anions: { 'Cl-': 2 }, color: '#f8fafc', desc: '吸湿性のある白色結晶として知られ、水に溶けやすいカドミウム塩です。カドミウム化合物は有害であり、ここでは教材用の紹介として扱います。' },
+  { key: 'CdSO4', formula: 'CdSO₄', name: '硫酸カドミウム', cations: { 'Cd2+': 1 }, anions: { 'SO4-2': 1 }, color: '#f8fafc', desc: 'カドミウムと硫酸イオンからなる水溶性の塩で、水和物としても知られます。カドミウム化合物は有害です。' },
+  { key: 'CdCO3', formula: 'CdCO₃', name: '炭酸カドミウム', cations: { 'Cd2+': 1 }, anions: { 'CO3-2': 1 }, color: '#f8fafc', desc: '白色系の難溶性炭酸塩です。天然には鉱物オタバイトとして産出し、カドミウムを含むため有害です。', mineral: { name: 'オタバイト', desc: 'CdCO₃からなる希少なカドミウム炭酸塩鉱物です。' } },
+  { key: 'Ga2O3', formula: 'Ga₂O₃', name: '酸化ガリウム(III)', cations: { 'Ga3+': 2 }, anions: { 'O2-': 3 }, color: '#f8fafc', desc: 'ガリウムの代表的な酸化物です。β-Ga₂O₃は広いバンドギャップを持つ半導体材料として研究されています。' },
+  { key: 'GaCl3', formula: 'GaCl₃', name: '塩化ガリウム(III)', cations: { 'Ga3+': 1 }, anions: { 'Cl-': 3 }, color: '#f8fafc', desc: '無水物は分子性を示し、水と反応しやすいガリウムの塩化物です。ルイス酸として化学反応や材料研究で利用されます。' },
+  { key: 'GaF3', formula: 'GaF₃', name: 'フッ化ガリウム(III)', cations: { 'Ga3+': 1 }, anions: { 'F-': 3 }, color: '#f8fafc', desc: 'ガリウム(III)とフッ化物イオンからなる無機フッ化物です。水に溶けにくい固体として知られ、ガリウムのフッ素化学で扱われます。' },
+  { key: 'Ga2SO43', formula: 'Ga₂(SO₄)₃', name: '硫酸ガリウム(III)', cations: { 'Ga3+': 2 }, anions: { 'SO4-2': 3 }, color: '#f8fafc', desc: 'ガリウム(III)と硫酸イオンからなる塩です。水溶液中では加水分解の影響を受けるため、組成式は無水塩の形式を示しています。' },
+  { key: 'GaPO4', formula: 'GaPO₄', name: 'リン酸ガリウム', cations: { 'Ga3+': 1 }, anions: { 'PO4-3': 1 }, color: '#f8fafc', desc: 'リン酸ガリウムは石英に似た結晶構造を持ち、圧電性を示す材料として研究・利用されています。' },
+
   //複カチオン
     { key:'AlK(SO4)2', formula:'AlK(SO₄)₂', name:'硫酸アルミニウムカリウム', cations:{'Al3+':1,'K+':1}, anions:{'SO4-2':2}, color:'#f8fafc', desc:'硫酸アルミニウムカリウム十二水和物として知られる結晶性固体です。通称明礬。水に溶けやすく、古くから染料の媒染剤や収斂剤として利用されてきました。'},
     { key:'KAl(SO4)2', formula:'KAl(SO₄)₂', name:'硫酸アルミニウムカリウム', cations:{'K+':1,'Al3+':1}, anions:{'SO4-2':2}, color:'#f8fafc', desc:'硫酸カリウムアルミニウム十二水和物として知られる結晶性固体です。通称明礬。水に溶けやすく、古くから染料の媒染剤や収斂剤として利用されてきました。'},
@@ -1858,7 +1919,7 @@ const COMPOUNDS = [
 
 //↓自動生成辞書登録部分
     const AUTO_ION_ORDER = [
-      'H+', 'Li+', 'Be2+', 'Na+', 'K+', 'Cs+', 'Cu+', 'Ag+', 'Au4+', 'Cu2+', 'Hg2+', 'Hg22+', 'Fe2+', 'Zn2+', 'Ca2+', 'Pb2+', 'Sr2+',
+      'H+', 'Li+', 'Be2+', 'Na+', 'K+', 'Cs+', 'Cu+', 'Ag+', 'Au4+', 'Cu2+', 'Hg2+', 'Hg22+', 'Fe2+', 'Zn2+', 'Cd2+', 'Ga3+', 'Ca2+', 'Pb2+', 'Sr2+',
       'Mg2+', 'Al3+', 'Si4+', 'Ti3+', 'Ti4+', 'V2+', 'V3+', 'Fe3+', 'Co2+', 'Co3+', 'Mn2+', 'Bk3+', 'Bk4+', 'Ba2+', 'La3+', 'Nd3+', 'Yb2+', 'Yb3+',
       'Sn2+', 'Sn4+',
       'NH4+', 'U4+', 'U6+', 'Pu3+', 'Pu4+', 'UO22+', 'As3+', 'Cr3+', 'Cr2+', 'Ni2+', 'Tc4+',
@@ -1901,7 +1962,9 @@ const COMPOUNDS = [
         ...cationIds.map((ionId) => formulaPart(ionId, cations[ionId])),
         ...anionIds.map((ionId) => formulaPart(ionId, anions[ionId])),
       ].join('');
-      const cationNames = cationIds.map((ionId) => IONS[ionId].name.replace(/イオン$/, ''));
+      const cationNames = cationIds.map((ionId) =>
+        ionId === 'Hg22+' ? '水銀(I)' : IONS[ionId].name.replace(/イオン$/, '')
+      );
       const anionPrefixes = {
         'F-': 'フッ化',
         'Cl-': '塩化',
@@ -2086,7 +2149,7 @@ const COMPOUNDS = [
     //イオン化傾向列-ionline
     const ACTIVITY_SERIES = [
       'Li', 'Cs', 'K', 'Ba', 'Na', 'Ca', 'Sr', 'La', 'Mg', 'Be', 'Al', 'Bk', 'U',
-      'Ti', 'V', 'Mn', 'Zn', 'Cr', 'Fe', 'Co', 'Ni', 'Sn', 'Pb', 'H2', 'Cu', 'Ag', 'Au',
+      'Ti', 'V', 'Mn', 'Zn', 'Cr', 'Ga', 'Fe', 'Cd', 'Co', 'Ni', 'Sn', 'Pb', 'H2', 'Cu', 'Ag', 'Au',
     ];
     const METAL_IONS = {
       Li: { ionId: 'Li+', charge: 1 }, Cs: { ionId: 'Cs+', charge: 1 }, K: { ionId: 'K+', charge: 1 },
@@ -2095,6 +2158,7 @@ const COMPOUNDS = [
       Mg: { ionId: 'Mg2+', charge: 2 }, Al: { ionId: 'Al3+', charge: 3 },
       Bk: { ionId: 'Bk3+', charge: 3 }, U: { ionId: 'U4+', charge: 4 },
       Zn: { ionId: 'Zn2+', charge: 2 }, Cr: { ionId: 'Cr2+', charge: 2 },
+      Ga: { ionId: 'Ga3+', charge: 3 }, Cd: { ionId: 'Cd2+', charge: 2 },
       Fe: { ionId: 'Fe2+', charge: 2 }, Co: { ionId: 'Co2+', charge: 2 },
       Ni: { ionId: 'Ni2+', charge: 2 }, Pb: { ionId: 'Pb2+', charge: 2 },
       Cu: { ionId: 'Cu2+', charge: 2 }, Ag: { ionId: 'Ag+', charge: 1 },
