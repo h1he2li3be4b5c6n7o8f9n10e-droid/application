@@ -1142,11 +1142,12 @@
       'O2-':  { id: 'O2-',  name: '酸化物イオン',     type: 'anion',  charge: -2, color: 'from-slate-500 to-slate-700', textColor: 'text-slate-100', borderColor: 'border-slate-400' },
       'S2-':  { id: 'S2-',  name: '硫化物イオン',     type: 'anion',  charge: -2, color: 'from-yellow-700 to-amber-900', textColor: 'text-amber-100', borderColor: 'border-amber-500' },
       'F-':   { id: 'F-',   name: 'フッ化物イオン',   type: 'anion',  charge: -1, color: 'from-lime-500 to-green-600', textColor: 'text-lime-100', borderColor: 'border-lime-400' },
-      'S2-':  { id: 'S2-',  name: '硫化物イオン',     type: 'anion',  charge: -2, color: 'from-yellow-700 to-amber-900', textColor: 'text-amber-100', borderColor: 'border-amber-500' },
       'Cl-':  { id: 'Cl-',  name: '塩化物イオン',     type: 'anion',  charge: -1, color: 'from-emerald-500 to-teal-600', textColor: 'text-emerald-100', borderColor: 'border-emerald-400' },
       'Br-':  { id: 'Br-',  name: '臭化物イオン',     type: 'anion',  charge: -1, color: 'from-amber-700 to-yellow-950', textColor: 'text-amber-50', borderColor: 'border-amber-500' },
       'I-':   { id: 'I-',   name: 'ヨウ化物イオン',   type: 'anion',  charge: -1, color: 'from-purple-600 to-violet-800', textColor: 'text-purple-50', borderColor: 'border-purple-300' },
       'OH-':  { id: 'OH-',  name: '水酸化物イオン',   type: 'anion',  charge: -1, formula: 'OH', polyatomic: true, color: 'from-rose-500 to-pink-600', textColor: 'text-rose-100', borderColor: 'border-pink-400' },
+      'N3-': { id: 'N3-', symbol: 'N³⁻', name: '窒化物イオン', type: 'anion', charge: -3, formula: 'N', color: 'from-slate-600 to-indigo-900', textColor: 'text-slate-50', borderColor: 'border-indigo-300' },
+      'N3-1': { id: 'N3-1', symbol: 'N₃⁻', name: 'アジ化物イオン', type: 'anion', charge: -1, formula: 'N3', polyatomic: true, color: 'from-amber-500 to-orange-700', textColor: 'text-amber-50', borderColor: 'border-amber-300' },
       'SO4-2': { id: 'SO4-2', symbol: 'SO₄²⁻', name: '硫酸イオン', type: 'anion', charge: -2, formula: 'SO4', polyatomic: true, color: 'from-cyan-600 to-blue-700', textColor: 'text-cyan-50', borderColor: 'border-cyan-300' },
       'NO3-1': { id: 'NO3-1', symbol: 'NO₃⁻', name: '硝酸イオン', type: 'anion', charge: -1, formula: 'NO3', polyatomic: true, color: 'from-indigo-500 to-violet-700', textColor: 'text-violet-50', borderColor: 'border-violet-300' },
       'PO4-3': { id: 'PO4-3', symbol: 'PO₄³⁻', name: 'リン酸イオン', type: 'anion', charge: -3, formula: 'PO4', polyatomic: true, color: 'from-fuchsia-600 to-purple-800', textColor: 'text-fuchsia-50', borderColor: 'border-fuchsia-300' },
@@ -1168,6 +1169,16 @@
       'TcO4-1': { id: 'TcO4-1', symbol: 'TcO₄⁻', name: '過テクネチウム酸イオン', type: 'anion', charge: -1, formula: 'TcO4', polyatomic: true, color: 'from-rose-600 to-pink-800', textColor: 'text-rose-50', borderColor: 'border-rose-300' },
       'CoO2-1': { id: 'CoO2-1', symbol: 'CoO₂⁻', name: 'コバルト酸(III)イオン', type: 'anion', charge: -1, formula: 'CoO2', polyatomic: true, color: 'from-pink-600 to-violet-800', textColor: 'text-pink-50', borderColor: 'border-pink-300' }
     };
+
+    const ION_SUPERSCRIPT_DIGITS = { 0: '⁰', 1: '¹', 2: '²', 3: '³', 4: '⁴', 5: '⁵', 6: '⁶', 7: '⁷', 8: '⁸', 9: '⁹' };
+    Object.values(IONS).forEach((ion) => {
+      if (!ion.formula) ion.formula = ion.id.replace(/\d*[+-]$/, '');
+      if (!ion.symbol) {
+        const magnitude = Math.abs(ion.charge);
+        const charge = magnitude === 1 ? '' : String(magnitude).replace(/[0-9]/g, (digit) => ION_SUPERSCRIPT_DIGITS[digit]);
+        ion.symbol = `${ion.formula}${charge}${ion.charge > 0 ? '⁺' : '⁻'}`;
+      }
+    });
 
     const ELEMENTS = {
       Li: { id: 'Li', name: 'リチウム', color: 'from-red-500 to-rose-700', textColor: 'text-red-50', borderColor: 'border-red-300' },
@@ -1386,6 +1397,15 @@ const COMPOUNDS = [
   { key: 'BO3H3', formula: 'H₃BO₃', name: 'ホウ酸', cations: { 'H+': 3 }, anions: { 'BO3-3': 1 }, color: '#f8fafc', desc: 'ホウ素を含む酸性物質です。水溶液中では弱い酸性を示し、ホウ酸イオンを生じる性質があります。' },
   { key: 'H4-SiO4',  formula: 'H4SiO4',  name: 'オルトケイ酸', cations: { 'H+': 4 }, anions: { 'SiO4-4': 1 }, desc: 'ケイ酸イオンと水素イオンからなるケイ素のオキソ酸です。H4SiO4で表され、ケイ酸の基本的な構造として扱われます。'},
   { key: 'H-IO3',  formula: 'HIO3',  name: 'ヨウ素酸', cations: { 'H+': 1 }, anions: { 'IO3-1': 1 }, desc: 'ヨウ素酸イオンと水素イオンからなるオキソ酸です。HIO3で表され、ヨウ素の代表的な酸素酸の一つです。'},
+  { key: 'HClO3', formula: 'HClO₃', name: '塩素酸', cations: { 'H+': 1 }, anions: { 'ClO3-1': 1 }, color: '#d1fae5', desc: '塩素酸イオンと水素イオンからなるオキソ酸です。水溶液中で強い酸性と酸化性を示します。'},
+  { key: 'HAtO3', formula: 'HAtO₃', name: 'アスタチン酸', cations: { 'H+': 1 }, anions: { 'AtO3-1': 1 }, color: '#ffe4e6', desc: 'アスタチン酸イオンと水素イオンからなるオキソ酸として扱います。アスタチンは放射性元素であり、この化合物は教材上の組成モデルです。'},
+  { key: 'HBr', formula: 'HBr', name: '臭化水素', cations: { 'H+': 1 }, anions: { 'Br-': 1 }, color: '#fde68a', desc: '臭化物イオンと水素イオンからなる化合物です。無色の気体で、水に溶けると臭化水素酸になります。'},
+  { key: 'HI', formula: 'HI', name: 'ヨウ化水素', cations: { 'H+': 1 }, anions: { 'I-': 1 }, color: '#e9d5ff', desc: 'ヨウ化物イオンと水素イオンからなる化合物です。無色の気体で、水に溶けると強い酸性を示すヨウ化水素酸になります。'},
+  { key: 'NH3-from-ions', formula: 'NH₃', name: 'アンモニア', cations: { 'H+': 3 }, anions: { 'N3-': 1 }, color: '#d1fae5', desc: '窒化物イオンと水素イオンが組み合わさった組成です。実際のアンモニアは共有結合性分子ですが、ここではイオンブロックの組成モデルとして登録しています。'},
+  { key: 'HN3', formula: 'HN₃', name: 'アジ化水素', cations: { 'H+': 1 }, anions: { 'N3-1': 1 }, color: '#fcd34d', desc: 'アジ化物イオンと水素イオンからなる化合物で、アジ化水素酸とも呼ばれます。非常に不安定で危険な物質のため、ここでは組成を示す教材用の登録として扱います。'},
+  { key: 'HMnO4', formula: 'HMnO₄', name: '過マンガン酸', cations: { 'H+': 1 }, anions: { 'MnO4-1': 1 }, color: '#e9d5ff', desc: '過マンガン酸イオンと水素イオンからなる酸化性のオキソ酸です。水溶液中では不安定で、対応する過マンガン酸塩として扱われることが多い化合物です。'},
+  { key: 'HAuCl4', formula: 'HAuCl₄', name: 'テトラクロロ金(III)酸', cations: { 'H+': 1 }, anions: { 'AuCl4-1': 1 }, color: '#fef08a', desc: 'テトラクロロ金(III)酸イオンと水素イオンからなる酸です。水溶液中では金(III)のクロロ錯体として存在し、塩化金酸とも呼ばれます。'},
+  { key: 'HCoO2', formula: 'HCoO₂', name: 'コバルト酸(III)', cations: { 'H+': 1 }, anions: { 'CoO2-1': 1 }, color: '#fbcfe8', desc: 'コバルト酸(III)イオンと水素イオンからなる組成です。ここでは登録済みイオンの電荷中性な組み合わせとして扱います。'},
   { key: 'H-CN',  formula: 'HCN',  name: 'シアン化水素', cations: { 'H+': 1 }, anions: { 'CN-1': 1 }, desc: 'シアン化物イオンと水素イオンからなる化合物です。HCNで表される弱酸で、水溶液はシアン化水素酸とも呼ばれます。'},
   { key: 'H-CNO',  formula: 'HCNO',  name: '雷酸', cations: { 'H+': 1 }, anions: { 'CNO-1': 1 }, desc: '雷酸イオンと水素イオンからなる化合物です。HCNOで表され、シアン酸（HOCN）とは異性体の関係にあります。'},
   { key: 'H3PO4', formula: 'H₃PO₄', name: 'リン酸', cations: { 'H+': 3 }, anions: { 'PO4-3': 1 }, color: '#f8fafc', desc: '無色の液体または結晶として存在する酸です。水溶液は酸性を示し、リン酸塩の原料などに利用されます。' },
@@ -1836,8 +1856,8 @@ const COMPOUNDS = [
       'Mg2+', 'Al3+', 'Si4+', 'Ti3+', 'Ti4+', 'V2+', 'V3+', 'Fe3+', 'Co2+', 'Co3+', 'Mn2+', 'Bk3+', 'Bk4+', 'Ba2+', 'La3+', 'Nd3+', 'Yb2+', 'Yb3+',
       'Sn2+', 'Sn4+',
       'NH4+', 'U4+', 'U6+', 'Pu3+', 'Pu4+', 'UO22+', 'As3+', 'Cr3+', 'Cr2+', 'Ni2+', 'Tc4+',
-      'F-', 'Cl-', 'OH-', 'O2-', 'S2-', 'H-', 'SO4-2', 'NO3-1', 'PO4-3', 'AsO4-3', 'CrO4-2', 
-      'Cr2O7-2', 'CO3-2', 'HCO3-1', 'BO3-3', 'SiO4-4', 'IO3-1', 'BrO3-1', 'MnO4-1', 'TcO4-1', 'CoO2-1', 'CN-1', 'CNO-1', 'UO22+', 'I-', 'Br-'
+      'F-', 'Cl-', 'OH-', 'O2-', 'S2-', 'H-', 'N3-', 'N3-1', 'SO4-2', 'NO3-1', 'PO4-3', 'AsO4-3', 'CrO4-2', 
+      'Cr2O7-2', 'CO3-2', 'HCO3-1', 'BO3-3', 'SiO4-4', 'IO3-1', 'ClO3-1', 'BrO3-1', 'AtO3-1', 'MnO4-1', 'AuCl4-1', 'TcO4-1', 'CoO2-1', 'CN-1', 'CNO-1', 'UO22+', 'I-', 'Br-'
     ];
     const SUBSCRIPT_DIGITS = { 0: '₀', 1: '₁', 2: '₂', 3: '₃', 4: '₄', 5: '₅', 6: '₆', 7: '₇', 8: '₈', 9: '₉' };
 
@@ -1869,7 +1889,9 @@ const COMPOUNDS = [
         const unit = ion.polyatomic && count > 1 ? `(${symbol})` : symbol;
         return `${unit}${count > 1 ? String(count).replace(/[0-9]/g, (digit) => SUBSCRIPT_DIGITS[digit]) : ''}`;
       };
-      const formula = [
+      const isAmmonia = cationIds.length === 1 && cations['H+'] === 3 &&
+        anionIds.length === 1 && anions['N3-'] === 1;
+      const formula = isAmmonia ? 'NH₃' : [
         ...cationIds.map((ionId) => formulaPart(ionId, cations[ionId])),
         ...anionIds.map((ionId) => formulaPart(ionId, anions[ionId])),
       ].join('');
@@ -1881,6 +1903,8 @@ const COMPOUNDS = [
         'O2-': '酸化',
         'S2-': '硫化',
         'H-': '水素化',
+        'N3-': '窒化',
+        'N3-1': 'アジ化',
         'SO4-2': '硫酸',
         'NO3-1': '硝酸',
         'PO4-3': 'リン酸',
@@ -1892,13 +1916,16 @@ const COMPOUNDS = [
         'BO3-3': 'ホウ酸',
         'MnO4-1': '過マンガン酸',
         'TcO4-1': '過テクネチウム酸',
+        'ClO3-1': '塩素酸',
         'BrO3-1': '臭素酸',
+        'AtO3-1': 'アスタチン酸',
+        'AuCl4-1': 'テトラクロロ金(III)酸',
         'CoO2-1': 'コバルト酸',
         'I-': 'ヨウ化',
         'Br-': '臭化'
       };
       const cationName = cationNames.join('・');
-      const name = anionIds.length === 1
+      const name = isAmmonia ? 'アンモニア' : anionIds.length === 1
         ? `${anionPrefixes[anionIds[0]]}${cationName}`
         : `${cationName}（${anionIds.map((ionId) => anionPrefixes[ionId]).join('・')}混合陰イオン化合物）`;
       return {
@@ -2020,6 +2047,10 @@ const COMPOUNDS = [
     }
 
     const SOLUBILITY_RULES = [
+      { anion: 'N3-', cation: 'H+', solubility: 'soluble' },
+      { anion: 'N3-', solubility: 'insoluble' },
+      { anion: 'N3-1', cations: ['Li+', 'Na+', 'K+', 'Cs+', 'NH4+', 'H+'], solubility: 'soluble' },
+      { anion: 'N3-1', solubility: 'insoluble' },
       { cation: 'Ag+', anion: 'Cl-', solubility: 'insoluble' },
       { cation: 'Cu+', anion: 'Cl-', solubility: 'insoluble' },
       { cation: 'Pb2+', anion: 'Cl-', solubility: 'insoluble' },
@@ -4964,7 +4995,7 @@ const COMPOUNDS = [
     const DEX_BASIC_ACID_KEYS = new Set([
       'H2O1', 'HF', 'HCl', 'H2S', 'CrO4H2', 'Cr2O7H2', 'AsH3O4', 'BO3H3',
       'H4-SiO4', 'H-IO3', 'H-CN', 'H-CNO', 'H3PO4', 'H2CO3', 'H2SO4',
-      'HNO3', 'H1OH1', 'H2',
+      'HNO3', 'H1OH1', 'H2', 'HBr', 'HI', 'NH3-from-ions', 'HMnO4', 'HAuCl4', 'HCoO2',
     ]);
 
     function getDexCompoundCategory(compound) {
