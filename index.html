@@ -242,6 +242,31 @@
       transform: translate(-50%, 0);
     }
 
+    #coin-reward-toast {
+      position: fixed;
+      z-index: 70;
+      right: 1rem;
+      bottom: 1rem;
+      max-width: calc(100vw - 2rem);
+      padding: .75rem 1rem;
+      border: 1px solid rgba(52, 211, 153, .45);
+      border-radius: .9rem;
+      background: rgba(2, 44, 34, .96);
+      color: #d1fae5;
+      font-size: .9rem;
+      font-weight: 800;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(8px);
+      transition: opacity .2s ease, transform .2s ease;
+      white-space: pre-line;
+    }
+
+    #coin-reward-toast.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     .ion-block.tap-added,
     .element-block.tap-added {
       animation: paletteTapAdded .5s ease-out;
@@ -912,7 +937,16 @@
           イオンパズル Lab
         </h1>
       </div>
-      <div class="flex gap-2">
+      <div class="flex flex-wrap items-center justify-end gap-2">
+        <div id="coin-display" class="px-3 py-2 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-200 text-sm font-extrabold whitespace-nowrap" aria-live="polite">
+          <i class="fa-solid fa-coins" aria-hidden="true"></i> <span id="coin-count">0</span>
+        </div>
+        <button id="ion-shop-open" type="button" onclick="openIonShop()" class="px-4 py-2 rounded-xl text-sm font-bold bg-amber-500 text-slate-950 transition hover:bg-amber-400 flex items-center gap-2">
+          <i class="fa-solid fa-store"></i> イオンショップ
+        </button>
+        <button id="header-progress-reset" type="button" onclick="resetGameProgress()" class="hidden px-4 py-2 rounded-xl text-sm font-bold bg-rose-500/15 border border-rose-400/40 text-rose-200 transition hover:bg-rose-500/25 items-center gap-2">
+          <i class="fa-solid fa-rotate-left"></i> リセット
+        </button>
         <button id="tab-lab" onclick="switchTab('lab')" class="px-4 py-2 rounded-xl text-sm font-bold bg-cyan-500 text-slate-950 transition hover:bg-cyan-400 flex items-center gap-2">
           <i class="fa-solid fa-atom"></i> 実験室
         </button>
@@ -1085,6 +1119,31 @@
     <span class="lighter-flame-label" aria-live="polite"></span>
     <span class="lighter-body"></span>
   </div>
+
+  <div id="ion-shop-modal" class="hidden fixed inset-0 z-[60] bg-slate-950/80 p-4 flex items-center justify-center" role="dialog" aria-modal="true" aria-labelledby="ion-shop-title" onclick="if (event.target === this) closeIonShop()">
+    <section class="w-full max-w-3xl max-h-[90vh] overflow-hidden rounded-2xl border border-slate-700 bg-slate-900 shadow-2xl flex flex-col">
+      <header class="flex items-center justify-between gap-3 border-b border-slate-800 p-4">
+        <div>
+          <h2 id="ion-shop-title" class="text-lg font-extrabold text-amber-200"><i class="fa-solid fa-store mr-2"></i>イオンショップ</h2>
+          <p class="text-xs text-slate-400 mt-1">イオンごとに個別アンロック。価数 × 10コイン。</p>
+        </div>
+        <button type="button" onclick="closeIonShop()" aria-label="ショップを閉じる" class="rounded-lg px-3 py-2 text-slate-300 hover:bg-slate-800"><i class="fa-solid fa-xmark"></i></button>
+      </header>
+      <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 p-4">
+        <p class="text-sm font-bold text-amber-200"><i class="fa-solid fa-coins mr-1"></i><span id="shop-coin-count">0</span> コイン</p>
+        <div class="flex flex-wrap items-center gap-2">
+          <button id="unlock-all-ions" type="button" onclick="unlockAllIons()" class="rounded-xl border border-cyan-400/40 bg-cyan-500/15 px-4 py-2 text-sm font-extrabold text-cyan-200 transition hover:bg-cyan-500/25">
+            ALLアンロック <span class="block text-[10px] font-medium text-cyan-100/70">自由に遊ぶ・無料</span>
+          </button>
+          <button id="reset-game-progress" type="button" onclick="resetGameProgress()" class="rounded-xl border border-rose-400/40 bg-rose-500/15 px-4 py-2 text-sm font-extrabold text-rose-200 transition hover:bg-rose-500/25">
+            <i class="fa-solid fa-rotate-left mr-1"></i>リセット
+          </button>
+        </div>
+      </div>
+      <div id="ion-shop-list" class="grid grid-cols-1 gap-2 overflow-y-auto p-4 sm:grid-cols-2" aria-live="polite"></div>
+    </section>
+  </div>
+  <div id="coin-reward-toast" role="status" aria-live="polite"></div>
 
   <script>
     // === データ定義 ===
@@ -1367,6 +1426,11 @@ const ALLOYS = [
     key: 'Cu-Sn-Zn', formula: 'Cu-Sn-Zn', name: '砲金（ガンメタル）',
     metals: ['Cu', 'Sn', 'Zn'],
     desc: '銅を主成分にスズと亜鉛を加えた青銅系合金です。組成幅があり、耐食性や鋳造性を生かしてバルブなどに利用されます。'
+  },
+  {
+    key: 'Cu-Sn', formula: 'Cu-Sn', name: '青銅（ブロンズ）',
+    metals: ['Cu', 'Sn'],
+    desc: '銅を主成分にスズを加えた合金です。スズの割合によって性質は変化し、鋳造性や耐食性を生かして器物・彫刻・機械部品などに利用されます。ここでは特定の化学量論比ではなく、一般的な青銅の合金系として扱います。'
   },
   {
     key: 'Ti-Al', formula: 'TiAl', name: 'チタンアルミナイド（γ-TiAl）',
@@ -1909,8 +1973,8 @@ const COMPOUNDS = [
 
 
 //↓鉱物系辞書追加領域
-    const MANUAL_COMPOUNDS = [...COMPOUNDS];
-    const MINERAL_COMPOUNDS = [
+const MANUAL_COMPOUNDS = [...COMPOUNDS];
+const MINERAL_COMPOUNDS = [
       { key: 'Cu2-OH2-CO3', formula: 'Cu2(OH)2CO3', name: '水酸化炭酸銅(II)', cations: { 'Cu2+': 2 }, anions: { 'OH-': 2, 'CO3-2': 1 }, color: '#16a34a', desc: '緑色の固体です。銅(II)イオン、水酸化物イオン、炭酸イオンからなる塩基性炭酸塩です。', mineral: { name: '孔雀石', desc: '鮮やかな緑色を示す銅の炭酸塩鉱物です。' } },
 
     ];
@@ -1945,6 +2009,10 @@ const COMPOUNDS = [
     function getCompoundCompositionKey(compound) {
       return normalizeComposition(compound.cations, compound.anions);
     }
+
+    const REGISTERED_COMPOUND_COMPOSITIONS = new Set(
+      [...MANUAL_COMPOUNDS, ...MINERAL_COMPOUNDS].map(getCompoundCompositionKey),
+    );
 
     function makeAutoCompound(cations, anions, compositionKey) {
       const cationIds = AUTO_ION_ORDER.filter((ionId) => cations[ionId]);
@@ -2318,14 +2386,72 @@ const COMPOUNDS = [
     });
 
     const SPECIAL_DISCOVERY_STORAGE_KEY = 'ion-puzzle-lab.discovered-special-compounds.v1';
-
+    const GAME_PROGRESS_STORAGE_KEY = 'ion-puzzle-lab.progress.v1';
+    const INITIAL_UNLOCKED_IONS = ['Na+', 'H+', 'O2-', 'Cl-', 'Fe2+', 'SO4-2', 'Cu2+'];
+    const MANUAL_COMPOUND_REWARD = 12;
     function loadDiscoveredSpecialCompounds() {
       try {
-        window.localStorage.removeItem(SPECIAL_DISCOVERY_STORAGE_KEY);
-      } catch {
-        // Storage can be unavailable for local files or private browsing.
+        const stored = window.localStorage.getItem(SPECIAL_DISCOVERY_STORAGE_KEY);
+        const parsed = stored ? JSON.parse(stored) : [];
+        return Array.isArray(parsed) ? parsed.filter((key) => typeof key === 'string') : [];
+      } catch (error) {
+        console.error('特殊化合物の発見データを読み込めませんでした。', error);
+        return [];
       }
-      return [];
+    }
+
+    function loadGameProgress() {
+      try {
+        const stored = window.localStorage.getItem(GAME_PROGRESS_STORAGE_KEY);
+        if (!stored) {
+          return {
+            coins: 0,
+            unlockedIons: new Set(INITIAL_UNLOCKED_IONS),
+            discoveredCompounds: new Set(),
+            allIonsUnlocked: false,
+          };
+        }
+
+        const parsed = JSON.parse(stored);
+        const unlockedIons = Array.isArray(parsed.unlockedIons)
+          ? parsed.unlockedIons.filter((id) => typeof id === 'string' && IONS[id])
+          : [];
+        const knownCompoundKeys = new Set(
+          [...MANUAL_COMPOUNDS, ...MINERAL_COMPOUNDS].map((compound) => compound.key),
+        );
+        const discoveredKeys = Array.isArray(parsed.discoveredCompounds)
+          ? parsed.discoveredCompounds.filter((key) =>
+            typeof key === 'string' && knownCompoundKeys.has(key),
+          )
+          : [];
+        return {
+          coins: Number.isSafeInteger(parsed.coins) && parsed.coins >= 0 ? parsed.coins : 0,
+          unlockedIons: new Set([...INITIAL_UNLOCKED_IONS, ...unlockedIons]),
+          discoveredCompounds: new Set(discoveredKeys),
+          allIonsUnlocked: parsed.allIonsUnlocked === true,
+        };
+      } catch (error) {
+        console.error('ゲーム進行データを読み込めませんでした。', error);
+        return {
+          coins: 0,
+          unlockedIons: new Set(INITIAL_UNLOCKED_IONS),
+          discoveredCompounds: new Set(),
+          allIonsUnlocked: false,
+        };
+      }
+    }
+
+    function saveGameProgress() {
+      try {
+        window.localStorage.setItem(GAME_PROGRESS_STORAGE_KEY, JSON.stringify({
+          coins,
+          unlockedIons: [...unlockedIons],
+          discoveredCompounds: [...discoveredCompounds],
+          allIonsUnlocked,
+        }));
+      } catch (error) {
+        console.error('ゲーム進行データを保存できませんでした。', error);
+      }
     }
 
     function saveDiscoveredSpecialCompounds() {
@@ -2334,8 +2460,8 @@ const COMPOUNDS = [
           SPECIAL_DISCOVERY_STORAGE_KEY,
           JSON.stringify(discoveredSpecialCompounds),
         );
-      } catch {
-        // Storage can be unavailable for local files or private browsing.
+      } catch (error) {
+        console.error('特殊化合物の発見データを保存できませんでした。', error);
       }
     }
 
@@ -2354,7 +2480,11 @@ const COMPOUNDS = [
     let completedGroupKeys = new Set();
     let completedAlloyIds = new Set();
     let discoveredSpecialCompounds = loadDiscoveredSpecialCompounds();
-    let discoveredCompounds = new Set();
+    const loadedGameProgress = loadGameProgress();
+    let coins = loadedGameProgress.coins;
+    let unlockedIons = loadedGameProgress.unlockedIons;
+    let discoveredCompounds = loadedGameProgress.discoveredCompounds;
+    let allIonsUnlocked = loadedGameProgress.allIonsUnlocked;
     let heatedGroupResults = new Map();
     let heatingProgress = new Map();
     let activePointerDrag = null;
@@ -2992,13 +3122,150 @@ const COMPOUNDS = [
         typeof value === 'string' && value.toLocaleLowerCase().includes(normalizedQuery),
       );
       const ionResults = Object.values(IONS)
-        .filter((ion) => matches([ion.id, ion.name, ion.symbol, ion.formula]))
+        .filter((ion) => isIonUnlocked(ion.id) && matches([ion.id, ion.name, ion.symbol, ion.formula]))
         .map((item) => ({ kind: 'ion', item }));
       const elementResults = Object.values(ELEMENTS)
         .filter((element) => matches([element.id, element.name]))
         .map((item) => ({ kind: 'element', item }));
 
       return [...ionResults, ...elementResults];
+    }
+
+    function isIonUnlocked(ionId) {
+      return unlockedIons.has(ionId);
+    }
+
+    function getIonUnlockPrice(ion) {
+      return Math.abs(ion.charge) * 10;
+    }
+
+    function calculateCompoundReward(ions) {
+      if (!ions.length) return 0;
+      const unlockPriceTotal = ions.reduce((total, ion) =>
+        total + getIonUnlockPrice(IONS[ion.id]), 0);
+      return Math.floor(unlockPriceTotal / (ions.length * 2.5));
+    }
+
+    function updateCoinDisplay() {
+      document.getElementById('coin-count').textContent = coins.toLocaleString('ja-JP');
+      document.getElementById('shop-coin-count').textContent = coins.toLocaleString('ja-JP');
+    }
+
+    function updateAllUnlockHeader() {
+      document.getElementById('coin-display').classList.toggle('hidden', allIonsUnlocked);
+      document.getElementById('ion-shop-open').classList.toggle('hidden', allIonsUnlocked);
+      document.getElementById('header-progress-reset').classList.toggle('hidden', !allIonsUnlocked);
+    }
+
+    let coinRewardToastTimeout = null;
+
+    function showCoinReward(compounds) {
+      if (allIonsUnlocked) return;
+      const toast = document.getElementById('coin-reward-toast');
+      const formulaSummary = compounds.slice(0, 3)
+        .map(({ compound, reward }) => `${compound.formula} +${reward} 🪙`)
+        .join('\n');
+      const remainingCount = compounds.length - 3;
+      toast.textContent = `🧪 新しい化合物を発見！\n${formulaSummary}${remainingCount > 0 ? `\nほか${remainingCount}件` : ''}`;
+      toast.classList.add('is-visible');
+      window.clearTimeout(coinRewardToastTimeout);
+      coinRewardToastTimeout = window.setTimeout(() => toast.classList.remove('is-visible'), 2600);
+    }
+
+    function renderIonShop() {
+      const list = document.getElementById('ion-shop-list');
+      list.innerHTML = '';
+      Object.values(IONS).forEach((ion) => {
+        const unlocked = isIonUnlocked(ion.id);
+        const price = getIonUnlockPrice(ion);
+        const affordable = coins >= price;
+        const card = document.createElement('article');
+        card.className = 'flex items-center justify-between gap-3 rounded-xl border border-slate-700 bg-slate-950 p-3';
+
+        const details = document.createElement('div');
+        details.className = 'min-w-0';
+        const name = document.createElement('p');
+        name.className = 'font-bold text-white';
+        name.textContent = `${formatIonFormula(ion.id)} ・ ${ion.name}`;
+        const charge = document.createElement('p');
+        charge.className = 'text-xs text-slate-400';
+        charge.textContent = `価数: ${ion.charge > 0 ? `+${ion.charge}` : ion.charge} ・ ${unlocked ? '✓ 使用可能' : `${price} 🪙`}`;
+        details.append(name, charge);
+
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = unlocked
+          ? 'shrink-0 rounded-lg bg-emerald-500/15 px-3 py-2 text-xs font-bold text-emerald-300'
+          : 'shrink-0 rounded-lg bg-amber-500 px-3 py-2 text-xs font-bold text-slate-950 transition hover:bg-amber-400 disabled:cursor-not-allowed disabled:bg-slate-700 disabled:text-slate-400';
+        button.textContent = unlocked ? '✓ 使用可能' : (affordable ? 'アンロック' : 'コイン不足');
+        button.disabled = unlocked || !affordable;
+        if (!unlocked) button.onclick = () => purchaseIon(ion.id);
+        card.append(details, button);
+        list.appendChild(card);
+      });
+      updateCoinDisplay();
+    }
+
+    function openIonShop() {
+      renderIonShop();
+      document.getElementById('ion-shop-modal').classList.remove('hidden');
+      document.getElementById('unlock-all-ions').focus({ preventScroll: true });
+    }
+
+    function closeIonShop() {
+      document.getElementById('ion-shop-modal').classList.add('hidden');
+      const focusTarget = allIonsUnlocked
+        ? document.getElementById('header-progress-reset')
+        : document.getElementById('ion-shop-open');
+      focusTarget.focus({ preventScroll: true });
+    }
+
+    function purchaseIon(ionId) {
+      const ion = IONS[ionId];
+      if (!ion || isIonUnlocked(ionId)) return;
+      const price = getIonUnlockPrice(ion);
+      if (coins < price) return;
+
+      coins -= price;
+      unlockedIons.add(ionId);
+      saveGameProgress();
+      updateCoinDisplay();
+      renderIonList();
+      renderIonShop();
+    }
+
+    function unlockAllIons() {
+      Object.keys(IONS).forEach((ionId) => unlockedIons.add(ionId));
+      allIonsUnlocked = true;
+      saveGameProgress();
+      updateAllUnlockHeader();
+      updateCoinDisplay();
+      renderIonList();
+      renderIonShop();
+      closeIonShop();
+    }
+
+    function resetGameProgress() {
+      const confirmed = window.confirm('コイン・イオンのアンロック・発見済み化合物をすべて初期化します。この操作は取り消せません。');
+      if (!confirmed) return;
+
+      coins = 0;
+      unlockedIons = new Set(INITIAL_UNLOCKED_IONS);
+      discoveredCompounds = new Set();
+      discoveredSpecialCompounds = [];
+      allIonsUnlocked = false;
+      saveGameProgress();
+      saveDiscoveredSpecialCompounds();
+      updateAllUnlockHeader();
+      updateDexBadge();
+      updateCoinDisplay();
+      renderIonList();
+      renderIonShop();
+      if (activeTab === 'dex') renderDex();
+      document.getElementById('coin-reward-toast').classList.remove('is-visible');
+      if (document.getElementById('ion-shop-modal').classList.contains('hidden')) {
+        document.getElementById('ion-shop-open').focus({ preventScroll: true });
+      }
     }
 
     function attachPaletteCardEvents(card, kind, id) {
@@ -3160,7 +3427,7 @@ const COMPOUNDS = [
       }
 
       Object.values(IONS)
-        .filter((ion) => ion.type === currentIonTab)
+        .filter((ion) => ion.type === currentIonTab && isIonUnlocked(ion.id))
         .forEach((ion) => {
           list.appendChild(createIonPaletteCard(ion));
         });
@@ -3218,7 +3485,7 @@ const COMPOUNDS = [
     }
 
     function addIonToWorkspace(ionId, x, y) {
-      if (workspaceIons.length >= 8 || !IONS[ionId]) return null;
+      if (workspaceIons.length >= 8 || !IONS[ionId] || !isIonUnlocked(ionId)) return null;
 
       const position = x === undefined
         ? getNextIonPosition(workspaceIons.length, ionId)
@@ -3627,8 +3894,9 @@ const COMPOUNDS = [
       heatedGroupResults.clear();
       heatingProgress.clear();
 
-      const cationIds = Object.keys(IONS).filter((id) => IONS[id].type === 'cation');
-      const anionIds = Object.keys(IONS).filter((id) => IONS[id].type === 'anion');
+      const cationIds = Object.keys(IONS).filter((id) => IONS[id].type === 'cation' && isIonUnlocked(id));
+      const anionIds = Object.keys(IONS).filter((id) => IONS[id].type === 'anion' && isIonUnlocked(id));
+      if (!cationIds.length || !anionIds.length) return;
       const cationId = cationIds[Math.floor(Math.random() * cationIds.length)];
       const anionCount = IONS[cationId].charge;
       const ionIds = [
@@ -4946,6 +5214,8 @@ const COMPOUNDS = [
       const groups = buildCompoundGroups();
       const matchedCompounds = [];
       const matchedAlloys = workspaceElements.filter((element) => element.type === 'alloy');
+      const newlyDiscoveredCompounds = [];
+      let discoveryStateChanged = false;
 
       groups.forEach((group) => {
         const compound = findCompoundForGroup(group);
@@ -4964,13 +5234,34 @@ const COMPOUNDS = [
             discoveredSpecialCompounds.unshift(compound.key);
             saveDiscoveredSpecialCompounds();
             updateDexBadge();
+            discoveryStateChanged = true;
+            if (!REGISTERED_COMPOUND_COMPOSITIONS.has(getCompoundCompositionKey(compound))) {
+              newlyDiscoveredCompounds.push({
+                compound,
+                reward: calculateCompoundReward(group.ions),
+              });
+            }
           }
         } else if (!discoveredCompounds.has(compound.key)) {
           discoveredCompounds.add(compound.key);
-          updateDexBadge();
+          discoveryStateChanged = true;
+          newlyDiscoveredCompounds.push({
+            compound,
+            reward: MANUAL_COMPOUND_REWARD,
+          });
         }
         handleGenerationSuccess();
       });
+
+      if (discoveryStateChanged) {
+        if (newlyDiscoveredCompounds.length && !allIonsUnlocked) {
+          coins += newlyDiscoveredCompounds.reduce((total, item) => total + item.reward, 0);
+        }
+        saveGameProgress();
+        updateDexBadge();
+        updateCoinDisplay();
+        if (newlyDiscoveredCompounds.length) showCoinReward(newlyDiscoveredCompounds);
+      }
 
       matchedAlloys.forEach((alloy) => {
         if (completedAlloyIds.has(alloy.instanceId)) return;
@@ -5050,8 +5341,12 @@ const COMPOUNDS = [
     }
 
     function revealAllDexCompounds() {
+      const previousCount = discoveredCompounds.size;
       MANUAL_COMPOUNDS.forEach((compound) => discoveredCompounds.add(compound.key));
       MINERAL_COMPOUNDS.forEach((compound) => discoveredCompounds.add(compound.key));
+      if (discoveredCompounds.size !== previousCount) {
+        saveGameProgress();
+      }
       updateDexBadge();
       if (activeTab === 'dex') renderDex();
     }
@@ -5308,7 +5603,9 @@ const COMPOUNDS = [
       renderBeaker();
       setupDragAndDrop();
       initializeLighter();
+      updateAllUnlockHeader();
       updateDexBadge();
+      updateCoinDisplay();
       updateWorkspace();
     };
   </script>
